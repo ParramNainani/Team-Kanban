@@ -26,8 +26,22 @@ export async function POST(request: Request) {
     // Calculate total benefit
     const totalBenefit = schemes.reduce((sum, scheme) => sum + scheme.estimatedBenefit, 0);
 
+    // Auto-generate a markdown table for the reply
+    let formattedReply = reply;
+    if (schemes.length > 0) {
+      formattedReply += "\n\nHere are the schemes you are eligible for:\n\n";
+      formattedReply += "| Scheme Name | Estimated Benefit | Key Benefits |\n";
+      formattedReply += "| --- | --- | --- |\n";
+      
+      schemes.forEach((scheme) => {
+        formattedReply += `| ${scheme.name} | Rs. ${scheme.estimatedBenefit} | ${scheme.benefits} |\n`;
+      });
+      
+      formattedReply += `\n**Total Potential Benefit:** Rs. ${totalBenefit}\n`;
+    }
+
     const response: ConversationResponse = {
-      reply,
+      reply: formattedReply,
       isComplete,
       keywords,
       schemes,
