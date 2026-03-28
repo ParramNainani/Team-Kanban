@@ -1,1 +1,34 @@
-// TODO: Local dataset of schemes`n// Contains 20-30 schemes`n// Each scheme includes: id, name, tags, benefits, documents, estimatedBenefit`n[]
+[
+  {
+    "id": "1",
+    "name": "PM Kisan Samman Nidhi",
+    "tags": ["farmer", "low income"],
+    "benefits": "Financial benefit of Rs 6000 per year",
+    "documents": ["Aadhaar", "Land Records"],
+    "estimatedBenefit": 6000
+  },
+  {
+    "id": "2",
+    "name": "National Family Benefit Scheme",
+    "tags": ["widow", "low income"],
+    "benefits": "One time assistance of Rs 20000",
+    "documents": ["Death Certificate", "Income Certificate"],
+    "estimatedBenefit": 20000
+  },
+  {
+    "id": "3",
+    "name": "Post Matric Scholarship",
+    "tags": ["student", "low income"],
+    "benefits": "Covers tuition fees and maintenance allowance",
+    "documents": ["Income Certificate", "Marksheet"],
+    "estimatedBenefit": 15000
+  },
+  {
+    "id": "4",
+    "name": "Unemployment Allowance",
+    "tags": ["unemployed"],
+    "benefits": "Monthly allowance for educated unemployed youth",
+    "documents": ["Employment Exchange Card", "Education Proof"],
+    "estimatedBenefit": 12000
+  }
+]
