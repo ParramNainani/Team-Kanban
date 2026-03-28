@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import CursorEffect from "@/components/CursorEffect";
 import { AuthProvider } from "@/components/AuthProvider";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 export const metadata: Metadata = {
   title: "Sahayak AI — Discover government schemes that fit your situation",    
@@ -20,6 +21,7 @@ export default function RootLayout({
         <AuthProvider>
           <CursorEffect />
           {children}
+          <FloatingWhatsApp />
         </AuthProvider>
       </body>
     </html>
