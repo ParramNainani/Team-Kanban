@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import { situationEngine } from "../../../lib/ai/situation-engine";
 import { getRecommendedSchemes } from "../../../services/schemeService";
 import { ConversationResponse, UserProfile } from "../../../types";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export async function POST(request: Request) {
   try {
-    const { messages } = await request.json();
+    const { messages, language } = await request.json();
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json({ error: "Messages array is required" }, { status: 400 });
@@ -15,9 +16,7 @@ export async function POST(request: Request) {
     const conversationHistory = messages.map((m: { role: string; content: string }) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join("\n");
 
     // Call the engine to process the message context
-    const { reply, isComplete, profile } = await situationEngine(conversationHistory);
-
-    // If we need more info, return the reply only
+    const { reply, isComplete, profile } = await situationEngine(conversationHistory, language);
     if (!isComplete) {
       const response: ConversationResponse = { reply, isComplete, profile };
       return NextResponse.json(response);
@@ -42,10 +41,30 @@ export async function POST(request: Request) {
     const totalBenefit = matchResult.totalEstimatedBenefit;
     const schemes = matchResult.schemes;
 
-    // Auto-generate a markdown table for the reply
+    // The AI's engine will now automatically format the reply if complete.
     let formattedReply = reply;
+
     if (schemes && schemes.length > 0) {
-      formattedReply += "\n\nI have found some schemes that you might be eligible for based on the details provided. Please review them below:";
+      try {
+        const apiKey = process.env.GEMINI_API_KEY || "";
+        if (apiKey) {
+          const genAI = new GoogleGenerativeAI(apiKey);
+          const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+          const schemeDetailsContext = schemes.map(s => 
+            `Name: ${s.name}\nDescription: ${s.description}\nLinks: ${s.links?.length ? s.links.join(", ") : "Official Government Portal"}`
+          ).join("\n\n");
+
+          const prompt = `You are a friendly Indian welfare AI assistant named Sahayak. The user just matched with these government schemes based on their profile:\n\n${schemeDetailsContext}\n\nPlease generate a very warm, brief reply in the specified language constraint: **${language || "English"}**. \n\nFor EACH scheme, mention:\n1. What it is.\n2. The specific Documents Required to apply.\n3. EXACTLY Where to go to apply (the official portal/department name, and include the URLs provided in the context).\nDo NOT use JSON, output a nice conversational Markdown response that directly speaks to the user.`;
+
+          const result = await model.generateContent(prompt);
+          if (result && result.response) {
+            formattedReply = result.response.text();
+          }
+        }
+      } catch (e) {
+        console.error("Secondary Gemini enrichment failed:", e);
+      }
     }
 
     const response: ConversationResponse = {

@@ -12,10 +12,11 @@ import { generateTags } from "./ai/gap-detector";
  * - gender: 1
  * - maritalStatus: 1
  * - landOwnership: 1
- * Total: 15
+ * - keyword relevance matches: 5 (max)
+ * Total: 20
  */
 export function computeMaxScore(): number {
-  return 3 + 3 + 2 + 2 + 2 + 1 + 1 + 1; // 15
+  return 3 + 3 + 2 + 2 + 2 + 1 + 1 + 1 + 5; // 20
 }
 
 /**
@@ -143,6 +144,27 @@ function calculateScore(user: UserProfile, scheme: Scheme): number {
   // Land ownership match (+1)
   if (checkLandOwnershipMatch(user.landOwnership, scheme.eligibility.landOwnership)) {
     score += 1;
+  }
+
+  // Keyword relevance match (+5 max) based on unstructured data
+  const searchString = `${scheme.name} ${scheme.description || ""} ${scheme.benefits}`.toLowerCase();
+  
+  if (user.occupation && user.occupation !== 'any') {
+    if (searchString.includes(user.occupation.toLowerCase())) {
+      score += 2;
+    }
+  }
+  
+  if (user.state && user.state !== 'All') {
+    if (searchString.includes(user.state.toLowerCase())) {
+      score += 2;
+    }
+  }
+  
+  if (user.category && user.category !== 'All') {
+    if (searchString.includes(user.category.toLowerCase())) {
+      score += 1;
+    }
   }
 
   return score;

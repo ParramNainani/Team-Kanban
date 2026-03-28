@@ -1,1 +1,0 @@
-const fs = require('fs'); let c = fs.readFileSync('components/landing/AnalyticsSection.tsx', 'utf8'); c = c.replace(/\\\\\\$\\{data.gap\\}%\\\/g, '\${data.gap}%\'); c = c.replace(/\\\Gap generation: \\\$\\{data.gap\\}%\\\/g, '\Gap generation: %\'); fs.writeFileSync('components/landing/AnalyticsSection.tsx', c);

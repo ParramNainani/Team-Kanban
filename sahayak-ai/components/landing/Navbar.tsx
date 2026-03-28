@@ -103,10 +103,10 @@ export function Navbar() {
               scrollToSection("hero");
             }}
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#FF671F]/40 bg-[#FF671F]/10 text-[#046A38] text-sm font-bold">
-              S
+            <span className="flex h-14 w-14 items-center justify-center rounded-xl overflow-hidden shadow-sm">
+              <img src="/logo.png" alt="Sahayak Logo" className="h-full w-full object-cover" />
             </span>
-            <span className="text-lg font-bold tracking-tight">Sahayak AI</span>
+            <span className="text-xl font-bold tracking-tight">Sahayak AI</span>
           </Link>
 
           <nav

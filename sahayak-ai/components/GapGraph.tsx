@@ -17,13 +17,20 @@ import {
 export type GapGraphProps = {
   totalEligible: number;
   totalReceived: number;
+  unit?: "currency" | "people" | "schemes";
 };
 
-function formatCurrency(value: number) {
-  return `₹${value.toLocaleString("en-IN")}`;
+function formatValue(value: number, unit: "currency" | "people" | "schemes" = "currency") {
+  const numValue = value ?? 0;
+  if (unit === "people" || unit === "schemes") {
+    return `${numValue.toLocaleString("en-IN")}`;
+  }
+  return `₹${numValue.toLocaleString("en-IN")}`;
 }
 
-export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps) {
+export default function GapGraph({ totalEligible, totalReceived, unit = "currency" }: GapGraphProps) {
+  const formatCurrency = (val: number) => formatValue(val, unit);
+
   // Edge case: no eligible data
   if (typeof totalEligible !== "number" || totalEligible <= 0) {
     return (
@@ -33,22 +40,21 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
     );
   }
 
+  const receivedPercent = totalEligible > 0 ? Math.round((totalReceived / totalEligible) * 100) : 0;
+  const missingPercent = 100 - receivedPercent;
+
   const missing = Math.max(totalEligible - totalReceived, 0);
   const barData = [
     { name: "Received", value: totalReceived },
     { name: "Eligible", value: totalEligible },
   ];
   const accent = "#E15A15";
-  const accentHover = "#DA1702";
-  const mutedGold = "#A78F62";
   const grayTick = "#888888";
   const secondary = "#2f2f35";
   const pieData = [
     { name: "Receiving", value: Math.min(totalReceived, totalEligible), color: accent },
     { name: "Missing", value: missing, color: secondary },
   ];
-  const receivedPercent = totalEligible > 0 ? Math.round((totalReceived / totalEligible) * 100) : 0;
-  const missingPercent = 100 - receivedPercent;
 
   // Custom center label for donut
   function DonutCenter() {
@@ -91,6 +97,7 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
   }
 
   // Custom tooltip for donut
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function CustomPieTooltip({ active, payload }: any) {
     if (!active || !payload || !payload.length) return null;
     const entry = payload[0].payload;
@@ -107,6 +114,7 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
   }
 
   // Custom tooltip for bar chart with explicit high-contrast colors
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomBarTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload || !payload.length) return null;
     return (
@@ -115,7 +123,7 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
           {label}
         </p>
         <p className="!text-white font-medium text-sm">
-          Value: ₹{payload[0].value.toLocaleString()}
+          Value: {formatCurrency(payload[0].value)}
         </p>
       </div>
     );
@@ -126,10 +134,10 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs uppercase tracking-wider text-[#A78F62] font-semibold mb-1">Welfare gap insight</p>
-          <h3 className="text-lg font-semibold text-gray-100 mb-1">Benefit gap analysis</h3>
+          <h3 className="text-lg font-semibold text-gray-100 mb-1">{unit === "currency" ? "Benefit gap analysis" : unit === "people" ? "Beneficiary reach analysis" : "Discoverable Programs vs Claimed"}</h3>
         </div>
         <div className="flex items-center gap-2 mt-2 sm:mt-0">
-          <span className="rounded-full bg-[#222]/50 border border-[#E15A15]/20 text-[#E15A15] text-xs font-semibold px-3 py-1 uppercase tracking-wider">Gap: {formatCurrency(missing)}/mo</span>
+          <span className="rounded-full bg-[#222]/50 border border-[#E15A15]/20 text-[#E15A15] text-xs font-semibold px-3 py-1 uppercase tracking-wider">Gap: {formatCurrency(missing)}{unit === "currency" ? "/mo" : ""}</span>
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-6 items-stretch">
@@ -139,16 +147,16 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
             <span className="text-xs uppercase tracking-wider text-[#A78F62] font-semibold">Monthly comparison</span>
             <span className="rounded px-2 py-0.5 text-[10px] bg-[#222]/50 border border-[#333]/50 text-gray-400">Bar chart</span>
           </div>
-          <div className="h-40 w-full">
+          <div className="flex-1 w-full min-h-[200px] mt-4">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={barData} barGap={24} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
                 <CartesianGrid stroke="#232323" strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: grayTick, fontSize: 12 }} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fill: grayTick, fontSize: 12 }} tickFormatter={v => v >= 1000 ? `${v / 1000}k` : v} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: grayTick, fontSize: 12 }} tickFormatter={v => formatCurrency(v)} />
                 <Tooltip content={<CustomBarTooltip />} cursor={{ fill: "#E15A1511" }} />
                 <Bar dataKey="value" radius={[8, 8, 0, 0]} isAnimationActive animationDuration={800}>
                   {barData.map((entry, idx) => (
-                    <Cell key={entry.name} fill={idx === 0 ? accent : "#333"} cursor="pointer" />
+                    <Cell key={entry.name} fill={idx === 0 ? accent : "#555"} cursor="pointer" />
                   ))}
                 </Bar>
               </BarChart>
@@ -181,7 +189,7 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
                   animationDuration={900}
                   label={false}
                 >
-                  {pieData.map((entry, idx) => (
+                  {pieData.map((entry) => (
                     <Cell key={entry.name} fill={entry.color} cursor="pointer" />
                   ))}
                 </Pie>
@@ -196,8 +204,16 @@ export default function GapGraph({ totalEligible, totalReceived }: GapGraphProps
           {/* Summary sentence */}
           <div className="mt-4 text-xs text-gray-400 text-center">
             {receivedPercent < 100
-              ? `You are currently receiving only ${receivedPercent}% of the support you qualify for.`
-              : "You are receiving all the support you qualify for!"}
+              ? unit === "currency"
+                ? `You are currently receiving only ${receivedPercent}% of the support you qualify for.`
+                : unit === "people" 
+                  ? `Currently, only ${receivedPercent}% of eligible individuals are successfully receiving support.`
+                  : "Claimable many, claimed none. Based on your profile, you are leaving schemes on the table."
+              : unit === "currency" 
+                ? "You are receiving all the support you qualify for!"
+                : unit === "people"
+                  ? "Full reach! 100% of eligible individuals are receiving support."
+                  : "You have verified and claimed all identified schemes."}
           </div>
         </div>
       </div>

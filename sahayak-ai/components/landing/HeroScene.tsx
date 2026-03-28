@@ -39,6 +39,7 @@ function AshokaChakra({ scrollProgress }: { scrollProgress: React.MutableRefObje
         </group>
       );
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [materialProps.color, materialProps.roughness, materialProps.metalness, materialProps.emissive, materialProps.emissiveIntensity]);
 
   useFrame((state, delta) => {

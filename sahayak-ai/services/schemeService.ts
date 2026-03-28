@@ -1,6 +1,46 @@
 import type { Scheme, UserProfile, MatchResult } from "../types/index";
-import { matchSchemes } from "../lib/matcher";
+import { matchSchemes } from "../lib/matcher";import verifiedDataData from "../data/schemes_verified.json";
 
+// Explicitly type the incoming verified data
+interface VerifiedSchemeRaw {
+  id: string;
+  name: string;
+  rawDescription: string;
+  importantInfo: string;
+  links: string[];
+  fullText: string;
+  source: string;
+  confidenceScore: number;
+  verified: boolean;
+  confidenceLevel: string;
+  verificationNotes: string[];
+}
+
+const verifiedData = verifiedDataData as unknown as VerifiedSchemeRaw[];
+
+const verifiedSchemesConverted: Scheme[] = verifiedData
+  .filter(v => v.confidenceLevel === "high" || v.confidenceScore >= 2 || v.verified)
+  .map(v => ({
+    id: v.id,
+    name: v.name,
+    description: v.rawDescription || v.fullText,
+    eligibility: {
+      // Broad structural net - relying on keyword matching in matcher.ts for stricter relevance
+      ageRange: { min: 0, max: 120 },
+      gender: "any",
+      occupation: ["any"],
+      incomeLimit: 9999999,
+      category: ["All"],
+      state: ["All"],
+      maritalStatus: "any",
+      landOwnership: null,
+    },
+    benefits: v.importantInfo && !v.importantInfo.startsWith("Eligibility: Check") ? v.importantInfo : "Refer to the scheme links to verify detailed benefits.",
+    documents: ["Aadhaar Card", "Bank Account Details", "Income Certificate", "Passport Size Photos"],
+    estimatedBenefit: 5000,
+    tags: [v.source, ...(v.verificationNotes || [])].filter(t => t && !t.includes("low") && !t.includes("missing")),
+    links: v.links,
+  }));
 /**
  * Sample schemes data with realistic Indian government welfare schemes
  * Each scheme includes structured eligibility criteria for accurate matching
@@ -148,21 +188,21 @@ export const schemes: Scheme[] = [
  * Get all available schemes
  */
 export function getAllSchemes(): Scheme[] {
-  return schemes;
+  return [...schemes, ...verifiedSchemesConverted];
 }
 
 /**
  * Get a scheme by ID
  */
 export function getSchemeById(id: string): Scheme | undefined {
-  return schemes.find((scheme) => scheme.id === id);
+  return [...schemes, ...verifiedSchemesConverted].find((scheme) => scheme.id === id);
 }
 
 /**
- * Get recommended schemes for a user profile using threshold-based filtering
+ * Get recommended schemes for a user profile using threshold-based filtering   
  * @param userProfile - User's demographic and economic profile
  * @returns MatchResult with recommended schemes, fallback indication, and metadata
  */
-export function getRecommendedSchemes(userProfile: UserProfile): MatchResult {
-  return matchSchemes(userProfile, schemes);
+export function getRecommendedSchemes(userProfile: UserProfile): MatchResult {  
+  return matchSchemes(userProfile, [...schemes, ...verifiedSchemesConverted]);
 }

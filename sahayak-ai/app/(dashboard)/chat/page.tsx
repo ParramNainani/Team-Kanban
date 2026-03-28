@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { Bot, User, Send, MessageSquare, Plus, Menu, Mic, MicOff, Loader2, Volume2, LogIn, LogOut, Paperclip, X } from "lucide-react";
+import { Bot, User, Send, MessageSquare, Plus, Menu, Mic, MicOff, Loader2, Volume2, LogIn, LogOut, Paperclip, X, BarChart3 } from "lucide-react";
 import type { Message } from "@/types";
 import ChatBackground from "@/components/ChatBackground";
 import GapGraph from "@/components/GapGraph";
+import ReactMarkdown from "react-markdown";
 import { useWebSpeech } from "@/hooks/useWebSpeech";
 import { db } from "@/lib/firebase";
-import { collection, doc, setDoc, onSnapshot, query, orderBy, serverTimestamp, getDoc } from "firebase/firestore";
+import { collection, doc, setDoc, onSnapshot, query, orderBy, getDoc } from "firebase/firestore";
 import { useAuth } from "@/components/AuthProvider";
 
 const WELCOME: Message = {
@@ -17,45 +18,45 @@ const WELCOME: Message = {
 };
 
 const SUPPORTED_LANGUAGES = [
-  { value: "en-IN", label: "EN" },
-  { value: "hi-IN", label: "HI" },
-  { value: "bn-IN", label: "BN" },
-  { value: "af-ZA", label: "AF" },
-  { value: "ar-SA", label: "AR" },
-  { value: "bg-BG", label: "BG" },
-  { value: "cs-CZ", label: "CS" },
-  { value: "da-DK", label: "DA" },
-  { value: "de-DE", label: "DE" },
-  { value: "el-GR", label: "EL" },
-  { value: "es-ES", label: "ES" },
-  { value: "fi-FI", label: "FI" },
-  { value: "fr-FR", label: "FR" },
-  { value: "gu-IN", label: "GU" },
-  { value: "he-IL", label: "HE" },
-  { value: "hr-HR", label: "HR" },
-  { value: "hu-HU", label: "HU" },
-  { value: "id-ID", label: "ID" },
-  { value: "it-IT", label: "IT" },
-  { value: "ja-JP", label: "JA" },
-  { value: "kn-IN", label: "KN" },
-  { value: "ko-KR", label: "KO" },
-  { value: "ml-IN", label: "ML" },
-  { value: "mr-IN", label: "MR" },
-  { value: "nl-NL", label: "NL" },
-  { value: "no-NO", label: "NO" },
-  { value: "pa-IN", label: "PA" },
-  { value: "pl-PL", label: "PL" },
-  { value: "pt-BR", label: "PT" },
-  { value: "ro-RO", label: "RO" },
-  { value: "ru-RU", label: "RU" },
-  { value: "sv-SE", label: "SV" },
-  { value: "ta-IN", label: "TA" },
-  { value: "te-IN", label: "TE" },
-  { value: "tr-TR", label: "TR" },
-  { value: "uk-UA", label: "UK" },
-  { value: "ur-IN", label: "UR" },
-  { value: "vi-VN", label: "VI" },
-  { value: "zh-CN", label: "ZH" },
+  { value: "en-IN", label: "English" },
+  { value: "hi-IN", label: "Hindi" },
+  { value: "bn-IN", label: "Bengali" },
+  { value: "af-ZA", label: "Afrikaans" },
+  { value: "ar-SA", label: "Arabic" },
+  { value: "bg-BG", label: "Bulgarian" },
+  { value: "cs-CZ", label: "Czech" },
+  { value: "da-DK", label: "Danish" },
+  { value: "de-DE", label: "German" },
+  { value: "el-GR", label: "Greek" },
+  { value: "es-ES", label: "Spanish" },
+  { value: "fi-FI", label: "Finnish" },
+  { value: "fr-FR", label: "French" },
+  { value: "gu-IN", label: "Gujarati" },
+  { value: "he-IL", label: "Hebrew" },
+  { value: "hr-HR", label: "Croatian" },
+  { value: "hu-HU", label: "Hungarian" },
+  { value: "id-ID", label: "Indonesian" },
+  { value: "it-IT", label: "Italian" },
+  { value: "ja-JP", label: "Japanese" },
+  { value: "kn-IN", label: "Kannada" },
+  { value: "ko-KR", label: "Korean" },
+  { value: "ml-IN", label: "Malayalam" },
+  { value: "mr-IN", label: "Marathi" },
+  { value: "nl-NL", label: "Dutch" },
+  { value: "no-NO", label: "Norwegian" },
+  { value: "pa-IN", label: "Punjabi" },
+  { value: "pl-PL", label: "Polish" },
+  { value: "pt-BR", label: "Portuguese" },
+  { value: "ro-RO", label: "Romanian" },
+  { value: "ru-RU", label: "Russian" },
+  { value: "sv-SE", label: "Swedish" },
+  { value: "ta-IN", label: "Tamil" },
+  { value: "te-IN", label: "Telugu" },
+  { value: "tr-TR", label: "Turkish" },
+  { value: "uk-UA", label: "Ukrainian" },
+  { value: "ur-IN", label: "Urdu" },
+  { value: "vi-VN", label: "Vietnamese" },
+  { value: "zh-CN", label: "Chinese" },
 ];
 
 export default function ChatAIStudioLayout() {
@@ -127,10 +128,17 @@ export default function ChatAIStudioLayout() {
   async function uploadFileToCloudinary(file: File) {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "fcc2f942c1c2cf744139291c6778d7");
-    const res = await fetch("https://api.cloudinary.com/v1_1/du5y3i974/image/upload", { method: "POST", body: formData });
-    if (!res.ok) { console.error(await res.text()); throw new Error("Upload failed"); }
-    return (await res.json()).secure_url;
+    // You must create an unsigned upload preset in Cloudinary Settings -> Upload and replace this.
+    formData.append("upload_preset", "sahayak-preset"); 
+    // You must replace 'du5y3i974' with your actual Cloudinary cloud name.
+    const res = await fetch("https://api.cloudinary.com/v1_1/du5y3i974/auto/upload", { method: "POST", body: formData });
+    if (!res.ok) { 
+      const errorText = await res.text();
+      console.error("Cloudinary response:", errorText); 
+      throw new Error(`Upload failed: ${res.statusText}`); 
+    }
+    const data = await res.json();
+    return data.secure_url;
   }
 
   async function handleSend() {
@@ -145,8 +153,13 @@ export default function ChatAIStudioLayout() {
     let attachedUrl = "";
     if (attachment) {
       try {
+        if (!user) {
+          alert("Please sign in to process documents.");
+          setLoading(false);
+          return;
+        }
         attachedUrl = await uploadFileToCloudinary(attachment);
-      } catch(e) { console.error(e); setLoading(false); return; }
+      } catch(e) { console.error("Upload Error:", e); alert("Failed to upload document. Please check your Cloudinary preset config."); setLoading(false); return; }
     }
 
     const userMessage: Message = { role: "user", content: trimmed, attachmentUrl: attachedUrl || undefined };
@@ -158,10 +171,11 @@ export default function ChatAIStudioLayout() {
     // setLoading(true); already set
 
     try {
+      const selectedLanguageLabel = SUPPORTED_LANGUAGES.find(l => l.value === speechLang)?.label || "English";
       const res = await fetch("/api/conversation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: nextMessages }),
+        body: JSON.stringify({ messages: nextMessages, language: selectedLanguageLabel }),
       });
 
       if (!res.ok) {
@@ -188,15 +202,18 @@ export default function ChatAIStudioLayout() {
           setChatId(currentChatId);
         }
 
+        // Firestore does not accept 'undefined' values. We serialize/deserialize to strip them out completely.
+        const sanitizedMessages = JSON.parse(JSON.stringify(finalMessages));
+
         const chatDocRef = doc(db, "users", user.uid, "chats", currentChatId);
         await setDoc(chatDocRef, {
           id: currentChatId,
-          title: finalMessages.find(m => m.role === 'user')?.content.substring(0, 30) + '...' || "New Chat",
-          messages: finalMessages,
-          timestamp: serverTimestamp()
+          title: sanitizedMessages.find((m: Message) => m.role === 'user')?.content.substring(0, 30) + '...' || "New Chat",
+          messages: sanitizedMessages,
+          timestamp: Date.now()
         }, { merge: true });
-      } catch (firebaseErr) {
-        console.error("Firebase sync failed, but chat continues:", firebaseErr);
+      } catch (firebaseErr: unknown) {
+        console.error("Firebase sync failed! Firestore error details:", (firebaseErr as Error)?.message || firebaseErr);
       }
 
       // Speak response automatically
@@ -215,14 +232,22 @@ export default function ChatAIStudioLayout() {
       <ChatBackground />
       {/* Sidebar: AI Studio Style */}
       <aside className="w-64 bg-[#1a1a1a]/40 backdrop-blur-xl border-r border-[#333]/50 flex-col hidden md:flex z-10">
-        <div className="p-4 border-b border-[#333]/50">
-          <button 
+        <div className="p-4 border-b border-[#333]/50 flex flex-col gap-3">
+          <button
             onClick={startNewChat}
             className="flex items-center justify-center space-x-2 text-sm bg-[#E15A15] hover:bg-[#DA1702] rounded-lg w-full py-2.5 px-3 transition-colors text-white font-semibold shadow-lg"
-          >     
+          >
             <Plus size={16} />
             <span>New Chat</span>
           </button>
+          
+          <Link
+            href="/gap-report"
+            className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-[#333]/50 text-gray-300 border border-[#333]/50 rounded-lg w-full py-2 px-3 transition-colors"
+          >
+            <BarChart3 size={15} />
+            <span>Gap Reports</span>
+          </Link>
         </div>
         <div className="flex-1 overflow-y-auto p-3 space-y-1">
           <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-3 px-2 mt-2">Memory Logs</p>
@@ -248,7 +273,10 @@ export default function ChatAIStudioLayout() {
         <header className="h-14 border-b border-[#333]/50 flex items-center px-4 justify-between bg-[#111111]/40 backdrop-blur-md">
           <div className="flex items-center space-x-3">
             <Menu className="md:hidden text-gray-400" size={20} />
-            <h1 className="text-sm font-medium tracking-wide">Sahayak <span className="text-[#DA1702]">Intelligence</span></h1>       
+            <div className="flex items-center gap-2">
+              <img src="/logo.jpeg" alt="Sahayak Logo" className="h-10 w-10 rounded-md object-cover" />
+              <h1 className="text-[16px] font-medium tracking-wide">Sahayak <span className="text-[#DA1702]">Intelligence</span></h1>
+            </div>
           </div>
           <div className="flex items-center space-x-3 text-xs">
             {isSpeaking && (
@@ -285,8 +313,10 @@ export default function ChatAIStudioLayout() {
                 </div>
                 <div className="flex flex-col space-y-2 max-w-2xl">
                   <div className="flex items-start gap-2">
-                    <div className={`p-4 rounded-2xl text-sm leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-[#E15A15] text-white rounded-tr-none' : 'bg-[#1a1a1a]/80 backdrop-blur-md text-gray-200 border border-[#333]/80 rounded-tl-none'}`}>
-                      <p className="whitespace-pre-wrap">{msg.content}</p>
+                    <div className={`p-4 md:p-5 rounded-2xl text-base md:text-lg leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-[#E15A15] text-white rounded-tr-none' : 'bg-[#1a1a1a]/80 backdrop-blur-md text-gray-200 border border-[#333]/80 rounded-tl-none'}`}>
+                        <div className="prose prose-invert max-w-none text-base md:text-lg prose-p:text-base md:prose-p:text-lg prose-p:leading-relaxed prose-li:text-base md:prose-li:text-lg prose-pre:bg-[#222] prose-pre:border prose-pre:border-[#333] prose-a:text-blue-400 hover:prose-a:text-blue-300">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>
                       {msg.attachmentUrl && (
                         <div className="mt-3 inline-flex border border-[#333] rounded-lg p-2 bg-[#222]/50 hover:bg-[#333]/50 transition-colors">
                           <a href={msg.attachmentUrl} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#E15A15] flex items-center gap-2 text-xs">
@@ -315,11 +345,34 @@ export default function ChatAIStudioLayout() {
                               <strong className="text-sm text-[#A78F62] leading-tight">{s.name}</strong>
                               {s.score !== undefined && (
                                 <span className="shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 border border-green-500/20">
-                                  {Math.round((s.score / 15) * 100)}% Match
+                                  {Math.round((s.score / 20) * 100)}% Match
                                </span>
                               )}
                             </div>
-                            <span className="text-xs text-gray-400 line-clamp-2 leading-relaxed mb-3 flex-grow">{s.benefits}</span>
+                            <div className="text-xs text-gray-400 leading-relaxed mb-3 flex-grow space-y-2">
+                              {s.description && (
+                                <p className="line-clamp-2 text-gray-300" title={s.description}>{s.description}</p>
+                              )}
+                              <p className="line-clamp-2" title={s.benefits}>{s.benefits}</p>
+                              
+                              {s.documents && s.documents.length > 0 && (
+                                <div className="mt-1 pt-1 border-t border-[#333]/50 text-[#E15A15]/80">
+                                  <strong className="text-[10px] uppercase text-gray-500 mr-2">Documents:</strong>
+                                  {s.documents.join(', ')}
+                                </div>
+                              )}
+
+                              {s.links && s.links.length > 0 && (
+                                <div className="mt-1 flex flex-wrap gap-1">
+                                  <strong className="text-[10px] uppercase text-gray-500 w-full">Apply Here:</strong>
+                                  {s.links.map((link, lidx) => (
+                                    <a key={lidx} href={link} target="_blank" rel="noopener noreferrer" className="text-[10px] text-blue-400 hover:text-blue-300 underline inline-flex items-center bg-blue-500/10 px-1.5 py-0.5 rounded">
+                                      Official Portal {lidx + 1}
+                                    </a>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
                             {s.tags && s.tags.length > 0 && (
                               <div className="flex flex-wrap gap-1.5 mt-auto">
                                 {s.tags.slice(0, 3).map((tag, tagIdx) => (
@@ -334,14 +387,13 @@ export default function ChatAIStudioLayout() {
                       </div>
                       {/* GapGraph integration below scheme cards */}
                       {(() => {
-                        // Compute totalEligible and totalReceived
-                        const fallbackValue = 1000;
-                        const totalEligible = msg.schemes.reduce((sum, s) => sum + (typeof s.estimatedBenefit === 'number' ? s.estimatedBenefit : fallbackValue), 0);
+                        // Compute totalEligible (number of schemes) and totalReceived
+                        const totalEligible = msg.schemes?.length || 0;
                         // Placeholder: totalReceived = 0 (can be replaced with real data)
                         const totalReceived = 0;
                         return (
                           <div className="mt-6">
-                            <GapGraph totalEligible={totalEligible} totalReceived={totalReceived} />
+                            <GapGraph totalEligible={totalEligible} totalReceived={totalReceived} unit="schemes" />
                           </div>
                         );
                       })()}

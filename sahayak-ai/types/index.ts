@@ -18,6 +18,7 @@ export interface Scheme {
   documents: string[];
   estimatedBenefit: number;
   tags?: string[];
+  links?: string[]; // Added links property
 }
 
 export interface UserProfile {

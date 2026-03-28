@@ -28,7 +28,6 @@ import { Footer } from "./Footer";
 import { HeroSection } from "./HeroSection";
 import { HowItWorksSection } from "./HowItWorksSection";
 import GapGraph from "@/components/GapGraph";
-import { AnalyticsSection } from "./AnalyticsSection";
 import {
   LandingProvider,
   useLanding,
@@ -181,7 +180,6 @@ function PageInner() {
       <Navbar />
       <main className="relative z-10">
         <HeroSection />
-        <AnalyticsSection />
 
         <section
           id="use-cases"
@@ -282,18 +280,18 @@ function PageInner() {
             <div className="rounded-[40px] border border-slate-200/20 bg-white/95 p-8 shadow-[0_40px_120px_rgba(15,23,42,0.12)]">
               <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.35em] text-[#BF5700]">Benefit gap preview</p>
-                  <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">See the gap at a glance</h2>
+                  <p className="text-sm uppercase tracking-[0.35em] text-[#BF5700]">Impact preview</p>
+                  <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">See the impact at a glance</h2>
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-                    A quick chart view of received benefits versus total eligible support for a clearer decision.
+                    A quick chart view of current beneficiaries versus total eligible population for a clear view of untouched potential.
                   </p>
                 </div>
                 <div className="rounded-3xl bg-slate-50 px-5 py-4 text-right text-sm text-slate-600 ring-1 ring-slate-200/70">
                   <p className="font-semibold uppercase tracking-[0.3em] text-slate-400">Insight panel</p>
-                  <p className="mt-2 text-base font-semibold text-slate-900">Connected to the main launch experience</p>
+                  <p className="mt-2 text-base font-semibold text-slate-900">Live Beneficiary Tracking</p>
                 </div>
               </div>
-              <GapGraph totalEligible={28000} totalReceived={11200} theme="light" />
+              <GapGraph totalEligible={28000} totalReceived={11200} unit="people" />
             </div>
           </div>
         </section>
@@ -357,8 +355,6 @@ function PageInner() {
             </div>
           </div>
         </section>
-
-        <AnalyticsSection />
 
         <section id="faq" className="scroll-mt-28 py-12 lg:py-12">
           <div className="mx-auto max-w-7xl px-4 lg:px-8">

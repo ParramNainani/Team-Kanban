@@ -34,10 +34,10 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:grid-cols-2 lg:grid-cols-5 lg:px-8">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E15A15]/40 bg-[#DA1702]/20 text-sm font-bold text-slate-900">
-              S
+            <span className="flex h-14 w-14 items-center justify-center rounded-xl overflow-hidden shadow-sm">
+              <img src="/logo.png" alt="Sahayak Logo" className="h-full w-full object-cover" />
             </span>
-            <span className="text-lg font-bold text-slate-900">Sahayak AI</span>
+            <span className="text-xl font-bold text-slate-900">Sahayak AI</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-500">
             Citizen-first guidance for government schemes—clear eligibility,
