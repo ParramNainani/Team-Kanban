@@ -21,7 +21,7 @@ export async function POST(request: Request) {
       schemes,
       totalBenefit,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }

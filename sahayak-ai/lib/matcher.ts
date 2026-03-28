@@ -1,4 +1,5 @@
 import type { UserProfile, Scheme, ScoredScheme, MatchResult } from "../types/index";
+import { generateTags } from "./ai/gap-detector";
 
 /**
  * Compute the maximum possible score for scheme matching.
@@ -19,15 +20,15 @@ export function computeMaxScore(): number {
 
 /**
  * Minimum score required for a scheme to be recommended.
- * Set at 60% of maximum possible score.
+ * Set at 80% of maximum possible score to ensure high quality matches.
  */
-export const RECOMMENDATION_THRESHOLD = Math.round(computeMaxScore() * 0.60);
+export const RECOMMENDATION_THRESHOLD = Math.round(computeMaxScore() * 0.80);
 
 /**
  * Check if user's occupation matches scheme's eligible occupations
  */
 function checkOccupationMatch(userOccupation: string, schemeOccupations: string[]): boolean {
-  return schemeOccupations.includes(userOccupation);
+  return schemeOccupations.includes(userOccupation) || schemeOccupations.includes("any");
 }
 
 /**
@@ -87,12 +88,15 @@ function isDisqualified(user: UserProfile, scheme: Scheme): boolean {
     return true;
   }
 
+  // Occupation check - user occupation MUST match (unless scheme allows "any")
+  if (!checkOccupationMatch(user.occupation, scheme.eligibility.occupation)) {
+    return true;
+  }
   return false;
 }
 
 /**
- * Calculate matching score for a user against a scheme
- */
+ * Calculate matching score for a user against a scheme */
 function calculateScore(user: UserProfile, scheme: Scheme): number {
   // Check hard disqualifications first
   if (isDisqualified(user, scheme)) {
@@ -153,6 +157,7 @@ function calculateScore(user: UserProfile, scheme: Scheme): number {
 export function matchSchemes(user: UserProfile, schemes: Scheme[]): MatchResult {
   // Calculate scores for all schemes
   const scoredSchemes: ScoredScheme[] = schemes.map((scheme) => ({
+    tags: generateTags(scheme),
     ...scheme,
     score: calculateScore(user, scheme),
     isFallback: false, // Will be updated based on threshold logic

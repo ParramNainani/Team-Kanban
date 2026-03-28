@@ -27,15 +27,15 @@ export function SectionHeading({
       className={`max-w-3xl ${alignCls}`}
     >
       {eyebrow && (
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#A78F62]">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-inherit opacity-90 font-bold">
           {eyebrow}
         </p>
       )}
-      <h2 className="text-3xl font-bold tracking-tight text-[#EAE9DC] sm:text-4xl lg:text-[2.6rem] lg:leading-[1.1]">
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.6rem] lg:leading-[1.1] bg-gradient-to-r from-[#FF671F] to-[#046A38] bg-clip-text text-transparent pb-1">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-4 text-base leading-relaxed text-[#635E5C] sm:text-lg">
+        <p className="mt-4 text-base leading-relaxed text-inherit/80 sm:text-lg">
           {subtitle}
         </p>
       )}

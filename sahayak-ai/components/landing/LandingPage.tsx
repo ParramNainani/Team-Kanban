@@ -149,6 +149,8 @@ function PageInner() {
 
     const mm = gsap.matchMedia();
     mm.add("(min-width: 1024px)", () => {
+      // Removing the pin on demoRef to fix the scroll in pasted image 2
+      /*
       if (!demoRef.current) return;
       const st = ScrollTrigger.create({
         trigger: demoRef.current,
@@ -158,20 +160,29 @@ function PageInner() {
         pinSpacing: true,
       });
       return () => st.kill();
+      */
     });
 
     return () => mm.revert();
   }, [reduced]);
 
   return (
-    <div ref={rootRef} className="min-h-screen bg-[#050101] text-[#EAE9DC]">
+    <div ref={rootRef} className="relative min-h-screen bg-[#FDFCF8] text-gray-900 selection:bg-[#FF671F]/30">
+      {/* Background color bands spanning the page scroll */}
+      <div className="pointer-events-none absolute inset-0 z-[0] overflow-hidden" aria-hidden>
+        {/* Saffron Band */}
+        <div className="absolute top-[80vh] left-0 right-0 h-[200vh] bg-gradient-to-b from-transparent via-[#FF671F]/10 to-transparent" />
+        {/* Green Band */}
+        <div className="absolute bottom-0 left-0 right-0 h-[200vh] bg-gradient-to-t from-[#046A38]/10 via-[#046A38]/5 to-transparent" />
+      </div>
+
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <HeroSection />
 
         <section
           id="use-cases"
-          className="border-y border-white/5 bg-[#120504]/50 py-20 backdrop-blur-sm"
+          className="py-12"
         >
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading
@@ -180,7 +191,7 @@ function PageInner() {
               title="Pick a path—preview updates instantly"
               subtitle="Tap a profile to reshape the assistant preview with schemes and language tuned to that journey."
             />
-            <div className="mt-12 flex flex-wrap justify-center gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               {USE_CASES.map((u) => (
                 <UseCaseChip
                   key={u.id}
@@ -195,14 +206,14 @@ function PageInner() {
           </div>
         </section>
 
-        <section id="features" className="scroll-mt-28 py-24 lg:py-32">
+        <section id="features" className="scroll-mt-28 py-12 lg:py-12">
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading
               eyebrow="Features"
               title="Built for clarity under pressure"
               subtitle="Every surface is designed to reduce cognitive load while you navigate real bureaucracy."
             />
-            <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {FEATURES.map((f) => (
                 <FeatureCard
                   key={f.id}
@@ -213,7 +224,7 @@ function PageInner() {
                   icon={f.icon}
                   active={activeFeatureId === f.id}
                   onSelect={(id) =>
-                    setActiveFeatureId((prev) => (prev === id ? null : id))
+                    setActiveFeatureId(activeFeatureId === id ? null : id)
                   }
                 />
               ))}
@@ -223,14 +234,14 @@ function PageInner() {
 
         <section
           id="how-it-works"
-          className="scroll-mt-28 border-t border-white/5 py-24 lg:py-32"
+          className="scroll-mt-28 py-12 lg:py-12"
         >
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading
               eyebrow="How it works"
               title="From story to shortlist in three moves"
             />
-            <div className="mt-16 max-w-3xl">
+            <div className="mt-10 max-w-3xl">
               <HowItWorksSection />
             </div>
           </div>
@@ -239,7 +250,7 @@ function PageInner() {
         <section
           ref={demoRef}
           id="demo"
-          className="scroll-mt-28 border-t border-white/5 py-24 lg:min-h-screen lg:py-32"
+          className="scroll-mt-28 py-24  lg:py-32"
         >
           <div className="mx-auto grid max-w-7xl gap-12 px-4 lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-8">
             <div className="lg:sticky lg:top-28">
@@ -263,14 +274,14 @@ function PageInner() {
           </div>
         </section>
 
-        <section id="benefits" className="scroll-mt-28 py-24 lg:py-32">
+        <section id="benefits" className="scroll-mt-28 py-12 lg:py-12">
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading
               align="center"
               eyebrow="Benefits"
               title="Why citizens stay after the first query"
             />
-            <div className="mt-16 grid gap-8 lg:grid-cols-3">
+            <div className="mt-10 grid gap-8 lg:grid-cols-3">
               <BenefitCard
                 stat="Minutes"
                 title="Faster access to relevant schemes"
@@ -292,7 +303,7 @@ function PageInner() {
 
         <section
           id="testimonials"
-          className="scroll-mt-28 border-t border-white/5 py-24 lg:py-32"
+          className="scroll-mt-28 border-t border-slate-200 py-12 lg:py-12"
         >
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading
@@ -300,7 +311,7 @@ function PageInner() {
               eyebrow="Testimonials"
               title="Trusted when the stakes are personal"
             />
-            <div className="mt-16 grid gap-8 lg:grid-cols-3">
+            <div className="mt-10 grid gap-8 lg:grid-cols-3">
               <TestimonialCard
                 initials="AP"
                 name="Ananya P."
@@ -323,14 +334,14 @@ function PageInner() {
           </div>
         </section>
 
-        <section id="faq" className="scroll-mt-28 py-24 lg:py-32">
+        <section id="faq" className="scroll-mt-28 py-12 lg:py-12">
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading
               align="center"
               eyebrow="FAQ"
               title="Straight answers before you commit time"
             />
-            <div className="mt-14">
+            <div className="mt-10">
               <FAQAccordion items={FAQ} />
             </div>
           </div>

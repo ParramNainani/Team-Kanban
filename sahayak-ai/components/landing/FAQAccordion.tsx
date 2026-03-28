@@ -12,7 +12,7 @@ export function FAQAccordion({ items }: Props) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="divide-y divide-white/10 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md">
+    <div className="divide-y divide-white/10 rounded-2xl border border-slate-200 bg-white shadow-sm backdrop-blur-md">
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
@@ -25,7 +25,7 @@ export function FAQAccordion({ items }: Props) {
               onClick={() => setOpen(isOpen ? null : i)}
               className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left sm:px-6"
             >
-              <span className="text-base font-medium text-[#EAE9DC] sm:text-lg">
+              <span className="text-base font-medium text-slate-900 sm:text-lg">
                 {item.q}
               </span>
               <motion.span
@@ -47,7 +47,7 @@ export function FAQAccordion({ items }: Props) {
                   transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="border-t border-white/5 px-5 pb-6 pt-2 text-sm leading-relaxed text-[#635E5C] sm:px-6">
+                  <p className="border-t border-white/5 px-5 pb-6 pt-2 text-sm leading-relaxed text-slate-600 sm:px-6">
                     {item.a}
                   </p>
                 </motion.div>

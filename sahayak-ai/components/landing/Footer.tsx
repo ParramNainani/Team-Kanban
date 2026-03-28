@@ -30,36 +30,36 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-[#050101]/90 py-16 backdrop-blur-md">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:grid-cols-2 lg:grid-cols-5 lg:px-8">
+    <footer className="border-t border-[#D9CABE] bg-[#E3D4C0]/80 py-10 backdrop-blur-md">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:grid-cols-2 lg:grid-cols-5 lg:px-8">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E15A15]/40 bg-[#DA1702]/20 text-sm font-bold text-[#EAE9DC]">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E15A15]/40 bg-[#DA1702]/20 text-sm font-bold text-slate-900">
               S
             </span>
-            <span className="text-lg font-bold text-[#EAE9DC]">Sahayak AI</span>
+            <span className="text-lg font-bold text-slate-900">Sahayak AI</span>
           </div>
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#635E5C]">
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-slate-500">
             Citizen-first guidance for government schemes—clear eligibility,
             fewer dead ends, and next steps you can use today.
           </p>
-          <p className="mt-6 text-xs text-[#635E5C]/80">
+          <p className="mt-6 text-xs text-slate-500/80">
             Contact:{" "}
-            <a href="mailto:hello@sahayak.ai" className="text-[#A78F62] hover:underline">
+            <a href="mailto:hello@sahayak.ai" className="text-[#FF671F] hover:underline">
               hello@sahayak.ai
             </a>
           </p>
           <div className="mt-4 flex gap-4 text-sm">
             <a
               href="https://twitter.com"
-              className="text-[#635E5C] hover:text-[#EAE9DC]"
+              className="text-slate-500 hover:text-slate-900"
               rel="noreferrer"
             >
               X
             </a>
             <a
               href="https://linkedin.com"
-              className="text-[#635E5C] hover:text-[#EAE9DC]"
+              className="text-slate-500 hover:text-slate-900"
               rel="noreferrer"
             >
               LinkedIn
@@ -68,7 +68,7 @@ export function Footer() {
         </div>
         {cols.map((c) => (
           <div key={c.title}>
-            <p className="text-xs font-semibold uppercase tracking-widest text-[#635E5C]">
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
               {c.title}
             </p>
             <ul className="mt-4 space-y-2 text-sm">
@@ -77,14 +77,14 @@ export function Footer() {
                   {l.href.startsWith("/") ? (
                     <Link
                       href={l.href}
-                      className="text-[#635E5C] hover:text-[#EAE9DC]"
+                      className="text-slate-500 hover:text-slate-900"
                     >
                       {l.label}
                     </Link>
                   ) : (
                     <a
                       href={l.href}
-                      className="text-[#635E5C] hover:text-[#EAE9DC]"
+                      className="text-slate-500 hover:text-slate-900"
                     >
                       {l.label}
                     </a>
@@ -95,10 +95,10 @@ export function Footer() {
           </div>
         ))}
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-[#635E5C]">
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
             Company
           </p>
-          <ul className="mt-4 space-y-2 text-sm text-[#635E5C]">
+          <ul className="mt-4 space-y-2 text-sm text-slate-500">
             <li>
               <span className="cursor-default">About</span>
             </li>
@@ -108,7 +108,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <p className="mx-auto mt-12 max-w-7xl px-4 text-center text-xs text-[#635E5C]/60 lg:px-8">
+      <p className="mx-auto mt-12 max-w-7xl px-4 text-center text-xs text-slate-500/60 lg:px-8">
         © {new Date().getFullYear()} Sahayak AI. Verify scheme details on official
         government portals before you apply.
       </p>

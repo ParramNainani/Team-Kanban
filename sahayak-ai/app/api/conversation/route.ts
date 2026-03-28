@@ -5,14 +5,17 @@ import { ConversationResponse, UserProfile } from "../../../types";
 
 export async function POST(request: Request) {
   try {
-    const { message } = await request.json();
+    const { messages } = await request.json();
 
-    if (!message) {
-      return NextResponse.json({ error: "Message is required" }, { status: 400 });
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return NextResponse.json({ error: "Messages array is required" }, { status: 400 });
     }
 
-    // Call the engine to process the message
-    const { reply, isComplete, profile } = await situationEngine(message);
+    // Convert messages array into a single text block so Gemini has context
+    const conversationHistory = messages.map((m: { role: string; content: string }) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join("\n");
+
+    // Call the engine to process the message context
+    const { reply, isComplete, profile } = await situationEngine(conversationHistory);
 
     // If we need more info, return the reply only
     if (!isComplete) {
@@ -23,7 +26,7 @@ export async function POST(request: Request) {
     // Since it is complete, cast the Partial profile to full UserProfile with defaults if needed
     const fullProfile: UserProfile = {
       age: profile.age || 0,
-      gender: profile.gender || "any" as any,
+      gender: (profile.gender as "male" | "female") || "male",
       occupation: profile.occupation || "any",
       income: profile.income || 0,
       category: profile.category || "All",
@@ -42,15 +45,7 @@ export async function POST(request: Request) {
     // Auto-generate a markdown table for the reply
     let formattedReply = reply;
     if (schemes && schemes.length > 0) {
-      formattedReply += "\n\nHere are the schemes you are eligible for:\n\n";
-      formattedReply += "| Scheme Name | Estimated Benefit | Key Benefits |\n";
-      formattedReply += "| --- | --- | --- |\n";
-      
-      schemes.forEach((scheme) => {
-        formattedReply += `| ${scheme.name} | Rs. ${scheme.estimatedBenefit} | ${scheme.benefits} |\n`;
-      });
-      
-      formattedReply += `\n**Total Potential Benefit:** Rs. ${totalBenefit}\n`;
+      formattedReply += "\n\nI have found some schemes that you might be eligible for based on the details provided. Please review them below:";
     }
 
     const response: ConversationResponse = {

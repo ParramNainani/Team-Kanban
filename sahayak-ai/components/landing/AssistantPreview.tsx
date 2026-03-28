@@ -82,7 +82,7 @@ export function AssistantPreview({ persona }: Props) {
   const p = useMemo(() => PERSONA_COPY[persona], [persona]);
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-5 shadow-2xl backdrop-blur-xl sm:p-6">
+    <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white/70 p-5 shadow-2xl backdrop-blur-xl sm:p-6">
       <div className="mb-4 flex flex-wrap gap-2">
         {PROMPTS.map((chip) => (
           <PromptChip
@@ -104,58 +104,58 @@ export function AssistantPreview({ persona }: Props) {
           transition={{ duration: 0.3 }}
           className="space-y-3"
         >
-          <div className="rounded-2xl border border-white/10 bg-black/35 p-4">
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-[#A78F62]">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
               You
             </p>
-            <p className="mt-1 text-sm text-[#EAE9DC]/90">{active.query}</p>
+            <p className="mt-1 text-sm text-slate-900">{active.query}</p>
           </div>
 
-          <div className="rounded-2xl border border-[#E15A15]/30 bg-[#DA1702]/10 p-4">
-            <div className="flex items-center gap-2 text-[#E15A15]">
+          <div className="rounded-2xl border border-[#046A38]/30 bg-[#046A38]/5 p-4">
+            <div className="flex items-center gap-2 text-[#046A38]">
               <Sparkles className="h-4 w-4" aria-hidden />
               <span className="text-[10px] font-bold uppercase tracking-widest">
                 Sahayak AI
               </span>
             </div>
-            <p className="mt-2 text-sm leading-relaxed text-[#EAE9DC]/85">
+            <p className="mt-2 text-sm leading-relaxed text-slate-800">
               Based on your profile, start with{" "}
-              <span className="font-semibold text-[#EAE9DC]">{p.scheme}</span>.
+              <span className="font-semibold text-slate-900">{p.scheme}</span>.
               We&apos;ll verify income or land context next so eligibility is
               clearer before you apply.
             </p>
           </div>
 
           <div className="grid gap-2 sm:grid-cols-3">
-            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
-              <p className="text-[10px] text-[#635E5C]">Schemes matched</p>
-              <p className="mt-1 text-lg font-semibold text-[#EAE9DC]">3</p>
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <p className="text-[10px] text-slate-500">Schemes matched</p>
+              <p className="mt-1 text-lg font-semibold text-slate-900">3</p>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
-              <p className="text-[10px] text-[#635E5C]">Confidence</p>
-              <p className="mt-1 text-lg font-semibold text-[#E15A15]">High</p>
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <p className="text-[10px] text-slate-500">Confidence</p>
+              <p className="mt-1 text-lg font-semibold text-[#046A38]">High</p>
             </div>
-            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
-              <p className="text-[10px] text-[#635E5C]">Documents</p>
-              <p className="mt-1 text-lg font-semibold text-[#EAE9DC]">4</p>
+            <div className="rounded-xl border border-slate-200 bg-white p-3">
+              <p className="text-[10px] text-slate-500">Documents</p>
+              <p className="mt-1 text-lg font-semibold text-slate-900">4</p>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#A78F62]/25 bg-black/30 p-4">
+          <div className="rounded-2xl border border-[#FF671F]/30 bg-[#FFF2EB] p-4">
             <div className="flex items-start gap-3">
-              <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#E15A15]" />
+              <BadgeCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#046A38]" />
               <div>
-                <p className="text-xs font-semibold text-[#EAE9DC]">
+                <p className="text-xs font-semibold text-slate-900">
                   {p.scheme}
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-[#635E5C]">
+                <p className="mt-1 text-xs leading-relaxed text-slate-500">
                   {p.benefit}
                 </p>
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="rounded-full border border-[#E15A15]/30 bg-[#DA1702]/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#EAE9DC]">
+                  <span className="rounded-full border border-[#046A38]/30 bg-[#046A38]/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-slate-900">
                     {p.badge}
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/10 px-2 py-0.5 text-[10px] text-[#635E5C]">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2 py-0.5 text-[10px] text-slate-500">
                     <FileText className="h-3 w-3" aria-hidden />
                     {p.doc}
                   </span>
@@ -168,7 +168,7 @@ export function AssistantPreview({ persona }: Props) {
 
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -bottom-10 left-1/2 h-24 w-[70%] -translate-x-1/2 rounded-full bg-[#DA1702]/25 blur-3xl"
+        className="pointer-events-none absolute -bottom-10 left-1/2 h-24 w-[70%] -translate-x-1/2 rounded-full bg-[#046A38]/20 blur-3xl"
         animate={{ opacity: [0.35, 0.55, 0.35] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />

@@ -88,7 +88,7 @@ export function MobileMenu({ open, onClose, onNavigate }: Props) {
                 className={`${primaryCtaClassName} w-full text-center`}
                 onClick={onClose}
               >
-                Explore Schemes
+                Try Chat Now
               </Link>
             </div>
           </motion.nav>
@@ -97,3 +97,4 @@ export function MobileMenu({ open, onClose, onNavigate }: Props) {
     </AnimatePresence>
   );
 }
+

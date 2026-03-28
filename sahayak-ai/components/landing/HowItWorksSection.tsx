@@ -32,7 +32,7 @@ export function HowItWorksSection() {
   return (
     <div className="relative">
       <div
-        className="pointer-events-none absolute left-[1.35rem] top-0 hidden h-full w-px bg-gradient-to-b from-[#E15A15]/50 via-[#DA1702]/30 to-transparent md:block lg:left-8"
+        className="pointer-events-none absolute md:left-[1.75rem] top-0 hidden h-full w-px bg-gradient-to-b from-[#E15A15]/50 via-[#DA1702]/30 to-transparent md:block"
         aria-hidden
       />
       <motion.div
@@ -54,30 +54,34 @@ export function HowItWorksSection() {
               <button
                 type="button"
                 onClick={() => setActiveStep(i)}
-                className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border text-sm font-bold transition md:h-14 md:w-14 ${
+                className={`relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border text-sm font-bold transition md:h-14 md:w-14 overflow-hidden ${
                   active
-                    ? "border-[#E15A15]/50 bg-[#DA1702]/25 text-[#EAE9DC] shadow-[0_0_24px_-8px_rgba(218,23,2,0.45)]"
-                    : "border-white/10 bg-white/[0.04] text-[#A78F62] hover:border-[#E15A15]/35"
+                    ? "border-[#E15A15]/50 text-slate-900 shadow-[0_0_24px_-8px_rgba(218,23,2,0.45)]"
+                    : "border-slate-300 text-[#A78F62] hover:border-[#E15A15]/35"
                 }`}
                 aria-pressed={active}
               >
-                {s.n}
+                <div className="pointer-events-none absolute inset-0 -z-20 bg-[#EADAC5]" aria-hidden />
+                <div className={`pointer-events-none absolute inset-0 -z-10 ${
+                  active ? "bg-[#DA1702]/25" : "bg-white/[0.04]"
+                }`} aria-hidden />
+                <span className="relative z-10">{s.n}</span>
               </button>
               <motion.div
                 onHoverStart={() => setActiveStep(i)}
                 className={`flex-1 rounded-3xl border p-6 backdrop-blur-md transition md:p-8 ${
                   active
                     ? "border-[#E15A15]/35 bg-white/[0.06]"
-                    : "border-white/10 bg-white/[0.03] hover:border-white/15"
+                    : "border-slate-300 bg-white/[0.03] hover:border-white/15"
                 }`}
               >
                 <div className="flex items-start gap-4">
-                  <Icon className="mt-1 h-6 w-6 text-[#E15A15]" aria-hidden />
+                  <Icon className="mt-1 h-6 w-6 text-[#046A38]" aria-hidden />
                   <div>
-                    <h3 className="text-xl font-semibold text-[#EAE9DC]">
+                    <h3 className="text-xl font-semibold text-slate-900">
                       {s.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#635E5C]">
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
                       {s.body}
                     </p>
                   </div>

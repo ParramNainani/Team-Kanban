@@ -30,10 +30,10 @@ export function FeatureCard({
       whileInView="visible"
       viewport={{ once: true, margin: "-30px" }}
       whileHover={cardHover}
-      className={`cursor-pointer rounded-3xl border p-6 backdrop-blur-md transition-shadow ${
+      className={`cursor-pointer rounded-[2rem] border p-7 backdrop-blur-xl transition-all duration-300 ${
         active
-          ? "border-[#E15A15]/45 bg-[#DA1702]/10 shadow-[0_0_40px_-14px_rgba(218,23,2,0.35)]"
-          : "border-white/10 bg-white/[0.04] hover:border-[#E15A15]/25"
+          ? "border-[#FF671F]/30 bg-[#FFF5EF]/90 shadow-xl shadow-[#FF671F]/5 scale-[1.02]"
+          : "border-[#D9CABE] bg-white/40 hover:bg-white/70 hover:border-[#C7B5A3] hover:shadow-lg hover:shadow-black/5"
       }`}
       onClick={() => onSelect(id)}
       role="button"
@@ -45,16 +45,20 @@ export function FeatureCard({
         }
       }}
     >
-      <div className="mb-4 inline-flex rounded-2xl border border-[#E15A15]/25 bg-[#5C0301]/30 p-3 text-[#E15A15]">
+      <div className={`mb-5 inline-flex rounded-2xl border p-3.5 transition-colors ${
+        active 
+          ? "border-[#FF671F]/30 bg-white text-[#FF671F] shadow-sm" 
+          : "border-[#D9CABE]/50 bg-white/50 text-[#8F857D]"
+      }`}>
         <Icon className="h-6 w-6" aria-hidden />
       </div>
-      <h3 className="text-lg font-semibold text-[#EAE9DC]">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-[#635E5C]">{description}</p>
+      <h3 className="text-lg font-semibold text-[#1F1A17]">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-[#6A635D]">{description}</p>
       {active && (
         <motion.p
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
-          className="mt-4 border-t border-white/10 pt-4 text-sm text-[#EAE9DC]/80"
+          className="mt-4 border-t border-slate-200 pt-4 text-sm text-[#6A635D]"
         >
           {detail}
         </motion.p>

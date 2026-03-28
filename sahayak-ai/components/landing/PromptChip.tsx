@@ -17,8 +17,8 @@ export function PromptChip({ children, active, onClick }: Props) {
       whileTap={{ scale: 0.97 }}
       className={`rounded-full border px-3 py-1.5 text-left text-[11px] font-medium transition sm:text-xs ${
         active
-          ? "border-[#E15A15]/60 bg-[#DA1702]/20 text-[#EAE9DC] shadow-[0_0_20px_-6px_rgba(218,23,2,0.45)]"
-          : "border-white/10 bg-white/[0.04] text-[#635E5C] hover:border-[#E15A15]/35 hover:text-[#EAE9DC]/90"
+          ? "border-[#FF671F]/60 bg-[#FF671F]/20 text-slate-900 shadow-[0_0_20px_-6px_rgba(255,103,31,0.45)]"
+          : "border-slate-300 bg-white text-slate-600 hover:border-[#046A38]/35 hover:text-slate-900"
       }`}
     >
       {children}

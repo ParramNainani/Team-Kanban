@@ -23,24 +23,24 @@ const CONTENT: Record<
   { headline: string; body: string; metrics: [string, string, string] }
 > = {
   discover: {
-    headline: "Ranked schemes for your profile",
-    body: "We cross-reference central and state programs, then surface the few that match your situation—not a generic list.",
-    metrics: ["12 schemes", "4 states", "Updated weekly"],
+    headline: "Curated subsidies for your farm",
+    body: "We analyze land holding, crop type, and state budgets to find actionable agricultural grants—skipping irrelevant ones.",
+    metrics: ["8 subsidies", "Active now", "Maharashtra"],
   },
   eligibility: {
-    headline: "Plain-language eligibility signals",
-    body: "Income ceilings, category rules, and geography checks are translated into yes/maybe/next-step guidance you can act on.",
-    metrics: ["Confidence: High", "3 checks", "2 follow-ups"],
+    headline: "Simplified criteria breakdown",
+    body: "Land size limits, irrigation status, and crop requirements explained clearly so you know exactly what you qualify for.",
+    metrics: ["Verified match", "Land < 2 Ha", "Drip reqs"],
   },
   benefits: {
-    headline: "Benefit ranges and payout paths",
-    body: "See stipend bands, credit limits, or subsidy amounts where published—plus what typically affects approval.",
-    metrics: ["₹12k–₹48k", "DBT-ready", "Trackable"],
+    headline: "Clear subsidy details",
+    body: "Understand the exact percentage of subsidy, maximum cap per hectare, and the timeline for multi-stage disbursement.",
+    metrics: ["50-80% cover", "Up to ₹1L", "Direct transfer"],
   },
   documents: {
-    headline: "Document readiness checklist",
-    body: "Income proof, domicile, institution letters—ordered by what reviewers ask for first so you are not caught mid-application.",
-    metrics: ["4 core docs", "2 alternates", "1 optional"],
+    headline: "Targeted document prep",
+    body: "Aadhaar, 7/12 extract, and quotation for equipment—organized by what you need to upload first to start the claim.",
+    metrics: ["3 core docs", "Land records", "Bank details"],
   },
 };
 
@@ -78,7 +78,7 @@ export function DemoPanel() {
       id="demo-panel"
       className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#120504] to-[#050101] shadow-2xl backdrop-blur-xl"
     >
-      <div className="flex flex-wrap gap-2 border-b border-white/10 p-3 sm:p-4">
+      <div className="flex overflow-x-auto hide-scrollbar gap-2 border-b border-white/10 p-3 sm:p-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {TABS.map((t) => {
           const Icon = t.icon;
           const active = tab === t.id;
@@ -87,7 +87,7 @@ export function DemoPanel() {
               key={t.id}
               type="button"
               onClick={() => setTab(t.id)}
-              className={`relative flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-wide transition sm:text-sm ${
+              className={`relative flex shrink-0 items-center gap-2 rounded-xl px-3 py-2 text-xs font-semibold uppercase tracking-wide transition sm:text-sm ${
                 active ? "text-[#EAE9DC]" : "text-[#635E5C] hover:text-[#EAE9DC]/80"
               }`}
             >
@@ -122,8 +122,8 @@ export function DemoPanel() {
             <div className="mt-4 space-y-3 rounded-2xl border border-white/10 bg-black/35 p-4">
               <p className="text-[10px] uppercase text-[#635E5C]">User</p>
               <p className="text-sm text-[#EAE9DC]/90">
-                I&apos;m a college student from Bihar looking for scholarship
-                support.
+                I am a small farmer from Maharashtra looking for a subsidy to
+                install a drip irrigation system.
               </p>
             </div>
             <div className="mt-3 rounded-2xl border border-[#E15A15]/25 bg-[#DA1702]/10 p-4">
@@ -146,7 +146,7 @@ export function DemoPanel() {
         </AnimatePresence>
 
         <div className="flex flex-col gap-3">
-          <MiniCounter value={12} label="Schemes matched" />
+          <MiniCounter value={8} label="Schemes matched" />
           <div className="rounded-2xl border border-[#E15A15]/25 bg-[#5C0301]/30 p-4">
             <p className="text-[10px] uppercase text-[#635E5C]">
               Eligibility confidence
@@ -157,7 +157,7 @@ export function DemoPanel() {
             <p className="text-[10px] uppercase text-[#635E5C]">
               Documents flagged
             </p>
-            <p className="mt-1 text-xl font-bold text-[#EAE9DC]">4</p>
+            <p className="mt-1 text-xl font-bold text-[#EAE9DC]">3</p>
           </div>
         </div>
       </div>

@@ -12,8 +12,12 @@ export interface Scheme {
     landOwnership: boolean | null;         // null = not applicable
   };
   benefits: string;
+  description?: string;
+  category?: string;
+  targetGroup?: string;
   documents: string[];
   estimatedBenefit: number;
+  tags?: string[];
 }
 
 export interface UserProfile {
@@ -46,3 +50,5 @@ export interface MatchResult {
   recommendedCount: number;
   thresholdUsed: number;
 }
+export interface SchemeSummary extends ScoredScheme {}
+export interface Message { role: 'user' | 'assistant' | 'system'; content: string; schemes?: SchemeSummary[]; profile?: Partial<UserProfile>; isComplete?: boolean; }

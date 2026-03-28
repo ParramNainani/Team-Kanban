@@ -89,19 +89,19 @@ export function Navbar() {
         variants={fadeUp}
         initial="hidden"
         animate="visible"
-        className="navbar-fixed fixed left-0 right-0 top-0 z-50 border-b border-white/5 bg-[#050101]/55 backdrop-blur-xl"
+        className="navbar-fixed fixed left-0 right-0 top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-xl"
         style={{ willChange: "transform" }}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <Link
             href="/"
-            className="flex items-center gap-2 text-[#EAE9DC]"
+            className="flex items-center gap-2 text-slate-900"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("hero");
             }}
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#E15A15]/40 bg-[#DA1702]/20 text-sm font-bold">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#FF671F]/40 bg-[#FF671F]/10 text-[#046A38] text-sm font-bold">
               S
             </span>
             <span className="text-lg font-bold tracking-tight">Sahayak AI</span>
@@ -121,8 +121,8 @@ export function Navbar() {
                 }}
                 className={`rounded-lg px-3 py-2 text-sm font-medium transition ${
                   active === item.id
-                    ? "text-[#E15A15]"
-                    : "text-[#635E5C] hover:text-[#EAE9DC]"
+                    ? "text-[#FF671F]"
+                    : "text-[#635E5C] hover:text-slate-900"
                 }`}
               >
                 {item.label}
@@ -139,13 +139,13 @@ export function Navbar() {
               Try Assistant
             </GlowButton>
             <Link href="/chat" className={primaryCtaClassName}>
-              Explore Schemes
+              Try Chat Now
             </Link>
           </div>
 
           <button
             type="button"
-            className="rounded-lg p-2 text-[#EAE9DC] lg:hidden"
+            className="rounded-lg p-2 text-slate-900 lg:hidden"
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
             onClick={() => setMobileOpen(true)}
@@ -164,3 +164,4 @@ export function Navbar() {
     </>
   );
 }
+

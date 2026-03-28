@@ -33,7 +33,7 @@ const keywordMap: Record<string, string[]> = {
  * @param scheme - Scheme object with name, eligibility, benefits, category, description, etc.
  * @returns Array of normalized, deduplicated tags
  */
-export function generateTags(scheme: any): string[] {
+export function generateTags(scheme: Scheme): string[] {
   const tags: Set<string> = new Set();
 
   // Combine all relevant text fields into one searchable block
@@ -82,11 +82,6 @@ function takeUniqueById<T extends { id: string }>(items: T[], limit: number): T[
   }
 
   return taken;
-}
-
-function toSchemeOnly(row: ScoredScheme): Scheme {
-  const { score: _score, ...scheme } = row;
-  return scheme;
 }
 
 function sumEstimatedBenefit(schemes: Scheme[]): number {
