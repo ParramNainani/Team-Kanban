@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     }
 
     // Call the engine to process the message
-    const { reply, isComplete, keywords } = situationEngine(message);
+    const { reply, isComplete, keywords } = await situationEngine(message);
 
     // If we need more info, return the reply only
     if (!isComplete) {
