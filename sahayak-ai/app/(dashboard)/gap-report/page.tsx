@@ -1,1 +1,3 @@
-// TODO: Displays scheme results
+export default function GapReportPage() {
+  return null;
+}
