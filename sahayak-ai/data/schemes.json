@@ -1,87 +1,604 @@
 [
   {
-    "id": "pm-kisan",
-    "name": "PM-KISAN",
-    "eligibility": {
-      "ageRange": { "min": 18, "max": 120 },
-      "gender": "any",
-      "occupation": ["farmer", "agricultural worker"],
-      "incomeLimit": 600000,
-      "category": ["All"],
-      "state": ["All"],
-      "maritalStatus": "any",
-      "landOwnership": true
-    },
-    "benefits": "₹6,000 per year in three equal installments for farmers with landholding up to 2 hectares",
-    "documents": ["Aadhaar Card", "Bank Account Details", "Land Records"],
-    "estimatedBenefit": 6000
+    "id": "scheme_1",
+    "name": "Amrit Bharat Station Scheme",
+    "rawDescription": "Amrit Bharat Station Scheme (ABSS) is an ongoing Indian Railways mission launched in December 2022 by the Ministry of Railways to redevelop 1275 stations nationwide. It is both enabler and beneficiary of other key Government of India schemes, such as BharatNet, One Station One Product, Make in India, Startup India, Standup India, industrial corridors, Bharatmala, Dedicated Freight Corridor Corporation of India and Sagarmala. This scheme is a second form of Adarsh Railway station development scheme in 2009-2010 The table below lists all the stations under the project. Damoh, Datia, Dewas, Gadarwara, Ganjbasoda, Ghoradongri, Guna, Gwalior, Harda, Harpalpur, Hoshangabad, Indore, Itarsi Jn., Jabalpur, Junnor Deo, Kareli, Katni Jn, Katni Murwara, Katni South, Khachrod, Khajuraho, Khandwa,...",
+    "fullText": "Amrit Bharat Station Scheme - Amrit Bharat Station Scheme (ABSS) is an ongoing Indian Railways mission launched in December 2022 by the Ministry of Railways to redevelop 1275 stations nationwide. It is both enabler and beneficiary of other key Government of India schemes, such as BharatNet, One Station One Product, Make in India, Startup India, Standup India, industrial corridors, Bharatmala, Dedicated Freight Corridor Corporation of India and Sagarmala. This scheme is a second form of Adarsh Railway station development scheme in 2009-2010 The table below lists all the stations under the project. Damoh, Datia, Dewas, Gadarwara, Ganjbasoda, Ghoradongri, Guna, Gwalior, Harda, Harpalpur, Hoshangabad, Indore, Itarsi Jn., Jabalpur, Junnor Deo, Kareli, Katni Jn, Katni Murwara, Katni South, Khachrod, Khajuraho, Khandwa,...",
+    "source": "wikipedia"
   },
   {
-    "id": "widow-pension",
-    "name": "National Widow Pension Scheme",
-    "eligibility": {
-      "ageRange": { "min": 18, "max": 120 },
-      "gender": "female",
-      "occupation": ["any"],
-      "incomeLimit": 200000,
-      "category": ["All"],
-      "state": ["All"],
-      "maritalStatus": "widow",
-      "landOwnership": null
-    },
-    "benefits": "₹2,000 per month financial assistance",
-    "documents": ["Widow Certificate", "Income Certificate", "Aadhaar Card"],
-    "estimatedBenefit": 24000
+    "id": "scheme_2",
+    "name": "Agnipath Scheme",
+    "rawDescription": "Agnipath Scheme (also spelled Agneepath Scheme) (Hindi: Agnīpath Yojanā, transl. Agnipath [Fireway] Scheme) is a tour of duty style scheme approved by the Government of India on 14 June 2022 and implemented in the country a few months later in September 2022, for recruitment of soldiers below the rank of commissioned officers into the three services of the armed forces. All recruits will be hired only for a four year period. Personnel recruited under this system are to be called Agniveers (transl. Fire-Warriors), which will be a new military rank. Although the scheme bypasses the traditional service benefits (such as pensions, rations, etc) allocated to personnel recruited in the armed forces, the government provides up to ₹50 lakh (US$59,000) rupees in insurance coverage, and they are...",
+    "fullText": "Agnipath Scheme - Agnipath Scheme (also spelled Agneepath Scheme) (Hindi: Agnīpath Yojanā, transl. Agnipath [Fireway] Scheme) is a tour of duty style scheme approved by the Government of India on 14 June 2022 and implemented in the country a few months later in September 2022, for recruitment of soldiers below the rank of commissioned officers into the three services of the armed forces. All recruits will be hired only for a four year period. Personnel recruited under this system are to be called Agniveers (transl. Fire-Warriors), which will be a new military rank. Although the scheme bypasses the traditional service benefits (such as pensions, rations, etc) allocated to personnel recruited in the armed forces, the government provides up to ₹50 lakh (US$59,000) rupees in insurance coverage, and they are...",
+    "source": "wikipedia"
   },
   {
-    "id": "ayushman-bharat",
-    "name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana",
-    "eligibility": {
-      "ageRange": { "min": 0, "max": 120 },
-      "gender": "any",
-      "occupation": ["any"],
-      "incomeLimit": 500000,
-      "category": ["All"],
-      "state": ["All"],
-      "maritalStatus": "any",
-      "landOwnership": null
-    },
-    "benefits": "Cashless treatment up to ₹5 lakh per family per year for secondary and tertiary care hospitalization",
-    "documents": ["Ayushman Bharat Card", "Income Certificate"],
-    "estimatedBenefit": 500000
+    "id": "scheme_3",
+    "name": "PM Poshan Shakti Nirman Abhiyaan PM Nutrition Power Building Scheme)",
+    "rawDescription": "The Midday Meal Scheme, or PM-Poshan Shakti Nirman in Hindi, is a mandatory but free school meal programme in India designed to enhance the nutritional status of school-age children nationwide. The programme supplies free lunches on working days for children in government primary and upper primary schools, government-aided anganwadis (pre-school), madrasas and maqtabs. Serving 120 million children in over 1.27 million schools and Education Guarantee Scheme centres, the Midday Meal Scheme is the largest of its kind in the world. In 1920, A. Subbarayalu Reddiar, the first Chief Minister of the Madras Presidency, introduced the mid-day meal scheme in a Corporation school in the Thousand Lights area. The initiative was based on the idea proposed by P. Theagaraya Chetty, who was serving as...",
+    "fullText": "PM Poshan Shakti Nirman Abhiyaan PM Nutrition Power Building Scheme) - The Midday Meal Scheme, or PM-Poshan Shakti Nirman in Hindi, is a mandatory but free school meal programme in India designed to enhance the nutritional status of school-age children nationwide. The programme supplies free lunches on working days for children in government primary and upper primary schools, government-aided anganwadis (pre-school), madrasas and maqtabs. Serving 120 million children in over 1.27 million schools and Education Guarantee Scheme centres, the Midday Meal Scheme is the largest of its kind in the world. In 1920, A. Subbarayalu Reddiar, the first Chief Minister of the Madras Presidency, introduced the mid-day meal scheme in a Corporation school in the Thousand Lights area. The initiative was based on the idea proposed by P. Theagaraya Chetty, who was serving as...",
+    "source": "wikipedia"
   },
   {
-    "id": "student-scholarship",
-    "name": "National Scholarship Portal - Post Matric Scholarship",
-    "eligibility": {
-      "ageRange": { "min": 17, "max": 30 },
-      "gender": "any",
-      "occupation": ["student"],
-      "incomeLimit": 600000,
-      "category": ["SC", "ST", "OBC", "Minority"],
-      "state": ["All"],
-      "maritalStatus": "any",
-      "landOwnership": null
-    },
-    "benefits": "Tuition fee reimbursement and maintenance allowance up to ₹20,000 per year",
-    "documents": ["Caste Certificate", "Income Certificate", "Admission Letter", "Mark Sheets"],
-    "estimatedBenefit": 20000
+    "id": "scheme_4",
+    "name": "Svamitva Yojana",
+    "rawDescription": "Svamitva Scheme (Survey of Villages Abadi and Mapping with Improvised Technology in Village Area) is a property survey program launched by Indian Prime Minister Narendra Modi on 24 April 2021 under presidency of , as a central-sector scheme to promote socio-economic empowerment and a more self-reliant rural India. About 6.62 lakh villages across the country will be surveyed in this scheme from 2021 to 2025, using varied technology including drones to collect property data. The initial phase of the scheme was implemented during 2020-21 in the select villages of Maharashtra, Karnataka, Haryana, Uttar Pradesh, Uttarakhand, Madhya Pradesh, Punjab and Rajasthan. The scheme is intended to reduce property disputes by providing accurate land records while boosting financial liquidity. The...",
+    "fullText": "Svamitva Yojana - Svamitva Scheme (Survey of Villages Abadi and Mapping with Improvised Technology in Village Area) is a property survey program launched by Indian Prime Minister Narendra Modi on 24 April 2021 under presidency of , as a central-sector scheme to promote socio-economic empowerment and a more self-reliant rural India. About 6.62 lakh villages across the country will be surveyed in this scheme from 2021 to 2025, using varied technology including drones to collect property data. The initial phase of the scheme was implemented during 2020-21 in the select villages of Maharashtra, Karnataka, Haryana, Uttar Pradesh, Uttarakhand, Madhya Pradesh, Punjab and Rajasthan. The scheme is intended to reduce property disputes by providing accurate land records while boosting financial liquidity. The...",
+    "source": "wikipedia"
   },
   {
-    "id": "mnrega",
-    "name": "Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)",
-    "eligibility": {
-      "ageRange": { "min": 18, "max": 120 },
-      "gender": "any",
-      "occupation": ["unskilled worker", "farmer", "laborer"],
-      "incomeLimit": 1000000,
-      "category": ["All"],
-      "state": ["All"],
-      "maritalStatus": "any",
-      "landOwnership": false
-    },
-    "benefits": "100 days of guaranteed wage employment per year at minimum wage rates",
-    "documents": ["Job Card", "Aadhaar Card", "Bank Account"],
-    "estimatedBenefit": 60000
+    "id": "scheme_5",
+    "name": "PM Matsya Sampada Yojana",
+    "rawDescription": "The Pradhan Mantri Matsya Sampada Yojana (PMMSY) (http://pmmsy.dof.gov.in/) is an initiative launched by the Government of India to establish a comprehensive framework and reduce infrastructural gaps in the fisheries sector. The scheme was announced by the Finance Minister, Nirmala Sitharaman while presenting the Union budget for 2019–20 in the parliament of India on 5 July 2019. The government intends to place India in the first place[vague] in fish production and processing by implementing Neeli Kranti (transl. Blue Revolution). This scheme is in line with governments aim to double the farmers' income by 2022–23. The policy envisages to integrate all the fishermen with agricultural farmers and provide all the facilities available through various farmer welfare schemes to the...",
+    "fullText": "PM Matsya Sampada Yojana - The Pradhan Mantri Matsya Sampada Yojana (PMMSY) (http://pmmsy.dof.gov.in/) is an initiative launched by the Government of India to establish a comprehensive framework and reduce infrastructural gaps in the fisheries sector. The scheme was announced by the Finance Minister, Nirmala Sitharaman while presenting the Union budget for 2019–20 in the parliament of India on 5 July 2019. The government intends to place India in the first place[vague] in fish production and processing by implementing Neeli Kranti (transl. Blue Revolution). This scheme is in line with governments aim to double the farmers' income by 2022–23. The policy envisages to integrate all the fishermen with agricultural farmers and provide all the facilities available through various farmer welfare schemes to the...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_6",
+    "name": "Jal Jeevan Mission",
+    "rawDescription": "Har Ghar Jal (transl. Water To Every Household) is a scheme initiated by the Ministry of Jal Shakti of Government of India under the Jal Jeevan Mission in 2019 with the aim to provide 55 litres of tap water to every rural household per capita per day regularly on a long term basis by 2024. It is a restructuring of National Rural Drinking Water Programme (NRDWP) by Modi government in August 2019. Indian Prime Minister Narendra Modi during his Independence Day speech on August 15, 2019, addressed the goal of providing potable water connections to rural households across India by 2024 under a budget of 3.60 lakh crores. In this the central government share is 2.08 lakh crore. The scheme envisages cost sharing in the ratio of 100:0 between Central Government-Union Territories, 90:10%...",
+    "fullText": "Jal Jeevan Mission - Har Ghar Jal (transl. Water To Every Household) is a scheme initiated by the Ministry of Jal Shakti of Government of India under the Jal Jeevan Mission in 2019 with the aim to provide 55 litres of tap water to every rural household per capita per day regularly on a long term basis by 2024. It is a restructuring of National Rural Drinking Water Programme (NRDWP) by Modi government in August 2019. Indian Prime Minister Narendra Modi during his Independence Day speech on August 15, 2019, addressed the goal of providing potable water connections to rural households across India by 2024 under a budget of 3.60 lakh crores. In this the central government share is 2.08 lakh crore. The scheme envisages cost sharing in the ratio of 100:0 between Central Government-Union Territories, 90:10%...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_7",
+    "name": "Atal Bhujal Yojana",
+    "rawDescription": "Atal Bhujal Yojana (or, Atal Jal, lit Atal Groundwater Scheme or Atal Water) is a groundwater management scheme launched by Prime Minister Narendra Modi on the 95th birth anniversary of former Prime Minister Atal Bihari Vajpayee, on 25 December 2019. The purpose of the scheme is to improve groundwater management in seven states of India. In June 2018, the World Bank Board approved the scheme and it will be funded by the World Bank. It was launched on 25 December 2019 under the Jal Jeevan Mission. Gujarat, Haryana, Karnataka, Madhya Pradesh, Maharashtra, Rajasthan and Uttar Pradesh are the designated priority states for improvement of groundwater management through community participation, impacting around 78 districts and 8350 gram panchayats. The duration of the scheme is from 2020 to...",
+    "fullText": "Atal Bhujal Yojana - Atal Bhujal Yojana (or, Atal Jal, lit Atal Groundwater Scheme or Atal Water) is a groundwater management scheme launched by Prime Minister Narendra Modi on the 95th birth anniversary of former Prime Minister Atal Bihari Vajpayee, on 25 December 2019. The purpose of the scheme is to improve groundwater management in seven states of India. In June 2018, the World Bank Board approved the scheme and it will be funded by the World Bank. It was launched on 25 December 2019 under the Jal Jeevan Mission. Gujarat, Haryana, Karnataka, Madhya Pradesh, Maharashtra, Rajasthan and Uttar Pradesh are the designated priority states for improvement of groundwater management through community participation, impacting around 78 districts and 8350 gram panchayats. The duration of the scheme is from 2020 to...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_8",
+    "name": "PM Kisan Urja Suraksha Evam Utthan Mahabhiyan",
+    "rawDescription": "Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan (KUSUM) Yojana was launched in March 2019 by the Government of India to increase the income of farmers and provide sources of irrigation and de-dieselization the agricultural sector. To receive the benefit of this scheme farmers need to install solar irrigation pumps for cultivation. Under this scheme, the government of India will provide 60% subsidy on the total cost of solar irrigation installed pumps to the farmer. The objective of the scheme is to: The PM-KUSUM scheme of the Government of India is one of the largest initiatives in the world to provide clean energy to more than 3.5 million farmers. It solarizes agricultural pumps and provides up 10 GW distributed solar projects to the farmers. The scheme plans to set up 30.8...",
+    "fullText": "PM Kisan Urja Suraksha Evam Utthan Mahabhiyan - Pradhan Mantri Kisan Urja Suraksha evam Utthaan Mahabhiyan (KUSUM) Yojana was launched in March 2019 by the Government of India to increase the income of farmers and provide sources of irrigation and de-dieselization the agricultural sector. To receive the benefit of this scheme farmers need to install solar irrigation pumps for cultivation. Under this scheme, the government of India will provide 60% subsidy on the total cost of solar irrigation installed pumps to the farmer. The objective of the scheme is to: The PM-KUSUM scheme of the Government of India is one of the largest initiatives in the world to provide clean energy to more than 3.5 million farmers. It solarizes agricultural pumps and provides up 10 GW distributed solar projects to the farmers. The scheme plans to set up 30.8...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_9",
+    "name": "Ayushman Bharat Yojana",
+    "rawDescription": "Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (PM-JAY; lit. 'Prime Minister's People's Health Scheme', Ayushman Bharat PM-JAY lit. 'Live Long India Prime Minister's People's Health Scheme'), also colloquially known as Modicare, is a national public health insurance scheme of the Government of India that aims to provide free access to health insurance coverage for low income earners in the country. Roughly, the bottom 50% of the country qualifies for this scheme. It was launched in September 2018 by Prime Minister Narendra Modi. Ayushman Bharat Pradhan Mantri Jan Arogya Yojana was later expanded to include all citizens aged 70 years and above, regardless of their economic status. People using the program access their own primary care services from a family doctor and when anyone...",
+    "fullText": "Ayushman Bharat Yojana - Ayushman Bharat Pradhan Mantri Jan Arogya Yojana (PM-JAY; lit. 'Prime Minister's People's Health Scheme', Ayushman Bharat PM-JAY lit. 'Live Long India Prime Minister's People's Health Scheme'), also colloquially known as Modicare, is a national public health insurance scheme of the Government of India that aims to provide free access to health insurance coverage for low income earners in the country. Roughly, the bottom 50% of the country qualifies for this scheme. It was launched in September 2018 by Prime Minister Narendra Modi. Ayushman Bharat Pradhan Mantri Jan Arogya Yojana was later expanded to include all citizens aged 70 years and above, regardless of their economic status. People using the program access their own primary care services from a family doctor and when anyone...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_10",
+    "name": "Sarva Shiksha Abhiyan",
+    "rawDescription": "Sarva Shiksha Abhiyan (Hindi: सर्व शिक्षा अभियान, lit. 'Education for all campaign'), or SSA, was an Indian Government programme aimed at the universalisation of Elementary education \"in a time bound manner\", the 86th Amendment to the Constitution of India making free and compulsory education to children between the ages of 6 and 14 (estimated to be 206 million children in 2001) a fundamental right (Article- 21A). The programme was pioneered by former Indian Prime Minister Atal Bihari Vajpayee. It aimed to educate all children between the ages of 6 and 14 by 2010. However, the completion target was later deferred beyond the original deadline. As an intervention programme, it started in 2002 and SSA has been operational since 2000–2001. However, its roots go back to 1993–1994, when the...",
+    "fullText": "Sarva Shiksha Abhiyan - Sarva Shiksha Abhiyan (Hindi: सर्व शिक्षा अभियान, lit. 'Education for all campaign'), or SSA, was an Indian Government programme aimed at the universalisation of Elementary education \"in a time bound manner\", the 86th Amendment to the Constitution of India making free and compulsory education to children between the ages of 6 and 14 (estimated to be 206 million children in 2001) a fundamental right (Article- 21A). The programme was pioneered by former Indian Prime Minister Atal Bihari Vajpayee. It aimed to educate all children between the ages of 6 and 14 by 2010. However, the completion target was later deferred beyond the original deadline. As an intervention programme, it started in 2002 and SSA has been operational since 2000–2001. However, its roots go back to 1993–1994, when the...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_11",
+    "name": "Rashtriya Madhyamik Shiksha Abhiyan",
+    "rawDescription": "Rashtriya Madhyamik Shiksha Abhiyan (RMSA) (translation: National Mission for Secondary Education) is a centrally sponsored scheme of the Ministry of Human Resource Development, Government of India, for the development of secondary education in public schools throughout India. It was launched in March 2009. The implementation of the scheme has started from 2009–2010 to provide conditions for an efficient growth, development and equity for all. The scheme includes a multidimensional research, technical consulting, various implementations and funding support. The principal objectives are to enhance quality of secondary education and increase the total enrollment rate from 52% (as of 2005–2006) to 75% in five years, i.e. from 2009 to 2014. It aims to provide universal education for all...",
+    "fullText": "Rashtriya Madhyamik Shiksha Abhiyan - Rashtriya Madhyamik Shiksha Abhiyan (RMSA) (translation: National Mission for Secondary Education) is a centrally sponsored scheme of the Ministry of Human Resource Development, Government of India, for the development of secondary education in public schools throughout India. It was launched in March 2009. The implementation of the scheme has started from 2009–2010 to provide conditions for an efficient growth, development and equity for all. The scheme includes a multidimensional research, technical consulting, various implementations and funding support. The principal objectives are to enhance quality of secondary education and increase the total enrollment rate from 52% (as of 2005–2006) to 75% in five years, i.e. from 2009 to 2014. It aims to provide universal education for all...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_12",
+    "name": "Centrally Sponsored Scheme",
+    "rawDescription": "Centrally Sponsored Schemes (CSS) are schemes that are implemented by state governments of India but are largely funded by the central government with a defined state government share. Examples of such schemes include the Mahatma Gandhi National Rural Employment Guarantee Act and the Pradhan Mantri Gram Sadak Yojana. Even before the advent of the Five-Year plans of India, the practice of providing Central Assistance to the States to finance development schemes had been in vogue. After World War II, the Central Government along with Provincial Governments embarked on developmental projects which received Central Assistance in the form of grants that were called post-war development grants. Some of these grants were stopped by 1950–51 but grants for schemes like Grow More Food continued....",
+    "fullText": "Centrally Sponsored Scheme - Centrally Sponsored Schemes (CSS) are schemes that are implemented by state governments of India but are largely funded by the central government with a defined state government share. Examples of such schemes include the Mahatma Gandhi National Rural Employment Guarantee Act and the Pradhan Mantri Gram Sadak Yojana. Even before the advent of the Five-Year plans of India, the practice of providing Central Assistance to the States to finance development schemes had been in vogue. After World War II, the Central Government along with Provincial Governments embarked on developmental projects which received Central Assistance in the form of grants that were called post-war development grants. Some of these grants were stopped by 1950–51 but grants for schemes like Grow More Food continued....",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_13",
+    "name": "Post Literacy Programme",
+    "rawDescription": "The National Education Mission (Samagra Shiksha Abhiyan) is an overarching programme for the school education sector extending from pre-school to class 12, launched in 2018. It was allocated a budget of ₹385.72 billion (US$4.6 billion) in the 2019 Interim Union Budget of India. The stated mission comprises four schemes, namely Saakshar Bharat, Sarva Shiksha Abhiyan, Rashtriya Madhyamik Shiksha Abhiyan and the Centrally Sponsored Scheme on Teacher Education (CSSTE). In 2021, the NIPUN Bharat Mission was launched as part of Samagra Shiksha Abhiyan, teaching literacy and numeracy skills in universities by Grade 3. In the 2023–24 Union Budget presented on 1 February 2023, the Samagra Shiksha Abhiyan allocated an amount of ₹37,453.47. Saakshar Bharat is a government of India initiative...",
+    "fullText": "Post Literacy Programme - The National Education Mission (Samagra Shiksha Abhiyan) is an overarching programme for the school education sector extending from pre-school to class 12, launched in 2018. It was allocated a budget of ₹385.72 billion (US$4.6 billion) in the 2019 Interim Union Budget of India. The stated mission comprises four schemes, namely Saakshar Bharat, Sarva Shiksha Abhiyan, Rashtriya Madhyamik Shiksha Abhiyan and the Centrally Sponsored Scheme on Teacher Education (CSSTE). In 2021, the NIPUN Bharat Mission was launched as part of Samagra Shiksha Abhiyan, teaching literacy and numeracy skills in universities by Grade 3. In the 2023–24 Union Budget presented on 1 February 2023, the Samagra Shiksha Abhiyan allocated an amount of ₹37,453.47. Saakshar Bharat is a government of India initiative...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_14",
+    "name": "Continuing Education Programme",
+    "rawDescription": "The National Education Mission (Samagra Shiksha Abhiyan) is an overarching programme for the school education sector extending from pre-school to class 12, launched in 2018. It was allocated a budget of ₹385.72 billion (US$4.6 billion) in the 2019 Interim Union Budget of India. The stated mission comprises four schemes, namely Saakshar Bharat, Sarva Shiksha Abhiyan, Rashtriya Madhyamik Shiksha Abhiyan and the Centrally Sponsored Scheme on Teacher Education (CSSTE). In 2021, the NIPUN Bharat Mission was launched as part of Samagra Shiksha Abhiyan, teaching literacy and numeracy skills in universities by Grade 3. In the 2023–24 Union Budget presented on 1 February 2023, the Samagra Shiksha Abhiyan allocated an amount of ₹37,453.47. Saakshar Bharat is a government of India initiative...",
+    "fullText": "Continuing Education Programme - The National Education Mission (Samagra Shiksha Abhiyan) is an overarching programme for the school education sector extending from pre-school to class 12, launched in 2018. It was allocated a budget of ₹385.72 billion (US$4.6 billion) in the 2019 Interim Union Budget of India. The stated mission comprises four schemes, namely Saakshar Bharat, Sarva Shiksha Abhiyan, Rashtriya Madhyamik Shiksha Abhiyan and the Centrally Sponsored Scheme on Teacher Education (CSSTE). In 2021, the NIPUN Bharat Mission was launched as part of Samagra Shiksha Abhiyan, teaching literacy and numeracy skills in universities by Grade 3. In the 2023–24 Union Budget presented on 1 February 2023, the Samagra Shiksha Abhiyan allocated an amount of ₹37,453.47. Saakshar Bharat is a government of India initiative...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_15",
+    "name": "Rashtriya Gram Swaraj Abhiyan",
+    "rawDescription": "To strengthen Panchayati Raj institutions and support them towards achieving Sustainable Development Goals.",
+    "fullText": "Rashtriya Gram Swaraj Abhiyan - To strengthen Panchayati Raj institutions and support them towards achieving Sustainable Development Goals.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_16",
+    "name": "World Class Institutions Scheme",
+    "rawDescription": "Institutions of Eminence (IoE) is a recognition status set up in 2017 for higher education institutes in India, by the University Grants Commission. Recognised institutions are granted more autonomy, both administratively and academically, are allowed to open offshore campuses, and enjoy better collaboration opportunities with global universities. The plan encompasses twenty institutions, twelve of which have already been declared Institutes of Eminence as of April 2021[update]. Public institutions are granted up to ₹1,000 crore (equivalent to ₹14 billion or US$170 million in 2023); no funding is awarded to private institutions. The regulatory infrastructure for the Institutes of Eminence (IoE) plan was provided by the University Grants Commission (UGC) through the UGC (Declaration of...",
+    "fullText": "World Class Institutions Scheme - Institutions of Eminence (IoE) is a recognition status set up in 2017 for higher education institutes in India, by the University Grants Commission. Recognised institutions are granted more autonomy, both administratively and academically, are allowed to open offshore campuses, and enjoy better collaboration opportunities with global universities. The plan encompasses twenty institutions, twelve of which have already been declared Institutes of Eminence as of April 2021[update]. Public institutions are granted up to ₹1,000 crore (equivalent to ₹14 billion or US$170 million in 2023); no funding is awarded to private institutions. The regulatory infrastructure for the Institutes of Eminence (IoE) plan was provided by the University Grants Commission (UGC) through the UGC (Declaration of...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_17",
+    "name": "Khelo India – National Programme for Development of Sports",
+    "rawDescription": "Khelo India: National Programme for Development of Sports, branded as Khelo India (transl. Play India), aims at improving India's sports culture at the grass-root level through organized talent identification, structured sporting competitions and infrastructure development. It is a Government of India programme launched in 2017-18 under the tenure Prime Minister Narendra Modi and Sports Ministers Vijay Goel and Rajyavardhan Singh Rathore. There has also been an emphasis on including traditional Indian games in Khelo India events in order to revive their popularity. Khelo India State Centres of Excellence (KISCE) are sports facilities across India, built upon existing facilities, aiming to provide basic facilities for sportspersons with potential. Each centre will cater to three...",
+    "fullText": "Khelo India – National Programme for Development of Sports - Khelo India: National Programme for Development of Sports, branded as Khelo India (transl. Play India), aims at improving India's sports culture at the grass-root level through organized talent identification, structured sporting competitions and infrastructure development. It is a Government of India programme launched in 2017-18 under the tenure Prime Minister Narendra Modi and Sports Ministers Vijay Goel and Rajyavardhan Singh Rathore. There has also been an emphasis on including traditional Indian games in Khelo India events in order to revive their popularity. Khelo India State Centres of Excellence (KISCE) are sports facilities across India, built upon existing facilities, aiming to provide basic facilities for sportspersons with potential. Each centre will cater to three...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_18",
+    "name": "Saubhagya Yojana",
+    "rawDescription": "Saubhagya Scheme or Pradhan Mantri Sahaj Bijli Har Ghar Yojana was an Indian government project to provide electricity to some households. The project was announced in September 2017 by Prime Minister Narendra Modi, who said that the aim was to complete the electrification process by December 2018. Certain households identified via the Socio-economic and Caste Census (SECC) of 2011 will be eligible for free electricity connections, while others will be charged Rs. 500. On 16 November 2017, the government launched a website saubhagya.gov.in to disseminate information about the scheme. The total outlay of the project is Rs. 16, 320 crore while the Gross Budgetary Support (GBS) is Rs. 12,320 crore. The beneficiary household will get One LED lights, one DC power plug. It also includes the...",
+    "fullText": "Saubhagya Yojana - Saubhagya Scheme or Pradhan Mantri Sahaj Bijli Har Ghar Yojana was an Indian government project to provide electricity to some households. The project was announced in September 2017 by Prime Minister Narendra Modi, who said that the aim was to complete the electrification process by December 2018. Certain households identified via the Socio-economic and Caste Census (SECC) of 2011 will be eligible for free electricity connections, while others will be charged Rs. 500. On 16 November 2017, the government launched a website saubhagya.gov.in to disseminate information about the scheme. The total outlay of the project is Rs. 16, 320 crore while the Gross Budgetary Support (GBS) is Rs. 12,320 crore. The beneficiary household will get One LED lights, one DC power plug. It also includes the...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_19",
+    "name": "Krishonnati Yojana",
+    "rawDescription": "Umbrella scheme subsuming 11 schemes.",
+    "fullText": "Krishonnati Yojana - Umbrella scheme subsuming 11 schemes.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_20",
+    "name": "PM Matritva Vandana Yojana",
+    "rawDescription": "Pradhan Mantri Matru Vandana Yojana (PMMVY) (transl. Prime Minister's Maternity Welfare Scheme), previously known as the Indira Gandhi Matritva Sahyog Yojana, is a maternity benefit program run by the government of India. It was originally launched in 2010 and renamed in 2017. The scheme is implemented by the Ministry of Women and Child Development. It is a conditional cash transfer scheme for pregnant and lactating women of 19 years of age or above for the first live birth. It provides a partial wage compensation to women for wage-loss during childbirth and childcare and to provide conditions for safe delivery and good nutrition and feeding practices. In 2013, the scheme was brought under the National Food Security Act, 2013 to implement the provision of cash maternity benefit of...",
+    "fullText": "PM Matritva Vandana Yojana - Pradhan Mantri Matru Vandana Yojana (PMMVY) (transl. Prime Minister's Maternity Welfare Scheme), previously known as the Indira Gandhi Matritva Sahyog Yojana, is a maternity benefit program run by the government of India. It was originally launched in 2010 and renamed in 2017. The scheme is implemented by the Ministry of Women and Child Development. It is a conditional cash transfer scheme for pregnant and lactating women of 19 years of age or above for the first live birth. It provides a partial wage compensation to women for wage-loss during childbirth and childcare and to provide conditions for safe delivery and good nutrition and feeding practices. In 2013, the scheme was brought under the National Food Security Act, 2013 to implement the provision of cash maternity benefit of...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_21",
+    "name": "Janani Suraksha Yojana",
+    "rawDescription": "The National Health Mission (NHM) was launched by the government of India in 2013 subsuming the National Rural Health Mission (NRHM) and the later launched National Urban Health Mission (NUHM). It was further extended in March 2018, to continue until March 2020. It is headed by Mission Director and monitored by National Level Monitors appointed by the Government of India. The main program components include Health System Strengthening (RMNCH+A) in rural and urban areas- Reproductive-Maternal- Neonatal-Child and Adolescent Health, and Communicable and Non-Communicable Diseases. NHM envisages achievement of universal access to equitable, affordable and quality health care services that are accountable and responsive to the needs of the people. The National Rural Health Mission (NRHM),...",
+    "fullText": "Janani Suraksha Yojana - The National Health Mission (NHM) was launched by the government of India in 2013 subsuming the National Rural Health Mission (NRHM) and the later launched National Urban Health Mission (NUHM). It was further extended in March 2018, to continue until March 2020. It is headed by Mission Director and monitored by National Level Monitors appointed by the Government of India. The main program components include Health System Strengthening (RMNCH+A) in rural and urban areas- Reproductive-Maternal- Neonatal-Child and Adolescent Health, and Communicable and Non-Communicable Diseases. NHM envisages achievement of universal access to equitable, affordable and quality health care services that are accountable and responsive to the needs of the people. The National Rural Health Mission (NRHM),...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_22",
+    "name": "PM Ujjwala Yojana",
+    "rawDescription": "Pradhan Mantri Ujjwala Yojana (PMUY, translation: Prime Minister's Lightening Scheme) was launched by Prime Minister of India Narendra Modi on 1 May 2016 to distribute 50 million LPG connections to women of Below Poverty Line (BPL) families. A budgetary allocation of ₹80 billion (US$950 million) was made for the scheme. The scheme was replaced by the Ujjwala Yojana 2.0 in 2021. Although the scheme has expanded access to clean cooking technologies, the use of polluting fuels remains common, particularly in rural India. In the first year of its launch, the connections distributed were 22 million against the target of 15 million. As of 23 October 2017, 30 million connections were distributed, 44% of which were given to families belonging to scheduled castes and scheduled tribes. The...",
+    "fullText": "PM Ujjwala Yojana - Pradhan Mantri Ujjwala Yojana (PMUY, translation: Prime Minister's Lightening Scheme) was launched by Prime Minister of India Narendra Modi on 1 May 2016 to distribute 50 million LPG connections to women of Below Poverty Line (BPL) families. A budgetary allocation of ₹80 billion (US$950 million) was made for the scheme. The scheme was replaced by the Ujjwala Yojana 2.0 in 2021. Although the scheme has expanded access to clean cooking technologies, the use of polluting fuels remains common, particularly in rural India. In the first year of its launch, the connections distributed were 22 million against the target of 15 million. As of 23 October 2017, 30 million connections were distributed, 44% of which were given to families belonging to scheduled castes and scheduled tribes. The...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_23",
+    "name": "PM Fasal Bima Yojana",
+    "rawDescription": "The Pradhan Mantri fasal bima yojana (PMFBY) launched on 18 February 2016 by Prime Minister Narendra Modi is an insurance service for farmers for their yields. It was formulated in line with One Nation–One Scheme theme by replacing earlier two schemes Agricultural insurance in India#National Agriculture Insurance Scheme and Modified National Agricultural Insurance Scheme by incorporating their best features and removing their inherent drawbacks (shortcomings). It aims to reduce the premium burden on farmers and ensure early settlement of crop assurance claim for the full insured sum. Pradhan Mantri Fasal Bima Yojna (PMFBY) aims to provide a comprehensive insurance cover against failure of the crop thus helping in stabilising the income of the farmers. The scheme covers all Food &...",
+    "fullText": "PM Fasal Bima Yojana - The Pradhan Mantri fasal bima yojana (PMFBY) launched on 18 February 2016 by Prime Minister Narendra Modi is an insurance service for farmers for their yields. It was formulated in line with One Nation–One Scheme theme by replacing earlier two schemes Agricultural insurance in India#National Agriculture Insurance Scheme and Modified National Agricultural Insurance Scheme by incorporating their best features and removing their inherent drawbacks (shortcomings). It aims to reduce the premium burden on farmers and ensure early settlement of crop assurance claim for the full insured sum. Pradhan Mantri Fasal Bima Yojna (PMFBY) aims to provide a comprehensive insurance cover against failure of the crop thus helping in stabilising the income of the farmers. The scheme covers all Food &...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_24",
+    "name": "Agricultural insurance in India#National Agriculture Insurance Scheme",
+    "rawDescription": "Agriculture in India is highly susceptible to risks like droughts and floods. It is necessary to protect the farmers from natural calamities and ensure their credit eligibility for the next season. For this purpose, the Government of India introduced many agricultural social insurances throughout the country, the most important one of them being Pradhan Mantri Fasal Bima Yojana. The Pradhan Mantri Fasal Bima Yojana (Prime Minister's Crop Insurance Scheme) was launched by Prime Minister of India Narendra Modi on 13 February 2016. Livestock Insurance Scheme in India provided \"provide protection mechanism to the farmers and cattle rearers against any eventual loss of their animals due to death and to demonstrate the benefit of the insurance of livestock to the people and popularize it...",
+    "fullText": "Agricultural insurance in India#National Agriculture Insurance Scheme - Agriculture in India is highly susceptible to risks like droughts and floods. It is necessary to protect the farmers from natural calamities and ensure their credit eligibility for the next season. For this purpose, the Government of India introduced many agricultural social insurances throughout the country, the most important one of them being Pradhan Mantri Fasal Bima Yojana. The Pradhan Mantri Fasal Bima Yojana (Prime Minister's Crop Insurance Scheme) was launched by Prime Minister of India Narendra Modi on 13 February 2016. Livestock Insurance Scheme in India provided \"provide protection mechanism to the farmers and cattle rearers against any eventual loss of their animals due to death and to demonstrate the benefit of the insurance of livestock to the people and popularize it...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_25",
+    "name": "PM Krishi Sinchai Yojana",
+    "rawDescription": "Pradhan Mantri Krishi Sinchai Yojana (Hindi: प्रधानमंत्री कृषि सिंचाई योजना) is a national mission to improve farm productivity and ensure better utilization of the resources in the country. The budget of ₹53 billion (US$630 million) in a time span of one year 2015-2016 has been allocated to this scheme. The decision was taken on 1 July 2015 at the meeting of Cabinet Committee on Economic Affairs, approved with an outlay of 50000 crore for period of 5 years (2015-16 to 2019-20). The primary objectives of PMKSY are to attract investments in irrigation system at field level, develop and expand cultivable land in the country, enhance ranch water use in order to minimize wastage of water, enhance crop per drop by implementing water-saving technologies and precision irrigation. The plan...",
+    "fullText": "PM Krishi Sinchai Yojana - Pradhan Mantri Krishi Sinchai Yojana (Hindi: प्रधानमंत्री कृषि सिंचाई योजना) is a national mission to improve farm productivity and ensure better utilization of the resources in the country. The budget of ₹53 billion (US$630 million) in a time span of one year 2015-2016 has been allocated to this scheme. The decision was taken on 1 July 2015 at the meeting of Cabinet Committee on Economic Affairs, approved with an outlay of 50000 crore for period of 5 years (2015-16 to 2019-20). The primary objectives of PMKSY are to attract investments in irrigation system at field level, develop and expand cultivable land in the country, enhance ranch water use in order to minimize wastage of water, enhance crop per drop by implementing water-saving technologies and precision irrigation. The plan...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_26",
+    "name": "Swachh Bharat Mission",
+    "rawDescription": "Swachh Bharat Mission (SBM), Swachh Bharat Abhiyan or Clean India Mission is a country-wide campaign initiated by the Government of India on 2 October 2014 to eliminate open defecation and improve solid waste management and to create Open Defecation Free (ODF) villages. The mission also emphasizes scientific solid waste management, including segregation, collection, processing, and disposal of municipal waste.. The program also aims to increase awareness of menstrual health management. It is a restructured version of the Nirmal Bharat Abhiyan which was launched by the Government of India in 1999, as Total Sanitation Campaign. A formal sanitation programme was first launched in India in 1954, followed by the Central Rural Sanitation Programme in 1986, the Total Sanitation Campaign (TSC)...",
+    "fullText": "Swachh Bharat Mission - Swachh Bharat Mission (SBM), Swachh Bharat Abhiyan or Clean India Mission is a country-wide campaign initiated by the Government of India on 2 October 2014 to eliminate open defecation and improve solid waste management and to create Open Defecation Free (ODF) villages. The mission also emphasizes scientific solid waste management, including segregation, collection, processing, and disposal of municipal waste.. The program also aims to increase awareness of menstrual health management. It is a restructured version of the Nirmal Bharat Abhiyan which was launched by the Government of India in 1999, as Total Sanitation Campaign. A formal sanitation programme was first launched in India in 1954, followed by the Central Rural Sanitation Programme in 1986, the Total Sanitation Campaign (TSC)...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_27",
+    "name": "PM Mudra Yojana",
+    "rawDescription": "MUDRA is a financial institution for funding small businesses. 34,42,00,000 beneficiaries have received ₹18.6 lakh crore (equivalent to ₹21 trillion or US$250 billion in 2023). New entrepreneurs consist 22% of the beneficiaries.",
+    "fullText": "PM Mudra Yojana - MUDRA is a financial institution for funding small businesses. 34,42,00,000 beneficiaries have received ₹18.6 lakh crore (equivalent to ₹21 trillion or US$250 billion in 2023). New entrepreneurs consist 22% of the beneficiaries.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_28",
+    "name": "Smart Cities Mission",
+    "rawDescription": "Smart Cities Mission was an urban renewal and retrofitting program by the Government of India with the mission to develop smart cities across the country, making them citizen-friendly and sustainable. The Union Ministry of Urban Development was responsible for implementing the mission in collaboration with the state governments of the respective cities. In 2017, the ministry was merged with the ministry of housing and urban poverty alleviation to form the Ministry of Housing and Urban Affairs. The mission was planned to include 100 cities, with an initial project completion deadline of 2019, later revised to 2023. As of January 2025[update], 7,479 out of a total of 8,058 tendered projects had been completed, utilizing ₹1,500.05 billion (US$18 billion) of the total allocated amount of...",
+    "fullText": "Smart Cities Mission - Smart Cities Mission was an urban renewal and retrofitting program by the Government of India with the mission to develop smart cities across the country, making them citizen-friendly and sustainable. The Union Ministry of Urban Development was responsible for implementing the mission in collaboration with the state governments of the respective cities. In 2017, the ministry was merged with the ministry of housing and urban poverty alleviation to form the Ministry of Housing and Urban Affairs. The mission was planned to include 100 cities, with an initial project completion deadline of 2019, later revised to 2023. As of January 2025[update], 7,479 out of a total of 8,058 tendered projects had been completed, utilizing ₹1,500.05 billion (US$18 billion) of the total allocated amount of...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_29",
+    "name": "PM Gramin Awas Yojana",
+    "rawDescription": "Pradhan Mantri Gramin Aawas Yojana (lit. 'Prime Minister's Rural Housing Scheme') is a social welfare programme under the Ministry of Rural Development, Government of India, to provide housing for the rural poor in India. A similar scheme for urban poor was launched in 2015 as Housing for All by 2022. The scheme was officially launched by Prime Minister Narendra Modi on 20 November 2016 from Agra. Indira Awas Yojana was launched in 1985 by Rajiv Gandhi, the Prime Minister of India, as one of the major flagship programs of the Ministry of Rural Development to construct houses for the Below Poverty Line population in the villages. Under the PMGAY scheme, financial assistance worth ₹120,000 (US$1,400) in plain areas and ₹130,000 (US$1,500) in difficult areas (high land area) is provided...",
+    "fullText": "PM Gramin Awas Yojana - Pradhan Mantri Gramin Aawas Yojana (lit. 'Prime Minister's Rural Housing Scheme') is a social welfare programme under the Ministry of Rural Development, Government of India, to provide housing for the rural poor in India. A similar scheme for urban poor was launched in 2015 as Housing for All by 2022. The scheme was officially launched by Prime Minister Narendra Modi on 20 November 2016 from Agra. Indira Awas Yojana was launched in 1985 by Rajiv Gandhi, the Prime Minister of India, as one of the major flagship programs of the Ministry of Rural Development to construct houses for the Below Poverty Line population in the villages. Under the PMGAY scheme, financial assistance worth ₹120,000 (US$1,400) in plain areas and ₹130,000 (US$1,500) in difficult areas (high land area) is provided...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_30",
+    "name": "Swachh Bharat Abhiyan toilets",
+    "rawDescription": "Swachh Bharat Mission (SBM), Swachh Bharat Abhiyan or Clean India Mission is a country-wide campaign initiated by the Government of India on 2 October 2014 to eliminate open defecation and improve solid waste management and to create Open Defecation Free (ODF) villages. The mission also emphasizes scientific solid waste management, including segregation, collection, processing, and disposal of municipal waste.. The program also aims to increase awareness of menstrual health management. It is a restructured version of the Nirmal Bharat Abhiyan which was launched by the Government of India in 1999, as Total Sanitation Campaign. A formal sanitation programme was first launched in India in 1954, followed by the Central Rural Sanitation Programme in 1986, the Total Sanitation Campaign (TSC)...",
+    "fullText": "Swachh Bharat Abhiyan toilets - Swachh Bharat Mission (SBM), Swachh Bharat Abhiyan or Clean India Mission is a country-wide campaign initiated by the Government of India on 2 October 2014 to eliminate open defecation and improve solid waste management and to create Open Defecation Free (ODF) villages. The mission also emphasizes scientific solid waste management, including segregation, collection, processing, and disposal of municipal waste.. The program also aims to increase awareness of menstrual health management. It is a restructured version of the Nirmal Bharat Abhiyan which was launched by the Government of India in 1999, as Total Sanitation Campaign. A formal sanitation programme was first launched in India in 1954, followed by the Central Rural Sanitation Programme in 1986, the Total Sanitation Campaign (TSC)...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_31",
+    "name": "Ujjwala Yojana LPG gas connection",
+    "rawDescription": "Pradhan Mantri Ujjwala Yojana (PMUY, translation: Prime Minister's Lightening Scheme) was launched by Prime Minister of India Narendra Modi on 1 May 2016 to distribute 50 million LPG connections to women of Below Poverty Line (BPL) families. A budgetary allocation of ₹80 billion (US$950 million) was made for the scheme. The scheme was replaced by the Ujjwala Yojana 2.0 in 2021. Although the scheme has expanded access to clean cooking technologies, the use of polluting fuels remains common, particularly in rural India. In the first year of its launch, the connections distributed were 22 million against the target of 15 million. As of 23 October 2017, 30 million connections were distributed, 44% of which were given to families belonging to scheduled castes and scheduled tribes. The...",
+    "fullText": "Ujjwala Yojana LPG gas connection - Pradhan Mantri Ujjwala Yojana (PMUY, translation: Prime Minister's Lightening Scheme) was launched by Prime Minister of India Narendra Modi on 1 May 2016 to distribute 50 million LPG connections to women of Below Poverty Line (BPL) families. A budgetary allocation of ₹80 billion (US$950 million) was made for the scheme. The scheme was replaced by the Ujjwala Yojana 2.0 in 2021. Although the scheme has expanded access to clean cooking technologies, the use of polluting fuels remains common, particularly in rural India. In the first year of its launch, the connections distributed were 22 million against the target of 15 million. As of 23 October 2017, 30 million connections were distributed, 44% of which were given to families belonging to scheduled castes and scheduled tribes. The...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_32",
+    "name": "PM Awaas Yojana -",
+    "rawDescription": "Pradhan Mantri Awas Yojana (PMAY) is a credit-linked subsidy scheme by the Government of India to facilitate access to affordable housing for the low and moderate-income residents of the country. It envisaged a target of building 2 crore (20 million) affordable houses by 31 March 2022. It has two components: Pradhan Mantri Awas Yojana (Urban) (PMAY-U) for the urban poor and Pradhan Mantri Awaas Yojana (Gramin) (PMAY-G and also PMAY-R) for the rural poor, the former administered by Ministry of Housing and Urban Affairs and the latter by Ministry of Rural Development. This scheme converges with other schemes to ensure that houses have a toilet, Saubhagya Scheme for universal electricity connection, Ujjwala Yojana LPG connection, access to drinking water and Jan Dhan banking facilities,...",
+    "fullText": "PM Awaas Yojana - - Pradhan Mantri Awas Yojana (PMAY) is a credit-linked subsidy scheme by the Government of India to facilitate access to affordable housing for the low and moderate-income residents of the country. It envisaged a target of building 2 crore (20 million) affordable houses by 31 March 2022. It has two components: Pradhan Mantri Awas Yojana (Urban) (PMAY-U) for the urban poor and Pradhan Mantri Awaas Yojana (Gramin) (PMAY-G and also PMAY-R) for the rural poor, the former administered by Ministry of Housing and Urban Affairs and the latter by Ministry of Rural Development. This scheme converges with other schemes to ensure that houses have a toilet, Saubhagya Scheme for universal electricity connection, Ujjwala Yojana LPG connection, access to drinking water and Jan Dhan banking facilities,...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_33",
+    "name": "Pradhan Mantri Awaas Yojana",
+    "rawDescription": "Pradhan Mantri Gramin Aawas Yojana (lit. 'Prime Minister's Rural Housing Scheme') is a social welfare programme under the Ministry of Rural Development, Government of India, to provide housing for the rural poor in India. A similar scheme for urban poor was launched in 2015 as Housing for All by 2022. The scheme was officially launched by Prime Minister Narendra Modi on 20 November 2016 from Agra. Indira Awas Yojana was launched in 1985 by Rajiv Gandhi, the Prime Minister of India, as one of the major flagship programs of the Ministry of Rural Development to construct houses for the Below Poverty Line population in the villages. Under the PMGAY scheme, financial assistance worth ₹120,000 (US$1,400) in plain areas and ₹130,000 (US$1,500) in difficult areas (high land area) is provided...",
+    "fullText": "Pradhan Mantri Awaas Yojana - Pradhan Mantri Gramin Aawas Yojana (lit. 'Prime Minister's Rural Housing Scheme') is a social welfare programme under the Ministry of Rural Development, Government of India, to provide housing for the rural poor in India. A similar scheme for urban poor was launched in 2015 as Housing for All by 2022. The scheme was officially launched by Prime Minister Narendra Modi on 20 November 2016 from Agra. Indira Awas Yojana was launched in 1985 by Rajiv Gandhi, the Prime Minister of India, as one of the major flagship programs of the Ministry of Rural Development to construct houses for the Below Poverty Line population in the villages. Under the PMGAY scheme, financial assistance worth ₹120,000 (US$1,400) in plain areas and ₹130,000 (US$1,500) in difficult areas (high land area) is provided...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_34",
+    "name": "Saubhagya Scheme",
+    "rawDescription": "Saubhagya Scheme or Pradhan Mantri Sahaj Bijli Har Ghar Yojana was an Indian government project to provide electricity to some households. The project was announced in September 2017 by Prime Minister Narendra Modi, who said that the aim was to complete the electrification process by December 2018. Certain households identified via the Socio-economic and Caste Census (SECC) of 2011 will be eligible for free electricity connections, while others will be charged Rs. 500. On 16 November 2017, the government launched a website saubhagya.gov.in to disseminate information about the scheme. The total outlay of the project is Rs. 16, 320 crore while the Gross Budgetary Support (GBS) is Rs. 12,320 crore. The beneficiary household will get One LED lights, one DC power plug. It also includes the...",
+    "fullText": "Saubhagya Scheme - Saubhagya Scheme or Pradhan Mantri Sahaj Bijli Har Ghar Yojana was an Indian government project to provide electricity to some households. The project was announced in September 2017 by Prime Minister Narendra Modi, who said that the aim was to complete the electrification process by December 2018. Certain households identified via the Socio-economic and Caste Census (SECC) of 2011 will be eligible for free electricity connections, while others will be charged Rs. 500. On 16 November 2017, the government launched a website saubhagya.gov.in to disseminate information about the scheme. The total outlay of the project is Rs. 16, 320 crore while the Gross Budgetary Support (GBS) is Rs. 12,320 crore. The beneficiary household will get One LED lights, one DC power plug. It also includes the...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_35",
+    "name": "Ujjwala Yojana",
+    "rawDescription": "Pradhan Mantri Ujjwala Yojana (PMUY, translation: Prime Minister's Lightening Scheme) was launched by Prime Minister of India Narendra Modi on 1 May 2016 to distribute 50 million LPG connections to women of Below Poverty Line (BPL) families. A budgetary allocation of ₹80 billion (US$950 million) was made for the scheme. The scheme was replaced by the Ujjwala Yojana 2.0 in 2021. Although the scheme has expanded access to clean cooking technologies, the use of polluting fuels remains common, particularly in rural India. In the first year of its launch, the connections distributed were 22 million against the target of 15 million. As of 23 October 2017, 30 million connections were distributed, 44% of which were given to families belonging to scheduled castes and scheduled tribes. The...",
+    "fullText": "Ujjwala Yojana - Pradhan Mantri Ujjwala Yojana (PMUY, translation: Prime Minister's Lightening Scheme) was launched by Prime Minister of India Narendra Modi on 1 May 2016 to distribute 50 million LPG connections to women of Below Poverty Line (BPL) families. A budgetary allocation of ₹80 billion (US$950 million) was made for the scheme. The scheme was replaced by the Ujjwala Yojana 2.0 in 2021. Although the scheme has expanded access to clean cooking technologies, the use of polluting fuels remains common, particularly in rural India. In the first year of its launch, the connections distributed were 22 million against the target of 15 million. As of 23 October 2017, 30 million connections were distributed, 44% of which were given to families belonging to scheduled castes and scheduled tribes. The...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_36",
+    "name": "Atal Pension Yojana",
+    "rawDescription": "Atal Pension Yojana (APY, translation: Atal's Pension Scheme), formerly known as Swavalamban Yojana (SY, translation: Self-Support Scheme), is a government-backed pension scheme in India, primarily targeted at the unorganised sector. It was primarily launched as Swavalamban Yojana by UPA government, but renamed as Atal Pension Yojana in 2015 after the former Prime Minister Atal Bihari Bajpayee. It was mentioned in the year 2015 budget speech of Finance Minister Arun Jaitley. It was launched by Prime Minister Narendra Modi on 9 May 2015 in Kolkata. Its main objective is to help towards economic security of those people who become depressed after their working age and take retirement from professional life. Swavalamban Yojana was a government-backed pension scheme targeted at the...",
+    "fullText": "Atal Pension Yojana - Atal Pension Yojana (APY, translation: Atal's Pension Scheme), formerly known as Swavalamban Yojana (SY, translation: Self-Support Scheme), is a government-backed pension scheme in India, primarily targeted at the unorganised sector. It was primarily launched as Swavalamban Yojana by UPA government, but renamed as Atal Pension Yojana in 2015 after the former Prime Minister Atal Bihari Bajpayee. It was mentioned in the year 2015 budget speech of Finance Minister Arun Jaitley. It was launched by Prime Minister Narendra Modi on 9 May 2015 in Kolkata. Its main objective is to help towards economic security of those people who become depressed after their working age and take retirement from professional life. Swavalamban Yojana was a government-backed pension scheme targeted at the...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_37",
+    "name": "National Pension Scheme",
+    "rawDescription": "The National Pension System (NPS) is a defined-contribution pension system in India regulated by the Pension Fund Regulatory and Development Authority (PFRDA) which is under the jurisdiction of the Ministry of Finance of the Government of India. National Pension System Trust (NPS Trust) was established by PFRDA as per the provisions of the Indian Trusts Act of 1882 to take care of the assets and funds under this scheme for the best interest of the subscriber. NPS Trust is the registered owner of all assets under the NPS architecture which is held for the benefit of the subscribers under NPS. The securities are purchased by Pension Funds on behalf of, and in the name of the Trustees, however individual NPS subscribers remain the beneficial owner of the securities, assets, and funds. NPS...",
+    "fullText": "National Pension Scheme - The National Pension System (NPS) is a defined-contribution pension system in India regulated by the Pension Fund Regulatory and Development Authority (PFRDA) which is under the jurisdiction of the Ministry of Finance of the Government of India. National Pension System Trust (NPS Trust) was established by PFRDA as per the provisions of the Indian Trusts Act of 1882 to take care of the assets and funds under this scheme for the best interest of the subscriber. NPS Trust is the registered owner of all assets under the NPS architecture which is held for the benefit of the subscribers under NPS. The securities are purchased by Pension Funds on behalf of, and in the name of the Trustees, however individual NPS subscribers remain the beneficial owner of the securities, assets, and funds. NPS...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_38",
+    "name": "PM Suraksha Bima Yojana",
+    "rawDescription": "Pradhan Mantri Suraksha Bima Yojana (PMSBY, translation: Prime Minister's Safety Insurance Scheme) is a government-backed accident insurance scheme in India. It was originally mentioned in the 2015 budget speech by Finance Minister Arun Jaitley in February 2015. It was formally launched by the Prime Minister Narendra Modi on 8 May in Kolkata. Pradhan Mantri Suraksha Bima Yojana is available to people (Indian Resident or NRI) between 18 and 70 years of age with bank accounts. It has an annual premium of ₹20 (24¢ US). Goods and Services Tax (GST) is exempted on Pradhan Mantri Suraksha Bima Yojana. The amount is automatically debited from the account. This insurance scheme can have one year cover from 1 June to 31 May and is offered through banks. It is administered through public sector...",
+    "fullText": "PM Suraksha Bima Yojana - Pradhan Mantri Suraksha Bima Yojana (PMSBY, translation: Prime Minister's Safety Insurance Scheme) is a government-backed accident insurance scheme in India. It was originally mentioned in the 2015 budget speech by Finance Minister Arun Jaitley in February 2015. It was formally launched by the Prime Minister Narendra Modi on 8 May in Kolkata. Pradhan Mantri Suraksha Bima Yojana is available to people (Indian Resident or NRI) between 18 and 70 years of age with bank accounts. It has an annual premium of ₹20 (24¢ US). Goods and Services Tax (GST) is exempted on Pradhan Mantri Suraksha Bima Yojana. The amount is automatically debited from the account. This insurance scheme can have one year cover from 1 June to 31 May and is offered through banks. It is administered through public sector...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_39",
+    "name": "PM Jeevan Jyoti Bima Yojana PM Life Light Insurance Scheme)",
+    "rawDescription": "Pradhan Mantri Jeevan Jyoti Bima Yojana (Prime Minister Jeevan Jyoti Insurance Scheme) is a Government-backed life insurance scheme in India. It was originally mentioned in the year 2015 budget speech by the then-Finance Minister, Arun Jaitley in February 2015. It was formally launched by Prime Minister Narendra Modi on 9 May 2015 in Kolkata. As of May 2015, only 20% of India's population has any kind of insurance, this scheme aims to increase the number. Pradhan Mantri Jeevan Jyoti Bima Yojana is available to people between 18 and 50 years of age with bank accounts. It has an annual premium of ₹436 (US$5.20). The GST is exempted on Pradhan Mantri Jeevan Jyoti Bima Yojana. The amount will be automatically debited from the account on or before 31 May every year. Period for which...",
+    "fullText": "PM Jeevan Jyoti Bima Yojana PM Life Light Insurance Scheme) - Pradhan Mantri Jeevan Jyoti Bima Yojana (Prime Minister Jeevan Jyoti Insurance Scheme) is a Government-backed life insurance scheme in India. It was originally mentioned in the year 2015 budget speech by the then-Finance Minister, Arun Jaitley in February 2015. It was formally launched by Prime Minister Narendra Modi on 9 May 2015 in Kolkata. As of May 2015, only 20% of India's population has any kind of insurance, this scheme aims to increase the number. Pradhan Mantri Jeevan Jyoti Bima Yojana is available to people between 18 and 50 years of age with bank accounts. It has an annual premium of ₹436 (US$5.20). The GST is exempted on Pradhan Mantri Jeevan Jyoti Bima Yojana. The amount will be automatically debited from the account on or before 31 May every year. Period for which...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_40",
+    "name": "Pradhan Mantri Jan Dhan Yojana",
+    "rawDescription": "Pradhan Mantri Jan Dhan Yojana (transl. Prime Minister's Public Finance Scheme) is a financial inclusion program of the Government of India open to Indian citizens (minors of age 10 and older can also open an account with a guardian to manage it), that aims to expand affordable access to financial services such as bank accounts, remittances, credit, insurance and pensions. This financial inclusion campaign was launched by the Prime Minister of India Narendra Modi on 28 August 2014. He had announced this scheme on his first Independence Day speech on 15 August 2014. Run by Department of Financial Services, Ministry of Finance, under this scheme 15 million bank accounts were opened on inauguration day. The Guinness Book of World Records recognized this achievement, stating: \"The most...",
+    "fullText": "Pradhan Mantri Jan Dhan Yojana - Pradhan Mantri Jan Dhan Yojana (transl. Prime Minister's Public Finance Scheme) is a financial inclusion program of the Government of India open to Indian citizens (minors of age 10 and older can also open an account with a guardian to manage it), that aims to expand affordable access to financial services such as bank accounts, remittances, credit, insurance and pensions. This financial inclusion campaign was launched by the Prime Minister of India Narendra Modi on 28 August 2014. He had announced this scheme on his first Independence Day speech on 15 August 2014. Run by Department of Financial Services, Ministry of Finance, under this scheme 15 million bank accounts were opened on inauguration day. The Guinness Book of World Records recognized this achievement, stating: \"The most...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_41",
+    "name": "Heritage City Development and Augmentation Yojana",
+    "rawDescription": "National Heritage City Development and Augmentation Yojana (HRIDAY) was launched on 21 January 2015 with the aim of bringing together urban planning, economic growth and heritage conservation in an inclusive manner to preserve the heritage character of each Heritage City. The Scheme shall support development of core heritage infrastructure projects including revitalization of linked urban infrastructure for heritage assets such as monuments, Ghats, temples etc. along with reviving certain intangible assets. These initiatives shall include development of sanitation facilities, roads, public transportation & parking, citizen services, information kiosks etc. With a duration of four years (completing in November 2018) and a total outlay of ₹5 billion (US$ 63,000,000), the Scheme is set to...",
+    "fullText": "Heritage City Development and Augmentation Yojana - National Heritage City Development and Augmentation Yojana (HRIDAY) was launched on 21 January 2015 with the aim of bringing together urban planning, economic growth and heritage conservation in an inclusive manner to preserve the heritage character of each Heritage City. The Scheme shall support development of core heritage infrastructure projects including revitalization of linked urban infrastructure for heritage assets such as monuments, Ghats, temples etc. along with reviving certain intangible assets. These initiatives shall include development of sanitation facilities, roads, public transportation & parking, citizen services, information kiosks etc. With a duration of four years (completing in November 2018) and a total outlay of ₹5 billion (US$ 63,000,000), the Scheme is set to...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_42",
+    "name": "Sukanya Samridhi Yojana",
+    "rawDescription": "Sukanya Samriddhi Yojana (Girl Child Prosperity Account) is a Government of India backed saving scheme targeted at the parents of girl children. The scheme encourages parents to build a fund for the future education of their female child. The scheme was launched by Prime Minister Narendra Modi on 22 January 2015 as a part of the Beti Bachao, Beti Padhao campaign. The scheme currently provides an interest rate of 8.2% (For Jan -Mar 2024 quarter) and tax benefits. The account can be opened at any India Post office or branch of authorized commercial banks. The Sukanya Samriddhi Account Rules, 2016 was rescinded on 12 December 2019 and the new Sukanya Samriddhi Account Scheme, 2019 was introduced.",
+    "fullText": "Sukanya Samridhi Yojana - Sukanya Samriddhi Yojana (Girl Child Prosperity Account) is a Government of India backed saving scheme targeted at the parents of girl children. The scheme encourages parents to build a fund for the future education of their female child. The scheme was launched by Prime Minister Narendra Modi on 22 January 2015 as a part of the Beti Bachao, Beti Padhao campaign. The scheme currently provides an interest rate of 8.2% (For Jan -Mar 2024 quarter) and tax benefits. The account can be opened at any India Post office or branch of authorized commercial banks. The Sukanya Samriddhi Account Rules, 2016 was rescinded on 12 December 2019 and the new Sukanya Samriddhi Account Scheme, 2019 was introduced.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_43",
+    "name": "Deendayal Antyodaya Yojana",
+    "rawDescription": "Deen Dayal Upadhyaya Antyodaya Yojana or DDUAY is one of the Government of India scheme for helping the poor by providing skill training. It replaces Aajeevik. The Government of India has provisioned ₹500 crore (US$59 million) for the scheme. The objective of the scheme is to train 0.5 million people in urban areas per annum from 2016. In rural areas the objective is to train 1 million people by 2017. Further, in urban areas, services like SHG promotion, training centres, vendors markets, and permanent shelters for homeless. The aim of the scheme is skill development of both rural and urban India as per requisite international standards. The initial scheme Swarnajayanti Gram Swarozgar Yojana (SGSY) was launched in 1999. It was renamed as National Rural Livelihood Mission in 2011....",
+    "fullText": "Deendayal Antyodaya Yojana - Deen Dayal Upadhyaya Antyodaya Yojana or DDUAY is one of the Government of India scheme for helping the poor by providing skill training. It replaces Aajeevik. The Government of India has provisioned ₹500 crore (US$59 million) for the scheme. The objective of the scheme is to train 0.5 million people in urban areas per annum from 2016. In rural areas the objective is to train 1 million people by 2017. Further, in urban areas, services like SHG promotion, training centres, vendors markets, and permanent shelters for homeless. The aim of the scheme is skill development of both rural and urban India as per requisite international standards. The initial scheme Swarnajayanti Gram Swarozgar Yojana (SGSY) was launched in 1999. It was renamed as National Rural Livelihood Mission in 2011....",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_44",
+    "name": "National Rural Livelihood Mission",
+    "rawDescription": "The National Rural Livelihood Mission (NRLM) is a poverty alleviation project implemented by the Ministry of Rural Development, a branch of the Government of India. This plan is focused on promoting self-employment and the organization of rural poor. The idea behind this program is to organize the poor into Self Help Groups (SHGs) and make them capable of self-employment. In 1999, after restructuring the Integrated Rural Development Programme (IRDP), the Ministry of Rural Development (MoRD) launched Swarnajayanti Grameen Swarojgar Yojana (SGSY) to focus on promoting self-employment among the rural poor. SGSY is now remodelled to form NRLM, thereby plugging the shortfalls of the SGSY programme. This program was launched in 2011 with a budget of $5.1 billion and is one of the flagship...",
+    "fullText": "National Rural Livelihood Mission - The National Rural Livelihood Mission (NRLM) is a poverty alleviation project implemented by the Ministry of Rural Development, a branch of the Government of India. This plan is focused on promoting self-employment and the organization of rural poor. The idea behind this program is to organize the poor into Self Help Groups (SHGs) and make them capable of self-employment. In 1999, after restructuring the Integrated Rural Development Programme (IRDP), the Ministry of Rural Development (MoRD) launched Swarnajayanti Grameen Swarojgar Yojana (SGSY) to focus on promoting self-employment among the rural poor. SGSY is now remodelled to form NRLM, thereby plugging the shortfalls of the SGSY programme. This program was launched in 2011 with a budget of $5.1 billion and is one of the flagship...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_45",
+    "name": "Deendayal Upadhyaya Gram Jyoti Yojana",
+    "rawDescription": "Deen Dayal Upadhyaya Gram Jyoti Yojana is a Government of India scheme designed to provide continuous electricity supply to rural India. The government plans to invest ₹756 billion (US$8.9 billion) for rural electrification under this scheme. The scheme replaced the existing Rajiv Gandhi Grameen Vidyutikaran Yojana. The scheme will enable to initiate much awaited reforms in the rural areas. It focuses on feeder separation (rural households and agricultural) and strengthening of sub-transmission and distribution infrastructure including metering at all levels in rural areas. This will help in providing round the clock power to rural households and adequate power to agricultural consumers. The earlier scheme for rural electrification viz. Rajiv Gandhi Grameen Vidyutikaran Yojana has been...",
+    "fullText": "Deendayal Upadhyaya Gram Jyoti Yojana - Deen Dayal Upadhyaya Gram Jyoti Yojana is a Government of India scheme designed to provide continuous electricity supply to rural India. The government plans to invest ₹756 billion (US$8.9 billion) for rural electrification under this scheme. The scheme replaced the existing Rajiv Gandhi Grameen Vidyutikaran Yojana. The scheme will enable to initiate much awaited reforms in the rural areas. It focuses on feeder separation (rural households and agricultural) and strengthening of sub-transmission and distribution infrastructure including metering at all levels in rural areas. This will help in providing round the clock power to rural households and adequate power to agricultural consumers. The earlier scheme for rural electrification viz. Rajiv Gandhi Grameen Vidyutikaran Yojana has been...",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_46",
+    "name": "Rajiv Gandhi Grameen Vidyutikaran Yojana",
+    "rawDescription": "Rajiv Gandhi Grameen Vidyutikaran Yojana (RGGVY) or Rural Electricity Infrastructure and Household Electrification Scheme was launched in 2005 with the aim to provide electricity to all rural areas. In 2013, an amount of Rs. 198.98 crore was sanctioned to the Gorkhaland Territorial Administration (GTA) under this scheme which was later renamed as Deendayal Upadhyaya Gram Jyoti Yojana and recently as \"saubhagya\" This scheme aimed at electrifying all villages and habitations, Providing access to electricity to all rural households andProviding electricity connection to Below Poverty Line (BPL) families free of charge. To augment resource capacities for implementation of this scheme, Ministry of Power, Govt. of India involved CPSUs like NTPC, NHPC, PGCIL and DVC for making available their...",
+    "fullText": "Rajiv Gandhi Grameen Vidyutikaran Yojana - Rajiv Gandhi Grameen Vidyutikaran Yojana (RGGVY) or Rural Electricity Infrastructure and Household Electrification Scheme was launched in 2005 with the aim to provide electricity to all rural areas. In 2013, an amount of Rs. 198.98 crore was sanctioned to the Gorkhaland Territorial Administration (GTA) under this scheme which was later renamed as Deendayal Upadhyaya Gram Jyoti Yojana and recently as \"saubhagya\" This scheme aimed at electrifying all villages and habitations, Providing access to electricity to all rural households andProviding electricity connection to Below Poverty Line (BPL) families free of charge. To augment resource capacities for implementation of this scheme, Ministry of Power, Govt. of India involved CPSUs like NTPC, NHPC, PGCIL and DVC for making available their...",
+    "source": "wikipedia-nested"
+  },
+  {
+    "id": "scheme_47",
+    "name": "Atal Mission for Rejuvenation and Urban Transformation",
+    "rawDescription": "Preceded by Jawaharlal Nehru National Urban Renewal Mission started in 2005. Water based project to cover urban water ecosystem including taps, conservation and reducing flooding.",
+    "fullText": "Atal Mission for Rejuvenation and Urban Transformation - Preceded by Jawaharlal Nehru National Urban Renewal Mission started in 2005. Water based project to cover urban water ecosystem including taps, conservation and reducing flooding.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_48",
+    "name": "Swachh Bharat Abhiyan",
+    "rawDescription": "Central Rural Sanitation Programme (CRSP) launched in 1986. In 1999 it became the Total Sanitation Campaign (TSC). Multiple objectives including elimination of open defecation, addressing manual scavenging, and good sanitation and waste related practices.",
+    "fullText": "Swachh Bharat Abhiyan - Central Rural Sanitation Programme (CRSP) launched in 1986. In 1999 it became the Total Sanitation Campaign (TSC). Multiple objectives including elimination of open defecation, addressing manual scavenging, and good sanitation and waste related practices.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_49",
+    "name": "PM Jan Dhan Yojana",
+    "rawDescription": "National Mission for Financial Inclusion to ensure access to financial services. Replaced 2011 Swabhiman. The scheme resulted in 36.86 crore new in-use bank accounts by mid-2021.",
+    "fullText": "PM Jan Dhan Yojana - National Mission for Financial Inclusion to ensure access to financial services. Replaced 2011 Swabhiman. The scheme resulted in 36.86 crore new in-use bank accounts by mid-2021.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_50",
+    "name": "Deendayal Upadhyaya Grameen Kaushalya Yojana",
+    "rawDescription": "A scheme to engage rural youth, especially BPL and SC/ST segments of the population, in gainful employment through skill training programmes",
+    "fullText": "Deendayal Upadhyaya Grameen Kaushalya Yojana - A scheme to engage rural youth, especially BPL and SC/ST segments of the population, in gainful employment through skill training programmes",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_51",
+    "name": "Namami Gange Programme",
+    "rawDescription": "National Ganga Plan was launched in 1985. Integrates the efforts to clean and protect River Ganga in a comprehensive manner.",
+    "fullText": "Namami Gange Programme - National Ganga Plan was launched in 1985. Integrates the efforts to clean and protect River Ganga in a comprehensive manner.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_52",
+    "name": "Rajiv Gandhi Scheme for Empowerment of Adolescent Boys",
+    "rawDescription": "Aims at all-round development of adolescent boys and make them self-reliant, gender-sensitive and aware citizens, when they grow up. It covers all adolescent boys (both school going and out of school) in the age-group of 11 to 18 years.",
+    "fullText": "Rajiv Gandhi Scheme for Empowerment of Adolescent Boys - Aims at all-round development of adolescent boys and make them self-reliant, gender-sensitive and aware citizens, when they grow up. It covers all adolescent boys (both school going and out of school) in the age-group of 11 to 18 years.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_53",
+    "name": "Sansad Adarsh Gram Yojana",
+    "rawDescription": "To develop model villages. 223 CS/ CSS and 1,806 state schemes converge under SAGY. By 2016, members of parliament adopted 703 Gram Panchayats.",
+    "fullText": "Sansad Adarsh Gram Yojana - To develop model villages. 223 CS/ CSS and 1,806 state schemes converge under SAGY. By 2016, members of parliament adopted 703 Gram Panchayats.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_54",
+    "name": "Rashtriya Uchchatar Shiksha Abhiyan",
+    "rawDescription": "Improving the quality of higher education in India.",
+    "fullText": "Rashtriya Uchchatar Shiksha Abhiyan - Improving the quality of higher education in India.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_55",
+    "name": "Scheme for Adolescent Girls Scheme)",
+    "rawDescription": "Formed in 2010 by combining Kishori Shakti Yojana and Nutrition Programme for Adolescent Girls (NPAG) schemes into the Rajiv Gandhi Scheme for Empowerment of Adolescent Girls (RGSEAG) or Sabla. Implemented with Umbrella Integrated Child Development Services (ICDS) Scheme, and then placed under Saksham Anganwadi & Mission Poshan 2.0. Empowering adolescent girls aged 11–18 years with focus on out-of-school girls by improvement in their nutritional and health status and upgrading various skills like home skills, life skills and vocational skills.",
+    "fullText": "Scheme for Adolescent Girls Scheme) - Formed in 2010 by combining Kishori Shakti Yojana and Nutrition Programme for Adolescent Girls (NPAG) schemes into the Rajiv Gandhi Scheme for Empowerment of Adolescent Girls (RGSEAG) or Sabla. Implemented with Umbrella Integrated Child Development Services (ICDS) Scheme, and then placed under Saksham Anganwadi & Mission Poshan 2.0. Empowering adolescent girls aged 11–18 years with focus on out-of-school girls by improvement in their nutritional and health status and upgrading various skills like home skills, life skills and vocational skills.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_56",
+    "name": "PM Adarsh Gram Yojana",
+    "rawDescription": "Integrated development of Schedule Caste majority villages.",
+    "fullText": "PM Adarsh Gram Yojana - Integrated development of Schedule Caste majority villages.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_57",
+    "name": "Innovation in Science Pursuit for Inspired Research Programme",
+    "rawDescription": "Scholarships and internships for top science students, fellowships for pursuing PhD, research grants to researchers.",
+    "fullText": "Innovation in Science Pursuit for Inspired Research Programme - Scholarships and internships for top science students, fellowships for pursuing PhD, research grants to researchers.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_58",
+    "name": "Rashtriya Swasthya Bima Yojana",
+    "rawDescription": "Health insurance to poor (BPL), domestic workers, MGNERGA workers, rikshaw-pullers, building and other construction workers, and many other categories as may be identified by the respective states.",
+    "fullText": "Rashtriya Swasthya Bima Yojana - Health insurance to poor (BPL), domestic workers, MGNERGA workers, rikshaw-pullers, building and other construction workers, and many other categories as may be identified by the respective states.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_59",
+    "name": "PM's Employment Generation Programme",
+    "rawDescription": "Aimed at providing employment and self-employment to unemployed. Implemented by Khadi and Village Industries Commission as nodal agency.",
+    "fullText": "PM's Employment Generation Programme - Aimed at providing employment and self-employment to unemployed. Implemented by Khadi and Village Industries Commission as nodal agency.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_60",
+    "name": "Gramin Bhandaran Yojana",
+    "rawDescription": "Now subsumed under Agricultural Marketing Infrastructure (AMI). Creation of scientific storage capacity with allied facilities in rural areas to meet the requirements of farmers for storing farm produce, processed farm produce and agricultural inputs. Improve their marketability through promotion of grading, standardisation and quality control of agricultural produce.",
+    "fullText": "Gramin Bhandaran Yojana - Now subsumed under Agricultural Marketing Infrastructure (AMI). Creation of scientific storage capacity with allied facilities in rural areas to meet the requirements of farmers for storing farm produce, processed farm produce and agricultural inputs. Improve their marketability through promotion of grading, standardisation and quality control of agricultural produce.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_61",
+    "name": "Rashtriya Krishi Vikas Yojana",
+    "rawDescription": "Allocation in 2022-23 crossed ₹10,400 crore (equivalent to ₹120 billion or US$1.4 billion in 2023). Includes Pradhan Mantri Krishi Sinchai Yojna (Per Drop More Crop) and agricultural mechanization.",
+    "fullText": "Rashtriya Krishi Vikas Yojana - Allocation in 2022-23 crossed ₹10,400 crore (equivalent to ₹120 billion or US$1.4 billion in 2023). Includes Pradhan Mantri Krishi Sinchai Yojna (Per Drop More Crop) and agricultural mechanization.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_62",
+    "name": "National Mission on Nano Science and Technology",
+    "rawDescription": "\"Umbrella capacity-building programme\" targeted towards Nano Science and Technology.",
+    "fullText": "National Mission on Nano Science and Technology - \"Umbrella capacity-building programme\" targeted towards Nano Science and Technology.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_63",
+    "name": "Pooled Finance Development Fund Scheme",
+    "rawDescription": "The scheme enables Urban Local Bodies (ULBs) including small and medium-sized municipalities to raise credit from the market on a sustainable basis to meet their investment needs. PFDF will provide credit enhancement to ULBs to access market borrowings based on their credit worthiness through state level pooled mechanism.",
+    "fullText": "Pooled Finance Development Fund Scheme - The scheme enables Urban Local Bodies (ULBs) including small and medium-sized municipalities to raise credit from the market on a sustainable basis to meet their investment needs. PFDF will provide credit enhancement to ULBs to access market borrowings based on their credit worthiness through state level pooled mechanism.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_64",
+    "name": "National Creche Scheme",
+    "rawDescription": "Rajiv Gandhi National Crèche Scheme for Working Mothers",
+    "fullText": "National Creche Scheme - Rajiv Gandhi National Crèche Scheme for Working Mothers",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_65",
+    "name": "National Health Mission",
+    "rawDescription": "To improve India's health sector. Financial outlay in 2022 was ₹28,859 crore (equivalent to ₹320 billion or US$3.8 billion in 2023). Includes a number of (subsumed) programmes such as National Mental Health Programme (1982), National Blindness Control Programme (1976) and National Vector Borne Diseases Control Programme (2003).",
+    "fullText": "National Health Mission - To improve India's health sector. Financial outlay in 2022 was ₹28,859 crore (equivalent to ₹320 billion or US$3.8 billion in 2023). Includes a number of (subsumed) programmes such as National Mental Health Programme (1982), National Blindness Control Programme (1976) and National Vector Borne Diseases Control Programme (2003).",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_66",
+    "name": "Livestock Insurance Scheme",
+    "rawDescription": "Initiated as a pilot in 2005 and scaled up to all districts by 2014. Insurance to cattle and attaining qualitative improvement in livestock and their products.",
+    "fullText": "Livestock Insurance Scheme - Initiated as a pilot in 2005 and scaled up to all districts by 2014. Insurance to cattle and attaining qualitative improvement in livestock and their products.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_67",
+    "name": "Special Accelerated Road Development Programme",
+    "rawDescription": "To improve road connectivity in Northeast India.",
+    "fullText": "Special Accelerated Road Development Programme - To improve road connectivity in Northeast India.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_68",
+    "name": "Deendayal Disabled Rehabilitation Scheme",
+    "rawDescription": "Original form was the 1999 scheme to Promote Voluntary Action for Persons with Disabilities, with the aim of implementing Persons With Disabilities Act, 1995. DDRS to create an enabling environment to ensure equal opportunities, equity, social justice and empowerment of persons with disabilities.",
+    "fullText": "Deendayal Disabled Rehabilitation Scheme - Original form was the 1999 scheme to Promote Voluntary Action for Persons with Disabilities, with the aim of implementing Persons With Disabilities Act, 1995. DDRS to create an enabling environment to ensure equal opportunities, equity, social justice and empowerment of persons with disabilities.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_69",
+    "name": "PM Swasthya Suraksha Yojana",
+    "rawDescription": "Improving distribution and accessibility of health services. New AIIMS will be constructed under the scheme.",
+    "fullText": "PM Swasthya Suraksha Yojana - Improving distribution and accessibility of health services. New AIIMS will be constructed under the scheme.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_70",
+    "name": "Sampoorna Grameen Rozgar Yojana",
+    "rawDescription": "Providing additional wage employment and food security, alongside creation of durable community assets in rural areas.",
+    "fullText": "Sampoorna Grameen Rozgar Yojana - Providing additional wage employment and food security, alongside creation of durable community assets in rural areas.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_71",
+    "name": "Swadhar Greh Scheme",
+    "rawDescription": "For women in tough circumstances.",
+    "fullText": "Swadhar Greh Scheme - For women in tough circumstances.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_72",
+    "name": "PM Gram Sadak Yojana",
+    "rawDescription": "Good all-weather road connectivity to unconnected villages. World Bank supported.",
+    "fullText": "PM Gram Sadak Yojana - Good all-weather road connectivity to unconnected villages. World Bank supported.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_73",
+    "name": "Antyodaya Anna Yojana",
+    "rawDescription": "Under the scheme, 1 crore of the poorest among the poor (BPL, below poverty line) families covered under the targeted public distribution system are identified. Issue of ration cards following the recognition of Antyodaya families; unique quota cards to be recognised and \"Antyodaya Ration Card\" must be given to the Antyodaya families. The scheme has been further expanded twice by additional 50 lakh BPL families each in June 2003 and in August 2004, thus covering 2 crore families under the AAY scheme.",
+    "fullText": "Antyodaya Anna Yojana - Under the scheme, 1 crore of the poorest among the poor (BPL, below poverty line) families covered under the targeted public distribution system are identified. Issue of ration cards following the recognition of Antyodaya families; unique quota cards to be recognised and \"Antyodaya Ration Card\" must be given to the Antyodaya families. The scheme has been further expanded twice by additional 50 lakh BPL families each in June 2003 and in August 2004, thus covering 2 crore families under the AAY scheme.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_74",
+    "name": "Kishore Vaigyanik Protsahan Yojana",
+    "rawDescription": "National fellowship and scholarship programme to encourage students to take up research careers in the areas of basic sciences, engineering and medicine. Exam administered by the Indian Institute of Science.",
+    "fullText": "Kishore Vaigyanik Protsahan Yojana - National fellowship and scholarship programme to encourage students to take up research careers in the areas of basic sciences, engineering and medicine. Exam administered by the Indian Institute of Science.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_75",
+    "name": "National Social Assistance Programme",
+    "rawDescription": "Financial assistance to pensioners, widows and other target categories.",
+    "fullText": "National Social Assistance Programme - Financial assistance to pensioners, widows and other target categories.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_76",
+    "name": "Members of Parliament Local Area Development Scheme",
+    "rawDescription": "Each MP has the choice to suggest to the District Collector for works to the tune of Rs 5 crores per annum to be taken up in their constituency. The Rajya Sabha Member of Parliament can recommend works in one or more districts in the State from where he/she has been elected.",
+    "fullText": "Members of Parliament Local Area Development Scheme - Each MP has the choice to suggest to the District Collector for works to the tune of Rs 5 crores per annum to be taken up in their constituency. The Rajya Sabha Member of Parliament can recommend works in one or more districts in the State from where he/she has been elected.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_77",
+    "name": "National Scheme on Welfare of Fishermen",
+    "rawDescription": "Financial assistance to fishermen for construction of house, community hall for recreation and common working place and installation of tube-wells for drinking water.",
+    "fullText": "National Scheme on Welfare of Fishermen - Financial assistance to fishermen for construction of house, community hall for recreation and common working place and installation of tube-wells for drinking water.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_78",
+    "name": "National Social Assistance Scheme",
+    "rawDescription": "Public assistance to its citizens in the case of unemployment, old age, sickness and disablement and in other cases of undeserved want.",
+    "fullText": "National Social Assistance Scheme - Public assistance to its citizens in the case of unemployment, old age, sickness and disablement and in other cases of undeserved want.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_79",
+    "name": "Voluntary Disclosure of Income Scheme",
+    "rawDescription": "Opportunity to the income tax/ wealth tax defaulters to disclose their undisclosed income at the prevailing tax rates.",
+    "fullText": "Voluntary Disclosure of Income Scheme - Opportunity to the income tax/ wealth tax defaulters to disclose their undisclosed income at the prevailing tax rates.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_80",
+    "name": "National Service Scheme",
+    "rawDescription": "Personality development through social (or community) service.",
+    "fullText": "National Service Scheme - Personality development through social (or community) service.",
+    "source": "wikipedia"
+  },
+  {
+    "id": "scheme_81",
+    "name": "^ \"India | World Food Programme\"",
+    "rawDescription": "^ \"India | World Food Programme\". www.wfp.org. Retrieved 25 April 2023.",
+    "fullText": "^ \"India | World Food Programme\" - ^ \"India | World Food Programme\". www.wfp.org. Retrieved 25 April 2023.",
+    "source": "wikipedia-poverty"
+  },
+  {
+    "id": "scheme_82",
+    "name": "Digital India: Swachh Bharat Mission Mobile app",
+    "rawDescription": "Swachh Bharat Mission (SBM) Mobile app is being used by people and Government organizations for achieving the goals of Swachh Bharat Mission.",
+    "fullText": "Digital India: Swachh Bharat Mission Mobile app - Swachh Bharat Mission (SBM) Mobile app is being used by people and Government organizations for achieving the goals of Swachh Bharat Mission.",
+    "source": "wikipedia-digital"
+  },
+  {
+    "id": "scheme_83",
+    "name": "Digital India: ^ \"Cabinet approves PMGDISHA under Digital India Programme\"",
+    "rawDescription": "^ \"Cabinet approves PMGDISHA under Digital India Programme\". New Delhi: Business Standard. 8 February 2017.",
+    "fullText": "Digital India: ^ \"Cabinet approves PMGDISHA under Digital India Programme\" - ^ \"Cabinet approves PMGDISHA under Digital India Programme\". New Delhi: Business Standard. 8 February 2017.",
+    "source": "wikipedia-digital"
+  },
+  {
+    "id": "scheme_84",
+    "name": "Digital India: National Social Assistance Scheme",
+    "rawDescription": "National Social Assistance Scheme",
+    "fullText": "Digital India: National Social Assistance Scheme - National Social Assistance Scheme",
+    "source": "wikipedia-digital"
+  },
+  {
+    "id": "scheme_85",
+    "name": "Digital India: Farmer Income Protection Scheme",
+    "rawDescription": "Farmer Income Protection Scheme (PM AASHA)",
+    "fullText": "Digital India: Farmer Income Protection Scheme - Farmer Income Protection Scheme (PM AASHA)",
+    "source": "wikipedia-digital"
+  },
+  {
+    "id": "scheme_86",
+    "name": "Digital India: TG Mission Bhagiratha T App Folio",
+    "rawDescription": "TG Mission Bhagiratha T App Folio",
+    "fullText": "Digital India: TG Mission Bhagiratha T App Folio - TG Mission Bhagiratha T App Folio",
+    "source": "wikipedia-digital"
   }
 ]
