@@ -10,6 +10,7 @@
     "test:match": "npx --yes tsx test/matchTest.ts"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@pinecone-database/pinecone": "^2.0.0",
     "firebase": "^10.0.0",
     "firebase-admin": "^12.0.0",
