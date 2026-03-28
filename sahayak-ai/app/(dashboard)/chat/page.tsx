@@ -313,13 +313,13 @@ export default function ChatAIStudioLayout() {
         <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 scroll-smooth">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`w-full max-w-[95%] lg:max-w-[4xl] xl:max-w-[5xl] flex space-x-4 ${msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+              <div className={`max-w-[95%] lg:max-w-[4xl] xl:max-w-[5xl] flex space-x-4 ${msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 shadow-lg ${msg.role === 'user' ? 'bg-[#E15A15]' : 'bg-[#1a1a1a] border border-[#333]'}`}>
                   {msg.role === 'user' ? <User size={14} className="text-white"/> : <Bot size={14} className="text-[#E15A15]"/>}
                 </div>
-                <div className="flex flex-col space-y-2 w-full max-w-4xl xl:max-w-5xl">
+                <div className={`flex flex-col space-y-2 ${msg.role === 'user' ? 'items-end' : 'items-start'} w-auto max-w-4xl xl:max-w-5xl`}>
                   <div className="flex items-start gap-2">
-                    <div className={`p-4 md:p-5 rounded-2xl text-base md:text-lg leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-[#E15A15] text-white rounded-tr-none' : 'bg-[#1a1a1a]/80 backdrop-blur-md text-gray-200 border border-[#333]/80 rounded-tl-none'}`}>
+                    <div className={`p-4 md:p-5 rounded-2xl text-base md:text-lg leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-[#E15A15] text-white rounded-tr-none' : 'bg-[#1a1a1a]/80 backdrop-blur-md text-gray-200 border border-[#333]/80 rounded-tl-none'}`}>  
                         <div className="prose prose-invert max-w-none text-base md:text-lg prose-p:text-base md:prose-p:text-lg prose-p:leading-relaxed prose-li:text-base md:prose-li:text-lg prose-pre:bg-[#222] prose-pre:border prose-pre:border-[#333] prose-a:text-blue-400 hover:prose-a:text-blue-300">
                           <ReactMarkdown>{msg.content}</ReactMarkdown>
                         </div>
