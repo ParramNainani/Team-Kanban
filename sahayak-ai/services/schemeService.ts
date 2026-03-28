@@ -164,5 +164,9 @@ export function getSchemeById(id: string): Scheme | undefined {
  * @returns MatchResult with recommended schemes, fallback indication, and metadata
  */
 export function getRecommendedSchemes(userProfile: UserProfile): MatchResult {
-  return matchSchemes(userProfile, schemes);
+  return matchSchemes(userProfile, schemes, {
+    includeExpired: false,
+    sortMode: "combined",
+    maxResults: 5,
+  });
 }

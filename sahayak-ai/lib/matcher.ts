@@ -1,5 +1,6 @@
-import type { UserProfile, Scheme, ScoredScheme, MatchResult } from "../types/index";
-import { generateTags } from "./ai/gap-detector";
+import type { MatchResult, ScoredScheme, Scheme, SortMode, UserProfile } from "../types/index";
+import { applyExclusionFilter } from "./filters";
+import { scoreSchemes } from "./scorer";
 
 /**
  * Compute the maximum possible score for scheme matching.
@@ -20,9 +21,9 @@ export function computeMaxScore(): number {
 
 /**
  * Minimum score required for a scheme to be recommended.
- * Set at 80% of maximum possible score to ensure high quality matches.
+ * Set at 60% of maximum possible score to align with hybrid relevance filtering.
  */
-export const RECOMMENDATION_THRESHOLD = Math.round(computeMaxScore() * 0.80);
+export const RECOMMENDATION_THRESHOLD = Math.round(computeMaxScore() * 0.60);
 
 /**
  * Check if user's occupation matches scheme's eligible occupations
@@ -154,50 +155,38 @@ function calculateScore(user: UserProfile, scheme: Scheme): number {
  * @param schemes - Array of available schemes with eligibility criteria
  * @returns MatchResult with scored and ranked schemes using threshold-based filtering
  */
-export function matchSchemes(user: UserProfile, schemes: Scheme[]): MatchResult {
-  // Calculate scores for all schemes
-  const scoredSchemes: ScoredScheme[] = schemes.map((scheme) => ({
-    tags: generateTags(scheme),
-    ...scheme,
-    score: calculateScore(user, scheme),
-    isFallback: false, // Will be updated based on threshold logic
-  }));
+export function matchSchemes(
+  user: UserProfile,
+  schemes: Scheme[],
+  options: { includeExpired?: boolean; sortMode?: SortMode; maxResults?: number } = {}
+): MatchResult {
+  const { acceptedSchemes, excludedSchemes } = applyExclusionFilter(user, schemes, {
+    includeExpired: options.includeExpired,
+  });
 
-  // Filter out disqualified schemes (score = 0)
-  const eligibleSchemes = scoredSchemes.filter((scheme) => scheme.score > 0);
+  const sortMode = options.sortMode ?? "combined";
+  const rankedSchemes = scoreSchemes(user, acceptedSchemes, { sortMode });
+  const recommendedSchemes = rankedSchemes.filter((scheme) => scheme.score >= RECOMMENDATION_THRESHOLD);
 
-  // Sort by score descending
-  const sortedSchemes = eligibleSchemes.sort((a, b) => b.score - a.score);
-
-  // Filter schemes that meet the recommendation threshold
-  const recommendedSchemes = sortedSchemes.filter((scheme) => scheme.score >= RECOMMENDATION_THRESHOLD);
-
-  let finalSchemes: ScoredScheme[];
-  let recommendedCount: number;
+  let finalSchemes: ScoredScheme[] = [];
+  let recommendedCount = 0;
 
   if (recommendedSchemes.length > 0) {
-    // Use only recommended schemes
-    finalSchemes = recommendedSchemes.slice(0, 5); // Take top 5
+    finalSchemes = recommendedSchemes.slice(0, options.maxResults ?? 5);
     recommendedCount = finalSchemes.length;
-  } else {
-    // Fallback: return highest scored scheme
-    finalSchemes = sortedSchemes.length > 0 ? [sortedSchemes[0]] : [];
-    if (finalSchemes.length > 0) {
-      finalSchemes[0].isFallback = true;
-    }
-    recommendedCount = 0;
+  } else if (rankedSchemes.length > 0) {
+    finalSchemes = [rankedSchemes[0]];
+    finalSchemes[0].isFallback = true;
   }
 
-  // Calculate total estimated benefit
-  const totalEstimatedBenefit = finalSchemes.reduce(
-    (total, scheme) => total + scheme.estimatedBenefit,
-    0
-  );
+  const totalEstimatedBenefit = finalSchemes.reduce((total, scheme) => total + scheme.estimatedBenefit, 0);
 
   return {
     schemes: finalSchemes,
     totalEstimatedBenefit,
     recommendedCount,
     thresholdUsed: RECOMMENDATION_THRESHOLD,
+    excludedSchemes,
+    sortMode,
   };
 }
