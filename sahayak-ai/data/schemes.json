@@ -1,65 +1,87 @@
 [
   {
-    "id": "1",
-    "name": "PM Kisan Samman Nidhi",
-    "tags": ["farmer", "agriculture"],
-    "requiredCriteria": {
-      "location": "rural"
+    "id": "pm-kisan",
+    "name": "PM-KISAN",
+    "eligibility": {
+      "ageRange": { "min": 18, "max": 120 },
+      "gender": "any",
+      "occupation": ["farmer", "agricultural worker"],
+      "incomeLimit": 600000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": true
     },
-    "benefits": "Financial benefit of Rs 6000 per year",
-    "documents": ["Aadhaar", "Land Records"],
+    "benefits": "₹6,000 per year in three equal installments for farmers with landholding up to 2 hectares",
+    "documents": ["Aadhaar Card", "Bank Account Details", "Land Records"],
     "estimatedBenefit": 6000
   },
   {
-    "id": "2",
-    "name": "National Family Benefit Scheme",
-    "tags": ["widow", "death", "family"],
-    "requiredCriteria": {
-      "location": "any",
-      "maxIncome": 25000,
-      "minAge": 18,
-      "maxAge": 59
+    "id": "widow-pension",
+    "name": "National Widow Pension Scheme",
+    "eligibility": {
+      "ageRange": { "min": 18, "max": 120 },
+      "gender": "female",
+      "occupation": ["any"],
+      "incomeLimit": 200000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "widow",
+      "landOwnership": null
     },
-    "benefits": "One time assistance of Rs 20000",
-    "documents": ["Death Certificate", "Income Certificate", "Age Proof"],
+    "benefits": "₹2,000 per month financial assistance",
+    "documents": ["Widow Certificate", "Income Certificate", "Aadhaar Card"],
+    "estimatedBenefit": 24000
+  },
+  {
+    "id": "ayushman-bharat",
+    "name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana",
+    "eligibility": {
+      "ageRange": { "min": 0, "max": 120 },
+      "gender": "any",
+      "occupation": ["any"],
+      "incomeLimit": 500000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": null
+    },
+    "benefits": "Cashless treatment up to ₹5 lakh per family per year for secondary and tertiary care hospitalization",
+    "documents": ["Ayushman Bharat Card", "Income Certificate"],
+    "estimatedBenefit": 500000
+  },
+  {
+    "id": "student-scholarship",
+    "name": "National Scholarship Portal - Post Matric Scholarship",
+    "eligibility": {
+      "ageRange": { "min": 17, "max": 30 },
+      "gender": "any",
+      "occupation": ["student"],
+      "incomeLimit": 600000,
+      "category": ["SC", "ST", "OBC", "Minority"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": null
+    },
+    "benefits": "Tuition fee reimbursement and maintenance allowance up to ₹20,000 per year",
+    "documents": ["Caste Certificate", "Income Certificate", "Admission Letter", "Mark Sheets"],
     "estimatedBenefit": 20000
   },
   {
-    "id": "3",
-    "name": "Post Matric Scholarship",
-    "tags": ["student", "education"],
-    "requiredCriteria": {
-      "location": "any",
-      "maxIncome": 250000
+    "id": "mnrega",
+    "name": "Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)",
+    "eligibility": {
+      "ageRange": { "min": 18, "max": 120 },
+      "gender": "any",
+      "occupation": ["unskilled worker", "farmer", "laborer"],
+      "incomeLimit": 1000000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": false
     },
-    "benefits": "Covers tuition fees and maintenance allowance",
-    "documents": ["Income Certificate", "Marksheet"],
-    "estimatedBenefit": 15000
-  },
-  {
-    "id": "4",
-    "name": "Urban Unemployment Allowance",
-    "tags": ["unemployed", "youth"],
-    "requiredCriteria": {
-      "location": "urban",
-      "minAge": 21,
-      "maxAge": 35
-    },
-    "benefits": "Monthly allowance for educated unemployed youth",
-    "documents": ["Employment Exchange Card", "Education Proof"],
-    "estimatedBenefit": 12000
-  },
-  {
-    "id": "5",
-    "name": "Indira Gandhi National Old Age Pension",
-    "tags": ["elderly", "senior citizen"],
-    "requiredCriteria": {
-      "location": "any",
-      "maxIncome": 50000,
-      "minAge": 60
-    },
-    "benefits": "Monthly pension of Rs 200 to Rs 500 depending on age",
-    "documents": ["BPL Card", "Age Proof", "Aadhaar"],
-    "estimatedBenefit": 6000
+    "benefits": "100 days of guaranteed wage employment per year at minimum wage rates",
+    "documents": ["Job Card", "Aadhaar Card", "Bank Account"],
+    "estimatedBenefit": 60000
   }
 ]
