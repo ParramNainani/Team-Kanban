@@ -126,16 +126,22 @@ export default function ChatAIStudioLayout() {
   };
 
   async function uploadFileToCloudinary(file: File) {
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
+    if (!cloudName || !uploadPreset) {
+      throw new Error("Missing Cloudinary configuration. Please provide NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME and NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET in your .env.local file.");
+    }
+
     const formData = new FormData();
     formData.append("file", file);
-    // You must create an unsigned upload preset in Cloudinary Settings -> Upload and replace this.
-    formData.append("upload_preset", "sahayak-preset"); 
-    // You must replace 'du5y3i974' with your actual Cloudinary cloud name.
-    const res = await fetch("https://api.cloudinary.com/v1_1/du5y3i974/auto/upload", { method: "POST", body: formData });
-    if (!res.ok) { 
+    formData.append("upload_preset", uploadPreset);
+
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`, { method: "POST", body: formData });
+    if (!res.ok) {
       const errorText = await res.text();
-      console.error("Cloudinary response:", errorText); 
-      throw new Error(`Upload failed: ${res.statusText}`); 
+      console.error("Cloudinary response:", errorText);
+      throw new Error(`Upload failed: ${res.statusText}`);
     }
     const data = await res.json();
     return data.secure_url;
@@ -307,11 +313,11 @@ export default function ChatAIStudioLayout() {
         <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-6 scroll-smooth">
           {messages.map((msg, i) => (
             <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[85%] flex space-x-4 ${msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
+              <div className={`w-full max-w-[95%] lg:max-w-[4xl] xl:max-w-[5xl] flex space-x-4 ${msg.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''}`}>
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 shadow-lg ${msg.role === 'user' ? 'bg-[#E15A15]' : 'bg-[#1a1a1a] border border-[#333]'}`}>
                   {msg.role === 'user' ? <User size={14} className="text-white"/> : <Bot size={14} className="text-[#E15A15]"/>}
                 </div>
-                <div className="flex flex-col space-y-2 max-w-2xl">
+                <div className="flex flex-col space-y-2 w-full max-w-4xl xl:max-w-5xl">
                   <div className="flex items-start gap-2">
                     <div className={`p-4 md:p-5 rounded-2xl text-base md:text-lg leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-[#E15A15] text-white rounded-tr-none' : 'bg-[#1a1a1a]/80 backdrop-blur-md text-gray-200 border border-[#333]/80 rounded-tl-none'}`}>
                         <div className="prose prose-invert max-w-none text-base md:text-lg prose-p:text-base md:prose-p:text-lg prose-p:leading-relaxed prose-li:text-base md:prose-li:text-lg prose-pre:bg-[#222] prose-pre:border prose-pre:border-[#333] prose-a:text-blue-400 hover:prose-a:text-blue-300">
@@ -387,13 +393,13 @@ export default function ChatAIStudioLayout() {
                       </div>
                       {/* GapGraph integration below scheme cards */}
                       {(() => {
-                        // Compute totalEligible (number of schemes) and totalReceived
-                        const totalEligible = msg.schemes?.length || 0;
+                        // Compute totalEligible (sum of estimated benefit)
+                        const totalEligible = msg.schemes?.reduce((sum, s) => sum + (s.estimatedBenefit || 5000), 0) || 0;
                         // Placeholder: totalReceived = 0 (can be replaced with real data)
                         const totalReceived = 0;
                         return (
                           <div className="mt-6">
-                            <GapGraph totalEligible={totalEligible} totalReceived={totalReceived} unit="schemes" />
+                            <GapGraph totalEligible={totalEligible} totalReceived={totalReceived} unit="currency" />
                           </div>
                         );
                       })()}

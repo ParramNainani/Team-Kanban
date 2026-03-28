@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { UserProfile } from "../../types";
 
-export async function situationEngine(message: string, language?: string): Promise<{ reply: string; isComplete: boolean; profile: Partial<UserProfile>; intent?: string; confidence?: number }> {
+export async function situationEngine(message: string, language?: string, imageUrl?: string): Promise<{ reply: string; isComplete: boolean; profile: Partial<UserProfile>; intent?: string; confidence?: number }> {
   try {
     const apiKey = process.env.GEMINI_API_KEY || "";
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -16,7 +16,8 @@ Your job:
 3. Do NOT set "isComplete" to true UNLESS you have reliably extracted at least "age", "gender", "income", "occupation", and "state".
 4. If "isComplete" is false, gently weave ONE follow-up question into your natural reply to target missing criteria.
 5. If "isComplete" is true, your reply must state that you have found some schemes based on their profile, and they should review the list below.
-6. CRITICAL: Reply naturally and ONLY in the specified language: ${language || "the user's spoken language"}.
+6. YOU HAVE VISION CAPABILITIES. If the user provides an image or asks about an image, analyze it, describe what you see, and respond accordingly. DO NOT say you cannot see images.
+7. CRITICAL: Reply naturally and ONLY in the specified language: ${language || "the user's spoken language"}.
 
 Rules:
 - Always return valid JSON.
@@ -40,9 +41,34 @@ Rules:
 }`
     });
 
-    const result = await model.generateContent(message);
+    let contentParts: any[] = [{ text: message }];
+
+    if (imageUrl) {
+      try {
+        const imageRes = await fetch(imageUrl);
+        if (imageRes.ok) {
+          const arrayBuffer = await imageRes.arrayBuffer();
+          const buffer = Buffer.from(arrayBuffer);
+          const base64 = buffer.toString('base64');
+          const mimeType = imageRes.headers.get('content-type') || 'image/jpeg';
+          
+          contentParts.push({
+            inlineData: {
+              data: base64,
+              mimeType
+            }
+          });
+        } else {
+          console.warn("Failed to fetch image for Gemini vision processing", imageRes.statusText);
+        }
+      } catch (e) {
+        console.error("Error fetching/encoding image:", e);
+      }
+    }
+
+    const result = await model.generateContent(contentParts);
     const text = result.response.text();
-    
+
     // Safely parse JSON, removing markdown code blocks if the model includes them
     const jsonStr = text.replace(/```json/g, "").replace(/```/g, "").trim();
     const parsed = JSON.parse(jsonStr);

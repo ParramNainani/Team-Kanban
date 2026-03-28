@@ -15,8 +15,11 @@ export async function POST(request: Request) {
     // Convert messages array into a single text block so Gemini has context
     const conversationHistory = messages.map((m: { role: string; content: string }) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join("\n");
 
+    const lastUserMessageWithAttachment = [...messages].reverse().find(m => m.role === 'user' && m.attachmentUrl);
+    const imageUrl = lastUserMessageWithAttachment?.attachmentUrl;
+
     // Call the engine to process the message context
-    const { reply, isComplete, profile } = await situationEngine(conversationHistory, language);
+    const { reply, isComplete, profile } = await situationEngine(conversationHistory, language, imageUrl);
     if (!isComplete) {
       const response: ConversationResponse = { reply, isComplete, profile };
       return NextResponse.json(response);
