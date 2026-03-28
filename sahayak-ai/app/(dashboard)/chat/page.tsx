@@ -1,1 +1,2 @@
-// TODO: Setup app/(dashboard)/chat/page.tsx
+// TODO: Chat UI
+// TODO: Calls /api/conversation

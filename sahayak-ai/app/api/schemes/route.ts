@@ -1,1 +1,1 @@
-// TODO: Setup app/api/schemes/route.ts
+// TODO: Optional: fetch all schemes
