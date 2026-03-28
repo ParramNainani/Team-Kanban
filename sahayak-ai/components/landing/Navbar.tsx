@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { motion } from "framer-motion";
 import { Menu } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { GlowButton, primaryCtaClassName } from "./GlowButton";
 import { MobileMenu } from "./MobileMenu";
@@ -104,7 +105,7 @@ export function Navbar() {
             }}
           >
             <span className="flex h-14 w-14 items-center justify-center rounded-xl overflow-hidden shadow-sm">
-              <img src="/logo.png" alt="Sahayak Logo" className="h-full w-full object-cover" />
+              <Image src="/logo.png" alt="Sahayak Logo" width={56} height={56} className="h-full w-full object-cover" />
             </span>
             <span className="text-xl font-bold tracking-tight">Sahayak AI</span>
           </Link>

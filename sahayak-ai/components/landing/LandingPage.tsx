@@ -283,15 +283,15 @@ function PageInner() {
                   <p className="text-sm uppercase tracking-[0.35em] text-[#BF5700]">Impact preview</p>
                   <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-900">See the impact at a glance</h2>
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-                    A quick chart view of current beneficiaries versus total eligible population for a clear view of untouched potential.
+                    India&apos;s annual welfare budget is ₹3.5 lakh crore, but ₹1.4 lakh crore goes unclaimed every year due to awareness and language barriers. Here&apos;s the gap Sahayak AI is built to close.
                   </p>
                 </div>
                 <div className="rounded-3xl bg-slate-50 px-5 py-4 text-right text-sm text-slate-600 ring-1 ring-slate-200/70">
                   <p className="font-semibold uppercase tracking-[0.3em] text-slate-400">Insight panel</p>
-                  <p className="mt-2 text-base font-semibold text-slate-900">Live Beneficiary Tracking</p>
+                  <p className="mt-2 text-base font-semibold text-slate-900">National Welfare Gap</p>
                 </div>
               </div>
-              <GapGraph totalEligible={28000} totalReceived={11200} unit="people" />
+              <GapGraph totalEligible={3500000000000} totalReceived={2100000000000} unit="currency" />
             </div>
           </div>
         </section>

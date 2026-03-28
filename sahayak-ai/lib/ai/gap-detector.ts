@@ -8,8 +8,8 @@ import { calculateScore, normalizeToken } from "../utils/scoring";
  */
 const keywordMap: Record<string, string[]> = {
   widow: ["widow", "widows"],
-  student: ["student", "education", "school", "college", "university"],
-  farmer: ["farmer", "agriculture", "farming", "crop"],
+  student: ["student", "education", "school", "college", "university", "scholarship"],
+  farmer: ["farmer", "agriculture", "farming", "crop", "kisan", "agricultural"],
   "low income": ["low income", "bpl", "poor", "below poverty", "economically weaker"],
   elderly: ["senior citizen", "above 60", "60+", "aged", "elderly", "pensioner"],
   unemployed: ["jobless", "unemployed", "job seeker", "without employment"],
@@ -19,27 +19,40 @@ const keywordMap: Record<string, string[]> = {
   "financial support": ["money", "financial", "cash", "₹", "support", "benefit", "amount"],
   welfare: ["welfare", "social welfare"],
   adult: ["adult", "18 years", "above 18"],
-  disability: ["disability", "disabled", "handicap", "special needs"],
+  disability: ["disability", "disabled", "handicap", "special needs", "divyang"],
   sc: ["scheduled caste", "sc", "dalit"],
   st: ["scheduled tribe", "st", "tribal"],
   obc: ["obc", "other backward"],
   minority: ["minority", "religious minority"],
+  entrepreneur: ["startup", "entrepreneur", "self-employed", "business", "msme"],
+  laborer: ["laborer", "labour", "worker", "unskilled", "daily wage"],
+  housing: ["housing", "home", "shelter", "awas", "pradhan mantri awas"],
 };
 
 /**
  * Generate tags for a welfare scheme based on its properties.
- * Combines eligibility, benefits, category, and description to extract relevant tags.
+ * Safely stringifies the eligibility object instead of passing it directly to .join().
  *
- * @param scheme - Scheme object with name, eligibility, benefits, category, description, etc.
+ * @param scheme - Scheme object
  * @returns Array of normalized, deduplicated tags
  */
 export function generateTags(scheme: Scheme): string[] {
   const tags: Set<string> = new Set();
 
-  // Combine all relevant text fields into one searchable block
+  // Safely extract eligibility text — FIX: was passing object to .join() producing [object Object]
+  const eligibilityText = scheme.eligibility
+    ? [
+        scheme.eligibility.occupation?.join(" ") || "",
+        scheme.eligibility.gender || "",
+        scheme.eligibility.category?.join(" ") || "",
+        scheme.eligibility.state?.join(" ") || "",
+        scheme.eligibility.maritalStatus || "",
+      ].join(" ")
+    : "";
+
   const textBlock = [
     scheme.name || "",
-    scheme.eligibility || "",
+    eligibilityText,
     scheme.benefits || "",
     scheme.category || "",
     scheme.description || "",
@@ -53,12 +66,11 @@ export function generateTags(scheme: Scheme): string[] {
     for (const keyword of keywords) {
       if (textBlock.includes(keyword.toLowerCase())) {
         tags.add(tag);
-        break; // Found a match for this tag, move to next tag
+        break;
       }
     }
   }
 
-  // Convert set to sorted array for consistent output
   return Array.from(tags).sort();
 }
 
@@ -102,7 +114,6 @@ export function matchSchemes(keywords: string[]): MatchResult {
   }
 
   const ranked: ScoredScheme[] = catalog.map((scheme) => {
-    // For backward compatibility, generate tags from eligibility data
     const generatedTags = generateTags(scheme);
     const score = calculateScore(keywordTokens, generatedTags);
     if (process.env.DEBUG_MATCH === "1") {
@@ -119,13 +130,13 @@ export function matchSchemes(keywords: string[]): MatchResult {
 
   const schemesOut: ScoredScheme[] =
     topMatches.length === 0
-      ? takeUniqueById(catalog.map(s => ({ ...s, score: 0, isFallback: false })), 3)
+      ? takeUniqueById(catalog.map(s => ({ ...s, score: 0, isFallback: true })), 3)
       : topMatches;
 
   return {
     schemes: schemesOut,
     totalEstimatedBenefit: sumEstimatedBenefit(schemesOut),
-    recommendedCount: schemesOut.length, // Legacy: all returned schemes are "recommended"
-    thresholdUsed: 0, // Legacy: no threshold used
+    recommendedCount: schemesOut.length,
+    thresholdUsed: 0,
   };
 }

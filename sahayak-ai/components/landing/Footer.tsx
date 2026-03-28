@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const cols = [
   {
@@ -35,7 +36,7 @@ export function Footer() {
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2">
             <span className="flex h-14 w-14 items-center justify-center rounded-xl overflow-hidden shadow-sm">
-              <img src="/logo.png" alt="Sahayak Logo" className="h-full w-full object-cover" />
+              <Image src="/logo.png" alt="Sahayak Logo" width={56} height={56} className="h-full w-full object-cover" />
             </span>
             <span className="text-xl font-bold text-slate-900">Sahayak AI</span>
           </div>

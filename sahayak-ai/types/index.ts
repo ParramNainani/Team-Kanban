@@ -1,15 +1,17 @@
+/** Core type definitions for Sahayak AI */
+
 export interface Scheme {
   id: string;
   name: string;
   eligibility: {
-    ageRange: { min: number; max: number }; // user age must fall within this range
-    gender: "male" | "female" | "any";      // allowed gender
-    occupation: string[];                  // eligible occupations
-    incomeLimit: number;                   // maximum annual income (INR)
-    category: string[];                    // caste/category eligibility
-    state: string[];                       // applicable states ("All" allowed)
+    ageRange: { min: number; max: number };
+    gender: "male" | "female" | "any";
+    occupation: string[];
+    incomeLimit: number;
+    category: string[];
+    state: string[];
     maritalStatus: "married" | "unmarried" | "widow" | "any";
-    landOwnership: boolean | null;         // null = not applicable
+    landOwnership: boolean | null;
   };
   benefits: string;
   description?: string;
@@ -18,7 +20,7 @@ export interface Scheme {
   documents: string[];
   estimatedBenefit: number;
   tags?: string[];
-  links?: string[]; // Added links property
+  links?: string[];
 }
 
 export interface UserProfile {
@@ -28,7 +30,7 @@ export interface UserProfile {
   income: number;
   category: string;
   state: string;
-  maritalStatus: string;
+  maritalStatus: "married" | "unmarried" | "widow" | "any";
   landOwnership: boolean;
 }
 
@@ -51,6 +53,13 @@ export interface MatchResult {
   recommendedCount: number;
   thresholdUsed: number;
 }
-export interface SchemeSummary extends ScoredScheme {}
-export interface Message { role: 'user' | 'assistant' | 'system'; content: string; schemes?: SchemeSummary[]; profile?: Partial<UserProfile>; isComplete?: boolean; attachmentUrl?: string; }
 
+/** Chat message with optional attached data */
+export interface Message {
+  role: "user" | "assistant" | "system";
+  content: string;
+  schemes?: ScoredScheme[];
+  profile?: Partial<UserProfile>;
+  isComplete?: boolean;
+  attachmentUrl?: string;
+}

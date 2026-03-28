@@ -21,29 +21,100 @@ export function computeMaxScore(): number {
 
 /**
  * Minimum score required for a scheme to be recommended.
- * Set at 80% of maximum possible score to ensure high quality matches.
+ * Set at 60% of maximum possible score — lowered from 80% to allow
+ * more diverse results while still filtering irrelevant ones.
  */
-export const RECOMMENDATION_THRESHOLD = Math.round(computeMaxScore() * 0.80);
+export const RECOMMENDATION_THRESHOLD = Math.round(computeMaxScore() * 0.60);
+
+/** Occupation synonym groups for fuzzy matching */
+const OCCUPATION_SYNONYMS: Record<string, string[]> = {
+  farmer: ["farmer", "agricultural worker", "cultivator", "kisan", "agriculture"],
+  student: ["student", "scholar", "learner", "pupil"],
+  laborer: ["laborer", "labour", "unskilled worker", "daily wage worker", "worker", "construction worker"],
+  "self-employed": ["self-employed", "entrepreneur", "business owner", "shopkeeper", "vendor", "msme"],
+  teacher: ["teacher", "instructor", "educator", "professor", "lecturer"],
+  housewife: ["housewife", "homemaker", "home maker"],
+  retired: ["retired", "pensioner", "senior"],
+};
 
 /**
  * Check if user's occupation matches scheme's eligible occupations
+ * Uses fuzzy matching with synonym groups
  */
 function checkOccupationMatch(userOccupation: string, schemeOccupations: string[]): boolean {
-  return schemeOccupations.includes(userOccupation) || schemeOccupations.includes("any");
+  if (schemeOccupations.includes("any")) return true;
+
+  const userLower = userOccupation.toLowerCase().trim();
+
+  // Direct match
+  if (schemeOccupations.some(o => o.toLowerCase() === userLower)) return true;
+
+  // Fuzzy synonym match
+  for (const [, synonyms] of Object.entries(OCCUPATION_SYNONYMS)) {
+    const userInGroup = synonyms.some(s => userLower.includes(s) || s.includes(userLower));
+    if (userInGroup) {
+      const schemeInGroup = schemeOccupations.some(o =>
+        synonyms.some(s => o.toLowerCase().includes(s) || s.includes(o.toLowerCase()))
+      );
+      if (schemeInGroup) return true;
+    }
+  }
+
+  // Substring match as last resort
+  return schemeOccupations.some(o =>
+    userLower.includes(o.toLowerCase()) || o.toLowerCase().includes(userLower)
+  );
 }
 
 /**
  * Check if user's category matches scheme's eligible categories
  */
 function checkCategoryMatch(userCategory: string, schemeCategories: string[]): boolean {
-  return schemeCategories.includes(userCategory) || schemeCategories.includes("All");
+  if (schemeCategories.includes("All")) return true;
+  const userLower = userCategory.toLowerCase();
+  return schemeCategories.some(c => c.toLowerCase() === userLower);
 }
 
+/** State name normalization map */
+const STATE_ALIASES: Record<string, string[]> = {
+  "uttar pradesh": ["up", "uttar pradesh"],
+  "madhya pradesh": ["mp", "madhya pradesh"],
+  "andhra pradesh": ["ap", "andhra pradesh"],
+  "tamil nadu": ["tn", "tamil nadu", "tamilnadu"],
+  "west bengal": ["wb", "west bengal"],
+  "maharashtra": ["mh", "maharashtra"],
+  "karnataka": ["ka", "karnataka"],
+  "rajasthan": ["rj", "rajasthan"],
+  "bihar": ["bihar", "br"],
+  "gujarat": ["gj", "gujarat"],
+  "punjab": ["pb", "punjab"],
+  "haryana": ["hr", "haryana"],
+  "jharkhand": ["jh", "jharkhand"],
+  "odisha": ["or", "odisha", "orissa"],
+  "kerala": ["kl", "kerala"],
+  "telangana": ["ts", "telangana"],
+};
+
 /**
- * Check if user's state matches scheme's applicable states
+ * Check if user's state matches scheme's applicable states (with alias support)
  */
 function checkStateMatch(userState: string, schemeStates: string[]): boolean {
-  return schemeStates.includes(userState) || schemeStates.includes("All");
+  if (schemeStates.includes("All")) return true;
+
+  const userLower = userState.toLowerCase().trim();
+
+  // Direct match
+  if (schemeStates.some(s => s.toLowerCase() === userLower)) return true;
+
+  // Alias match
+  for (const [, aliases] of Object.entries(STATE_ALIASES)) {
+    const userInGroup = aliases.includes(userLower);
+    if (userInGroup) {
+      return schemeStates.some(s => aliases.includes(s.toLowerCase()));
+    }
+  }
+
+  return false;
 }
 
 /**
@@ -64,9 +135,7 @@ function checkMaritalStatusMatch(userStatus: string, schemeStatus: "married" | "
  * Check if user's land ownership matches scheme requirements
  */
 function checkLandOwnershipMatch(userLandOwnership: boolean, schemeLandOwnership: boolean | null): boolean {
-  if (schemeLandOwnership === null) {
-    return true; // Not applicable, so always pass
-  }
+  if (schemeLandOwnership === null) return true; // Not applicable
   return schemeLandOwnership === userLandOwnership;
 }
 
@@ -74,97 +143,86 @@ function checkLandOwnershipMatch(userLandOwnership: boolean, schemeLandOwnership
  * Check hard disqualification rules - if any fail, return true (disqualified)
  */
 function isDisqualified(user: UserProfile, scheme: Scheme): boolean {
-  // Income check - user income must be <= scheme limit
-  if (user.income > scheme.eligibility.incomeLimit) {
+  // Income check
+  if (user.income > scheme.eligibility.incomeLimit) return true;
+
+  // Age check — only disqualify if age is known (> 0)
+  if (user.age > 0 && (user.age < scheme.eligibility.ageRange.min || user.age > scheme.eligibility.ageRange.max)) {
     return true;
   }
 
-  // Age check - user age must be within range
-  if (user.age < scheme.eligibility.ageRange.min || user.age > scheme.eligibility.ageRange.max) {
-    return true;
-  }
+  // Gender check — hard disqualification
+  if (!checkGenderMatch(user.gender, scheme.eligibility.gender)) return true;
 
-  // Category check - user category must be included
-  if (!checkCategoryMatch(user.category, scheme.eligibility.category)) {
-    return true;
-  }
+  // Category check
+  if (!checkCategoryMatch(user.category, scheme.eligibility.category)) return true;
 
-  // Occupation check - user occupation MUST match (unless scheme allows "any")
-  if (!checkOccupationMatch(user.occupation, scheme.eligibility.occupation)) {
-    return true;
-  }
   return false;
 }
 
 /**
- * Calculate matching score for a user against a scheme */
+ * Calculate matching score for a user against a scheme
+ */
 function calculateScore(user: UserProfile, scheme: Scheme): number {
-  // Check hard disqualifications first
-  if (isDisqualified(user, scheme)) {
-    return 0;
-  }
+  if (isDisqualified(user, scheme)) return 0;
 
   let score = 0;
 
   // Occupation match (+3)
-  if (checkOccupationMatch(user.occupation, scheme.eligibility.occupation)) {
-    score += 3;
-  }
+  if (checkOccupationMatch(user.occupation, scheme.eligibility.occupation)) score += 3;
 
-  // Income within limit (+3) - already checked in disqualification, but add score
+  // Income within limit (+3) — graduated scoring
   if (user.income <= scheme.eligibility.incomeLimit) {
-    score += 3;
+    const ratio = user.income / scheme.eligibility.incomeLimit;
+    score += ratio < 0.5 ? 3 : ratio < 0.8 ? 2 : 1; // Better match for lower income
   }
 
-  // Age within range (+2) - already checked in disqualification, but add score
-  if (user.age >= scheme.eligibility.ageRange.min && user.age <= scheme.eligibility.ageRange.max) {
-    score += 2;
-  }
+  // Age within range (+2)
+  if (user.age >= scheme.eligibility.ageRange.min && user.age <= scheme.eligibility.ageRange.max) score += 2;
 
-  // Category match (+2) - already checked in disqualification, but add score
-  if (checkCategoryMatch(user.category, scheme.eligibility.category)) {
-    score += 2;
-  }
+  // Category match (+2)
+  if (checkCategoryMatch(user.category, scheme.eligibility.category)) score += 2;
 
   // State match (+2)
-  if (checkStateMatch(user.state, scheme.eligibility.state)) {
-    score += 2;
-  }
+  if (checkStateMatch(user.state, scheme.eligibility.state)) score += 2;
 
   // Gender match (+1)
-  if (checkGenderMatch(user.gender, scheme.eligibility.gender)) {
-    score += 1;
-  }
+  if (checkGenderMatch(user.gender, scheme.eligibility.gender)) score += 1;
 
   // Marital status match (+1)
-  if (checkMaritalStatusMatch(user.maritalStatus, scheme.eligibility.maritalStatus)) {
-    score += 1;
-  }
+  if (checkMaritalStatusMatch(user.maritalStatus, scheme.eligibility.maritalStatus)) score += 1;
 
   // Land ownership match (+1)
-  if (checkLandOwnershipMatch(user.landOwnership, scheme.eligibility.landOwnership)) {
-    score += 1;
-  }
+  if (checkLandOwnershipMatch(user.landOwnership, scheme.eligibility.landOwnership)) score += 1;
 
   // Keyword relevance match (+5 max) based on unstructured data
   const searchString = `${scheme.name} ${scheme.description || ""} ${scheme.benefits}`.toLowerCase();
-  
-  if (user.occupation && user.occupation !== 'any') {
-    if (searchString.includes(user.occupation.toLowerCase())) {
+
+  if (user.occupation && user.occupation !== "any") {
+    // Also check synonyms in text
+    const userOccLower = user.occupation.toLowerCase();
+    const synonymGroup = Object.values(OCCUPATION_SYNONYMS).find(group =>
+      group.some(s => userOccLower.includes(s) || s.includes(userOccLower))
+    );
+    if (synonymGroup) {
+      if (synonymGroup.some(s => searchString.includes(s))) score += 2;
+    } else if (searchString.includes(userOccLower)) {
       score += 2;
     }
   }
-  
-  if (user.state && user.state !== 'All') {
-    if (searchString.includes(user.state.toLowerCase())) {
-      score += 2;
+
+  if (user.state && user.state !== "All") {
+    const userStateLower = user.state.toLowerCase();
+    if (searchString.includes(userStateLower)) score += 2;
+    else {
+      // Check aliases
+      const aliases = Object.values(STATE_ALIASES).find(a => a.includes(userStateLower));
+      if (aliases?.some(a => searchString.includes(a))) score += 2;
     }
   }
-  
-  if (user.category && user.category !== 'All') {
-    if (searchString.includes(user.category.toLowerCase())) {
-      score += 1;
-    }
+
+  if (user.category && user.category !== "All") {
+    if (searchString.includes(user.category.toLowerCase())) score += 1;
   }
 
   return score;
@@ -182,14 +240,16 @@ export function matchSchemes(user: UserProfile, schemes: Scheme[]): MatchResult 
     tags: generateTags(scheme),
     ...scheme,
     score: calculateScore(user, scheme),
-    isFallback: false, // Will be updated based on threshold logic
+    isFallback: false,
   }));
 
   // Filter out disqualified schemes (score = 0)
   const eligibleSchemes = scoredSchemes.filter((scheme) => scheme.score > 0);
 
-  // Sort by score descending
-  const sortedSchemes = eligibleSchemes.sort((a, b) => b.score - a.score);
+  // Sort by score descending, then by estimatedBenefit as tiebreaker
+  const sortedSchemes = eligibleSchemes.sort((a, b) =>
+    b.score - a.score || b.estimatedBenefit - a.estimatedBenefit
+  );
 
   // Filter schemes that meet the recommendation threshold
   const recommendedSchemes = sortedSchemes.filter((scheme) => scheme.score >= RECOMMENDATION_THRESHOLD);
@@ -198,19 +258,17 @@ export function matchSchemes(user: UserProfile, schemes: Scheme[]): MatchResult 
   let recommendedCount: number;
 
   if (recommendedSchemes.length > 0) {
-    // Use only recommended schemes
-    finalSchemes = recommendedSchemes.slice(0, 5); // Take top 5
+    finalSchemes = recommendedSchemes.slice(0, 8); // Allow up to 8 matches
     recommendedCount = finalSchemes.length;
+  } else if (sortedSchemes.length > 0) {
+    // Fallback: return top 3 highest scored
+    finalSchemes = sortedSchemes.slice(0, 3).map(s => ({ ...s, isFallback: true }));
+    recommendedCount = 0;
   } else {
-    // Fallback: return highest scored scheme
-    finalSchemes = sortedSchemes.length > 0 ? [sortedSchemes[0]] : [];
-    if (finalSchemes.length > 0) {
-      finalSchemes[0].isFallback = true;
-    }
+    finalSchemes = [];
     recommendedCount = 0;
   }
 
-  // Calculate total estimated benefit
   const totalEstimatedBenefit = finalSchemes.reduce(
     (total, scheme) => total + scheme.estimatedBenefit,
     0

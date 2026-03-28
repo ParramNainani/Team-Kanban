@@ -23,7 +23,19 @@ export type GapGraphProps = {
 function formatValue(value: number, unit: "currency" | "people" | "schemes" = "currency") {
   const numValue = value ?? 0;
   if (unit === "people" || unit === "schemes") {
+    if (numValue >= 10000000) return `${(numValue / 10000000).toFixed(1)} Cr`;
+    if (numValue >= 100000) return `${(numValue / 100000).toFixed(1)} L`;
     return `${numValue.toLocaleString("en-IN")}`;
+  }
+  // For large currency values, use Indian scale formatting
+  if (numValue >= 1000000000000) {
+    return `₹${(numValue / 1000000000000).toFixed(1)}L Cr`;
+  }
+  if (numValue >= 10000000) {
+    return `₹${(numValue / 10000000).toFixed(0)} Cr`;
+  }
+  if (numValue >= 100000) {
+    return `₹${(numValue / 100000).toFixed(1)}L`;
   }
   return `₹${numValue.toLocaleString("en-IN")}`;
 }
@@ -137,14 +149,14 @@ export default function GapGraph({ totalEligible, totalReceived, unit = "currenc
           <h3 className="text-lg font-semibold text-gray-100 mb-1">{unit === "currency" ? "Benefit gap analysis" : unit === "people" ? "Beneficiary reach analysis" : "Discoverable Programs vs Claimed"}</h3>
         </div>
         <div className="flex items-center gap-2 mt-2 sm:mt-0">
-          <span className="rounded-full bg-[#222]/50 border border-[#E15A15]/20 text-[#E15A15] text-xs font-semibold px-3 py-1 uppercase tracking-wider">Gap: {formatCurrency(missing)}{unit === "currency" ? "/mo" : ""}</span>
+          <span className="rounded-full bg-[#222]/50 border border-[#E15A15]/20 text-[#E15A15] text-xs font-semibold px-3 py-1 uppercase tracking-wider">Gap: {formatCurrency(missing)}</span>
         </div>
       </div>
       <div className="flex flex-col md:flex-row gap-6 items-stretch">
         {/* Bar Chart */}
         <div className="flex-1 min-w-0 rounded-xl border border-[#333]/50 bg-[#1a1a1a]/80 p-4 shadow-sm backdrop-blur flex flex-col">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs uppercase tracking-wider text-[#A78F62] font-semibold">Monthly comparison</span>
+            <span className="text-xs uppercase tracking-wider text-[#A78F62] font-semibold">{unit === "currency" ? "Annual budget comparison" : "Coverage comparison"}</span>
             <span className="rounded px-2 py-0.5 text-[10px] bg-[#222]/50 border border-[#333]/50 text-gray-400">Bar chart</span>
           </div>
           <div className="flex-1 w-full min-h-[200px] mt-4">
