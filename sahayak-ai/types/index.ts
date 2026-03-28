@@ -27,6 +27,14 @@ export interface UserProfile {
   landOwnership: boolean;
 }
 
+export interface ConversationResponse {
+  reply: string;
+  isComplete: boolean;
+  profile?: Partial<UserProfile>;
+  schemes?: ScoredScheme[];
+  totalBenefit?: number;
+}
+
 export interface ScoredScheme extends Scheme {
   score: number;
   isFallback: boolean;

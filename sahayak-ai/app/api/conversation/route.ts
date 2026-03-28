@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { situationEngine } from "../../../lib/ai/situation-engine";
-import { matchSchemes } from "../../../lib/ai/gap-detector"; // Assuming this is exported from gap-detector.ts
-import { ConversationResponse } from "../../../types";
+import { getRecommendedSchemes } from "../../../services/schemeService";
+import { ConversationResponse, UserProfile } from "../../../types";
 
 export async function POST(request: Request) {
   try {
@@ -20,15 +20,28 @@ export async function POST(request: Request) {
       return NextResponse.json(response);
     }
 
+    // Since it is complete, cast the Partial profile to full UserProfile with defaults if needed
+    const fullProfile: UserProfile = {
+      age: profile.age || 0,
+      gender: profile.gender || "any" as any,
+      occupation: profile.occupation || "any",
+      income: profile.income || 0,
+      category: profile.category || "All",
+      state: profile.state || "All",
+      maritalStatus: profile.maritalStatus || "any",
+      landOwnership: profile.landOwnership || false
+    };
+
     // If complete, match the schemes strictly against the profile
-    const schemes = matchSchemes(profile);
+    const matchResult = getRecommendedSchemes(fullProfile);
 
     // Calculate total benefit
-    const totalBenefit = schemes.reduce((sum, scheme) => sum + scheme.estimatedBenefit, 0);
+    const totalBenefit = matchResult.totalEstimatedBenefit;
+    const schemes = matchResult.schemes;
 
     // Auto-generate a markdown table for the reply
     let formattedReply = reply;
-    if (schemes.length > 0) {
+    if (schemes && schemes.length > 0) {
       formattedReply += "\n\nHere are the schemes you are eligible for:\n\n";
       formattedReply += "| Scheme Name | Estimated Benefit | Key Benefits |\n";
       formattedReply += "| --- | --- | --- |\n";
@@ -50,6 +63,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(response);
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
