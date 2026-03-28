@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 /**
- * Custom hook for Web Speech API (recognition) + Google Translate TTS proxy (synthesis).
+ * Custom hook for Web Speech API (recognition + synthesis).
  * 
- * For English/Hindi: uses browser's native speechSynthesis (fast, no network).
- * For all other languages: uses our /api/tts proxy that fetches from Google Translate
- * (same pronunciation quality as Google Translate's listen button).
+ * Strategy:
+ * - Always try native speechSynthesis first (Chrome has great voices for most languages).
+ * - Just set utterance.lang = BCP-47 code and let Chrome pick the right voice automatically.
+ * - If native speech fires an error, fall back to Google Translate TTS via /api/tts proxy.
  */
 
-// BCP-47 → Google Translate language code mapping
+// BCP-47 → Google Translate language code mapping (fallback only)
 const GTTS_LANG_MAP: Record<string, string> = {
   "en-IN": "en", "hi-IN": "hi", "bn-IN": "bn", "ta-IN": "ta",
   "te-IN": "te", "gu-IN": "gu", "kn-IN": "kn", "ml-IN": "ml",
@@ -43,11 +44,9 @@ export function useWebSpeech(onText: (text: string) => void) {
     const recognition = new SpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = false;
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recognition.onresult = (event: any) => {
-      const text = event.results[0][0].transcript;
-      onTextRef.current(text);
+      onTextRef.current(event.results[0][0].transcript);
       setIsListening(false);
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,7 +56,6 @@ export function useWebSpeech(onText: (text: string) => void) {
     };
     recognition.onend = () => setIsListening(false);
     recognitionRef.current = recognition;
-
     return () => { try { recognition.stop(); } catch { /* */ } };
   }, []);
 
@@ -83,57 +81,11 @@ export function useWebSpeech(onText: (text: string) => void) {
     }
   }, []);
 
-  // ─── Check if browser has a usable native voice ───
-  const hasNativeVoice = useCallback((langCode: string): boolean => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window)) return false;
-    const voices = window.speechSynthesis.getVoices();
-    const prefix = langCode.toLowerCase().split("-")[0];
-    return voices.some(v => v.lang.toLowerCase().startsWith(prefix));
-  }, []);
-
-  // ─── Native browser TTS (English, Hindi) ───
-  const speakNative = useCallback((text: string, langCode: string) => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    const voices = window.speechSynthesis.getVoices();
-    const targetPrefix = langCode.toLowerCase().split("-")[0];
-
-    // Find best voice: prefer Google > exact match > prefix match
-    const googleMatch = voices.find(v =>
-      v.lang.toLowerCase().startsWith(targetPrefix) && v.name.toLowerCase().includes("google")
-    );
-    const exactMatch = voices.find(v => v.lang.toLowerCase() === langCode.toLowerCase());
-    const prefixMatch = voices.find(v => v.lang.toLowerCase().startsWith(targetPrefix));
-
-    const bestVoice = googleMatch || exactMatch || prefixMatch;
-    if (bestVoice) {
-      utterance.voice = bestVoice;
-      utterance.lang = bestVoice.lang;
-    } else {
-      utterance.lang = langCode;
-    }
-
-    if (targetPrefix !== "en") utterance.rate = 0.9;
-
-    utterance.onstart = () => setIsSpeaking(true);
-    utterance.onerror = () => setIsSpeaking(false);
-
-    // Chrome 15s pause fix
-    const timer = setInterval(() => {
-      if (window.speechSynthesis.speaking) window.speechSynthesis.resume();
-      else clearInterval(timer);
-    }, 10000);
-
-    utterance.onend = () => { clearInterval(timer); setIsSpeaking(false); };
-    window.speechSynthesis.speak(utterance);
-  }, []);
-
-  // ─── Split text into TTS-friendly chunks (~180 chars max) ───
+  // ─── Google TTS Proxy Fallback (chunked) ───
   const splitIntoChunks = (text: string, maxLen: number = 180): string[] => {
-    // Split on sentence boundaries (including Hindi/Bengali danda ।)
     const sentences = text.match(/[^.!?।\n]+[.!?।\n]?/g) || [text];
     const chunks: string[] = [];
     let current = "";
-
     for (const sentence of sentences) {
       const trimmed = sentence.trim();
       if (!trimmed) continue;
@@ -148,42 +100,26 @@ export function useWebSpeech(onText: (text: string) => void) {
     return chunks;
   };
 
-  // ─── Play audio chunks sequentially via our /api/tts proxy ───
   const playNextChunk = useCallback(() => {
     if (audioQueueRef.current.length === 0) {
       setIsSpeaking(false);
       return;
     }
-
     const url = audioQueueRef.current.shift()!;
     const audio = new Audio(url);
     audioRef.current = audio;
-
     audio.onended = () => playNextChunk();
-    audio.onerror = (err) => {
-      console.error("TTS audio chunk failed:", err);
-      playNextChunk(); // skip failed chunk
-    };
-
-    audio.play().catch(err => {
-      console.error("TTS play failed:", err);
-      setIsSpeaking(false);
-    });
+    audio.onerror = () => playNextChunk(); // skip failed chunk
+    audio.play().catch(() => setIsSpeaking(false));
   }, []);
 
-  const speakViaTTSProxy = useCallback((text: string, langCode: string) => {
+  const speakViaProxy = useCallback((text: string, langCode: string) => {
     const gttsLang = GTTS_LANG_MAP[langCode] || langCode.split("-")[0];
     const chunks = splitIntoChunks(text);
-
-    console.log(`TTS: Using Google Translate voice for "${gttsLang}" (${chunks.length} chunks)`);
-
-    // Build URLs through our own /api/tts proxy (bypasses CORS)
-    const urls = chunks.map(chunk => {
-      const encoded = encodeURIComponent(chunk);
-      return `/api/tts?text=${encoded}&lang=${gttsLang}`;
-    });
-
-    audioQueueRef.current = urls;
+    console.log(`TTS fallback: Google Translate for "${gttsLang}" (${chunks.length} chunks)`);
+    audioQueueRef.current = chunks.map(chunk =>
+      `/api/tts?text=${encodeURIComponent(chunk)}&lang=${gttsLang}`
+    );
     setIsSpeaking(true);
     playNextChunk();
   }, [playNextChunk]);
@@ -192,43 +128,56 @@ export function useWebSpeech(onText: (text: string) => void) {
   const speak = useCallback((text: string, lang?: string) => {
     if (typeof window === "undefined") return;
 
-    // Stop any ongoing speech
+    // Cancel any ongoing speech
     if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
     audioQueueRef.current = [];
 
-    // Clean markdown for TTS
+    // Clean markdown
     const cleanText = text
       .replace(/[#*_~`>]/g, "")
       .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
       .replace(/\n{2,}/g, ". ")
       .replace(/\s{2,}/g, " ")
       .trim();
-
     if (!cleanText) return;
 
     const langCode = lang || "en-IN";
+    const langPrefix = langCode.split("-")[0];
 
-    // Use native voice for English/Hindi (fast), Google TTS proxy for everything else
-    if (hasNativeVoice(langCode)) {
-      console.log(`TTS: Using native browser voice for ${langCode}`);
-      speakNative(cleanText, langCode);
-    } else {
-      speakViaTTSProxy(cleanText, langCode);
+    // ─── Native speechSynthesis ONLY for English and Hindi ───
+    // These are the only languages where browser voices sound correct.
+    // All other languages (Bengali, Tamil, Telugu, etc.) use Google TTS proxy.
+    if ((langPrefix === "en" || langPrefix === "hi") && "speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = langCode;
+
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onerror = (e) => {
+        console.warn("Native TTS failed, falling back to proxy:", e.error);
+        speakViaProxy(cleanText, langCode);
+      };
+
+      // Chrome 15s pause fix
+      const timer = setInterval(() => {
+        if (window.speechSynthesis.speaking) window.speechSynthesis.resume();
+        else clearInterval(timer);
+      }, 10000);
+      utterance.onend = () => { clearInterval(timer); setIsSpeaking(false); };
+
+      window.speechSynthesis.speak(utterance);
+      return;
     }
-  }, [hasNativeVoice, speakNative, speakViaTTSProxy]);
+
+    // ─── All other languages → Google Translate TTS proxy ───
+    speakViaProxy(cleanText, langCode);
+  }, [speakViaProxy]);
 
   const stopSpeaking = useCallback(() => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.cancel();
     }
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current = null;
-    }
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
     audioQueueRef.current = [];
     setIsSpeaking(false);
   }, []);
