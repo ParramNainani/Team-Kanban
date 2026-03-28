@@ -3,6 +3,9 @@ import { situationEngine } from "../../../lib/ai/situation-engine";
 import { getRecommendedSchemes } from "../../../services/schemeService";
 import { ConversationResponse, UserProfile } from "../../../types";
 
+// Vercel serverless config — Gemini API can take 10-30s
+export const maxDuration = 30;
+
 export async function POST(request: Request) {
   try {
     const { messages, language, languageCode } = await request.json();

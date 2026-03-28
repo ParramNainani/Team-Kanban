@@ -8,7 +8,14 @@ import { NextResponse } from "next/server";
  * accessing Google Translate's audio endpoint.
  * 
  * Usage: GET /api/tts?text=Hello&lang=bn
+ * 
+ * Vercel-compatible: Uses Node.js runtime with appropriate timeout.
  */
+
+// Vercel serverless function config
+export const runtime = "nodejs";
+export const maxDuration = 10; // seconds (Vercel hobby plan limit)
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const text = searchParams.get("text");
@@ -27,12 +34,18 @@ export async function GET(request: Request) {
     const encoded = encodeURIComponent(text);
     const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encoded}&tl=${lang}&client=tw-ob`;
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000); // 8s timeout
+
     const response = await fetch(url, {
+      signal: controller.signal,
       headers: {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Referer": "https://translate.google.com/",
       },
     });
+
+    clearTimeout(timeout);
 
     if (!response.ok) {
       console.error("Google TTS error:", response.status, response.statusText);
@@ -45,10 +58,14 @@ export async function GET(request: Request) {
       status: 200,
       headers: {
         "Content-Type": "audio/mpeg",
-        "Cache-Control": "public, max-age=86400", // Cache for 24h
+        "Cache-Control": "public, s-maxage=86400, max-age=86400", // Vercel CDN + browser cache 24h
+        "Access-Control-Allow-Origin": "*",
       },
     });
   } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") {
+      return NextResponse.json({ error: "TTS request timed out" }, { status: 504 });
+    }
     console.error("TTS proxy error:", error);
     return NextResponse.json({ error: "TTS proxy failed" }, { status: 500 });
   }
