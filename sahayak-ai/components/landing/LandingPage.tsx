@@ -28,6 +28,7 @@ import { Footer } from "./Footer";
 import { HeroSection } from "./HeroSection";
 import { HowItWorksSection } from "./HowItWorksSection";
 import GapGraph from "@/components/GapGraph";
+import { AnalyticsSection } from "./AnalyticsSection";
 import {
   LandingProvider,
   useLanding,
@@ -180,6 +181,7 @@ function PageInner() {
       <Navbar />
       <main className="relative z-10">
         <HeroSection />
+        <AnalyticsSection />
 
         <section
           id="use-cases"
@@ -356,6 +358,8 @@ function PageInner() {
           </div>
         </section>
 
+        <AnalyticsSection />
+
         <section id="faq" className="scroll-mt-28 py-12 lg:py-12">
           <div className="mx-auto max-w-7xl px-4 lg:px-8">
             <SectionHeading
@@ -383,3 +387,4 @@ export function LandingPage() {
     </LandingProvider>
   );
 }
+
