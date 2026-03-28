@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server";
-import { matchSchemes } from "../../../lib/ai/gap-detector"; // Assuming this is exported from gap-detector.ts
+import { matchSchemes } from "../../../lib/ai/gap-detector"; 
+import { UserProfile } from "../../../types";
 
 export async function POST(request: Request) {
   try {
-    const { keywords } = await request.json();
+    const profile: UserProfile = await request.json();
 
-    if (!Array.isArray(keywords)) {
-      return NextResponse.json({ error: "Keywords array is required" }, { status: 400 });
+    if (!profile || !Array.isArray(profile.keywords)) {
+      return NextResponse.json({ error: "Valid UserProfile object with keywords array is required" }, { status: 400 });
     }
 
-    // Process the keywords against the local json
-    const schemes = matchSchemes(keywords);
+    // Process the strict profile against the constraints
+    const schemes = matchSchemes(profile);
 
     // Calculate sum of benefits
     const totalBenefit = schemes.reduce((sum, scheme) => sum + scheme.estimatedBenefit, 0);

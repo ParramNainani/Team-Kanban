@@ -2,7 +2,10 @@
   {
     "id": "1",
     "name": "PM Kisan Samman Nidhi",
-    "tags": ["farmer", "low income"],
+    "tags": ["farmer", "agriculture"],
+    "requiredCriteria": {
+      "location": "rural"
+    },
     "benefits": "Financial benefit of Rs 6000 per year",
     "documents": ["Aadhaar", "Land Records"],
     "estimatedBenefit": 6000
@@ -10,25 +13,53 @@
   {
     "id": "2",
     "name": "National Family Benefit Scheme",
-    "tags": ["widow", "low income"],
+    "tags": ["widow", "death", "family"],
+    "requiredCriteria": {
+      "location": "any",
+      "maxIncome": 25000,
+      "minAge": 18,
+      "maxAge": 59
+    },
     "benefits": "One time assistance of Rs 20000",
-    "documents": ["Death Certificate", "Income Certificate"],
+    "documents": ["Death Certificate", "Income Certificate", "Age Proof"],
     "estimatedBenefit": 20000
   },
   {
     "id": "3",
     "name": "Post Matric Scholarship",
-    "tags": ["student", "low income"],
+    "tags": ["student", "education"],
+    "requiredCriteria": {
+      "location": "any",
+      "maxIncome": 250000
+    },
     "benefits": "Covers tuition fees and maintenance allowance",
     "documents": ["Income Certificate", "Marksheet"],
     "estimatedBenefit": 15000
   },
   {
     "id": "4",
-    "name": "Unemployment Allowance",
-    "tags": ["unemployed"],
+    "name": "Urban Unemployment Allowance",
+    "tags": ["unemployed", "youth"],
+    "requiredCriteria": {
+      "location": "urban",
+      "minAge": 21,
+      "maxAge": 35
+    },
     "benefits": "Monthly allowance for educated unemployed youth",
     "documents": ["Employment Exchange Card", "Education Proof"],
     "estimatedBenefit": 12000
+  },
+  {
+    "id": "5",
+    "name": "Indira Gandhi National Old Age Pension",
+    "tags": ["elderly", "senior citizen"],
+    "requiredCriteria": {
+      "location": "any",
+      "maxIncome": 50000,
+      "minAge": 60
+    },
+    "benefits": "Monthly pension of Rs 200 to Rs 500 depending on age",
+    "documents": ["BPL Card", "Age Proof", "Aadhaar"],
+    "estimatedBenefit": 6000
   }
 ]

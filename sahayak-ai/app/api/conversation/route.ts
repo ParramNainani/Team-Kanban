@@ -12,16 +12,16 @@ export async function POST(request: Request) {
     }
 
     // Call the engine to process the message
-    const { reply, isComplete, keywords } = await situationEngine(message);
+    const { reply, isComplete, profile } = await situationEngine(message);
 
     // If we need more info, return the reply only
     if (!isComplete) {
-      const response: ConversationResponse = { reply, isComplete, keywords };
+      const response: ConversationResponse = { reply, isComplete, profile };
       return NextResponse.json(response);
     }
 
-    // If complete, match the schemes
-    const schemes = matchSchemes(keywords);
+    // If complete, match the schemes strictly against the profile
+    const schemes = matchSchemes(profile);
 
     // Calculate total benefit
     const totalBenefit = schemes.reduce((sum, scheme) => sum + scheme.estimatedBenefit, 0);
@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     const response: ConversationResponse = {
       reply: formattedReply,
       isComplete,
-      keywords,
+      profile,
       schemes,
       totalBenefit,
     };
