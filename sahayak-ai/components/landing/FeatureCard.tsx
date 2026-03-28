@@ -38,7 +38,7 @@ export function FeatureCard({
       onClick={() => onSelect(id)}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
+      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           onSelect(id);

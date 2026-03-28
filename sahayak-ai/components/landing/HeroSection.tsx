@@ -11,6 +11,7 @@ import { AssistantPreview } from "./AssistantPreview";
 import { GlowButton, primaryCtaClassName } from "./GlowButton";
 import { useLanding } from "./LandingInteractionContext";
 import { useReducedMotion } from "./useReducedMotion";
+import { useAuth } from "@/components/AuthProvider";
 import { fadeUp, staggerContainer } from "./variants";
 
 const HeroScene = dynamic(() => import("./HeroScene"), {
@@ -29,6 +30,7 @@ function scrollToId(id: string) {
 
 export function HeroSection() {
   const { persona } = useLanding();
+  const { user, signInWithGoogle } = useAuth();
   const reduced = useReducedMotion();
   const bgParallaxRef = useRef<HTMLDivElement>(null);
 
@@ -98,10 +100,17 @@ export function HeroSection() {
             variants={fadeUp}
             className="mt-10 flex flex-wrap gap-4"
           >
-            <Link href="/chat" className={primaryCtaClassName}>
-              Get Started Free
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
+            {user ? (
+              <Link href="/chat" className={primaryCtaClassName}>
+                Go to Chat
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            ) : (
+              <button onClick={signInWithGoogle} className={primaryCtaClassName}>
+                Sign In / Sign Up
+                <ArrowRight className="h-4 w-4" aria-hidden />
+              </button>
+            )}
             <GlowButton
               variant="secondary"
               onClick={() => scrollToId("how-it-works")}

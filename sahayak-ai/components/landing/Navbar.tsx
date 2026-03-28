@@ -9,6 +9,7 @@ import { GlowButton, primaryCtaClassName } from "./GlowButton";
 import { MobileMenu } from "./MobileMenu";
 import { fadeUp } from "./variants";
 import { useReducedMotion } from "./useReducedMotion";
+import { useAuth } from "@/components/AuthProvider";
 
 const NAV = [
   { id: "features", label: "Features" },
@@ -37,6 +38,7 @@ export function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [active, setActive] = useState<string>("hero");
+  const { user, signInWithGoogle, signOut } = useAuth();
 
   useLayoutEffect(() => {
     const nav = navRef.current;
@@ -138,9 +140,20 @@ export function Navbar() {
             >
               Try Assistant
             </GlowButton>
-            <Link href="/chat" className={primaryCtaClassName}>
-              Try Chat Now
-            </Link>
+            {user ? (
+              <>
+                <Link href="/chat" className={primaryCtaClassName}>
+                  Go to Chat
+                </Link>
+                <button onClick={signOut} className="rounded-lg px-3 py-2 text-sm font-medium text-[#635E5C] hover:text-slate-900 transition">
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <button onClick={signInWithGoogle} className={primaryCtaClassName}>
+                Sign In / Sign Up
+              </button>
+            )}
           </div>
 
           <button
