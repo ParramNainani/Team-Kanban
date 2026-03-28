@@ -1,3 +1,3 @@
 export default function GapReportPage() {
-  return null;
+  return <div>Gap Report</div>;
 }

@@ -1,26 +1,73 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Bot, User, Send, MessageSquare, Plus, Menu, Mic, MicOff, Loader2, Volume2 } from "lucide-react";
+import { Bot, User, Send, MessageSquare, Plus, Menu, Mic, MicOff, Loader2, Volume2, LogIn, LogOut, Paperclip, X } from "lucide-react";
 import type { Message } from "@/types";
 import ChatBackground from "@/components/ChatBackground";
 import { useWebSpeech } from "@/hooks/useWebSpeech";
 import { db } from "@/lib/firebase";
 import { collection, doc, setDoc, onSnapshot, query, orderBy, serverTimestamp, getDoc } from "firebase/firestore";
+import { useAuth } from "@/components/AuthProvider";
 
 const WELCOME: Message = {
   role: "assistant",
   content: "Hi. I am Sahayak AI. How can I assist you with government schemes today?",
 };
 
+const SUPPORTED_LANGUAGES = [
+  { value: "en-IN", label: "EN" },
+  { value: "hi-IN", label: "HI" },
+  { value: "bn-IN", label: "BN" },
+  { value: "af-ZA", label: "AF" },
+  { value: "ar-SA", label: "AR" },
+  { value: "bg-BG", label: "BG" },
+  { value: "cs-CZ", label: "CS" },
+  { value: "da-DK", label: "DA" },
+  { value: "de-DE", label: "DE" },
+  { value: "el-GR", label: "EL" },
+  { value: "es-ES", label: "ES" },
+  { value: "fi-FI", label: "FI" },
+  { value: "fr-FR", label: "FR" },
+  { value: "gu-IN", label: "GU" },
+  { value: "he-IL", label: "HE" },
+  { value: "hr-HR", label: "HR" },
+  { value: "hu-HU", label: "HU" },
+  { value: "id-ID", label: "ID" },
+  { value: "it-IT", label: "IT" },
+  { value: "ja-JP", label: "JA" },
+  { value: "kn-IN", label: "KN" },
+  { value: "ko-KR", label: "KO" },
+  { value: "ml-IN", label: "ML" },
+  { value: "mr-IN", label: "MR" },
+  { value: "nl-NL", label: "NL" },
+  { value: "no-NO", label: "NO" },
+  { value: "pa-IN", label: "PA" },
+  { value: "pl-PL", label: "PL" },
+  { value: "pt-BR", label: "PT" },
+  { value: "ro-RO", label: "RO" },
+  { value: "ru-RU", label: "RU" },
+  { value: "sv-SE", label: "SV" },
+  { value: "ta-IN", label: "TA" },
+  { value: "te-IN", label: "TE" },
+  { value: "tr-TR", label: "TR" },
+  { value: "uk-UA", label: "UK" },
+  { value: "ur-IN", label: "UR" },
+  { value: "vi-VN", label: "VI" },
+  { value: "zh-CN", label: "ZH" },
+];
+
 export default function ChatAIStudioLayout() {
   const [input, setInput] = useState("");
+  const [attachment, setAttachment] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [chatId, setChatId] = useState<string | null>(null);
   const [chats, setChats] = useState<{ id: string; title: string; timestamp: unknown }[]>([]);
   const [speechLang, setSpeechLang] = useState("en-IN");
+  const [showLangDropdown, setShowLangDropdown] = useState(false);
   const bottomRef = useRef<HTMLDivElement | null>(null);
+  const { user, signInWithGoogle, signOut } = useAuth();
 
   const { isListening, isSpeaking, startListening, stopListening, speak, stopSpeaking } = useWebSpeech((text) => {
     setInput(text);
@@ -28,8 +75,9 @@ export default function ChatAIStudioLayout() {
 
   // Load chat history sidebar
   useEffect(() => {
+    if (!user) { setChats([]); return; }
     try {
-      const q = query(collection(db, "chats"), orderBy("timestamp", "desc"));     
+      const q = query(collection(db, "users", user.uid, "chats"), orderBy("timestamp", "desc"));     
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const chatList = snapshot.docs.map(doc => ({
           id: doc.id,
@@ -44,16 +92,17 @@ export default function ChatAIStudioLayout() {
       return () => unsubscribe();
     } catch (e) {
       console.warn("Firestore initialization error. History disabled.", e);
-    }  }, []);
+    }  }, [user]);
   // Scroll to bottom
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
   const loadChat = async (id: string) => {
+    if (!user) return;
     try {
       setLoading(true);
-      const docRef = doc(db, "chats", id);
+      const docRef = doc(db, "users", user.uid, "chats", id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
@@ -73,20 +122,38 @@ export default function ChatAIStudioLayout() {
     setInput("");
   };
 
+  async function uploadFileToCloudinary(file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "fcc2f942c1c2cf744139291c6778d7");
+    const res = await fetch("https://api.cloudinary.com/v1_1/du5y3i974/image/upload", { method: "POST", body: formData });
+    if (!res.ok) { console.error(await res.text()); throw new Error("Upload failed"); }
+    return (await res.json()).secure_url;
+  }
+
   async function handleSend() {
     const trimmed = input.trim();
-    if (!trimmed || loading) return;
+    if ((!trimmed && !attachment) || loading) return;
 
     if (isSpeaking) {
       stopSpeaking();
     }
 
-    const userMessage: Message = { role: "user", content: trimmed };
+    setLoading(true);
+    let attachedUrl = "";
+    if (attachment) {
+      try {
+        attachedUrl = await uploadFileToCloudinary(attachment);
+      } catch(e) { console.error(e); setLoading(false); return; }
+    }
+
+    const userMessage: Message = { role: "user", content: trimmed, attachmentUrl: attachedUrl || undefined };
     const nextMessages = [...messages, userMessage];
     
     setMessages(nextMessages);
     setInput("");
-    setLoading(true);
+    setAttachment(null);
+    // setLoading(true); already set
 
     try {
       const res = await fetch("/api/conversation", {
@@ -113,12 +180,13 @@ export default function ChatAIStudioLayout() {
 
       // Auto-save to Firebase (wrapped in a try-catch so it doesn't break the UI if Firestore permissions fail)
       try {
+        if (!user) throw new Error('Not logged in');
         const currentChatId = chatId || Math.random().toString(36).substring(7);
         if (!chatId) {
           setChatId(currentChatId);
         }
 
-        const chatDocRef = doc(db, "chats", currentChatId);
+        const chatDocRef = doc(db, "users", user.uid, "chats", currentChatId);
         await setDoc(chatDocRef, {
           id: currentChatId,
           title: finalMessages.find(m => m.role === 'user')?.content.substring(0, 30) + '...' || "New Chat",
@@ -187,7 +255,18 @@ export default function ChatAIStudioLayout() {
                 Speaking...
               </span>
             )}
-            <span className="bg-[#222]/50 px-2 py-1 rounded text-[#E15A15] font-mono text-[10px] tracking-wide border border-[#E15A15]/20 backdrop-blur-sm">Gemini Flash Voice</span> 
+            <span className="bg-[#222]/50 px-2 py-1 rounded text-[#E15A15] font-mono text-[10px] tracking-wide border border-[#E15A15]/20 backdrop-blur-sm hidden sm:inline-block">Gemini Flash Voice</span>
+            {user ? (
+              <button onClick={signOut} className="flex items-center gap-1 bg-[#222]/50 px-3 py-1.5 rounded text-gray-300 hover:text-white transition-colors border border-[#333]">
+                <LogOut size={12} />
+                <span className="hidden sm:inline">Sign Out</span>
+              </button>
+            ) : (
+              <button onClick={signInWithGoogle} className="flex items-center gap-1 bg-[#E15A15] hover:bg-[#DA1702] px-3 py-1.5 rounded text-white transition-colors">
+                <LogIn size={12} />
+                <span className="hidden sm:inline">Sign In</span>
+              </button>
+            )} 
           </div>
         </header>
 
@@ -201,7 +280,14 @@ export default function ChatAIStudioLayout() {
                 <div className="flex flex-col space-y-2 max-w-2xl">
                   <div className="flex items-start gap-2">
                     <div className={`p-4 rounded-2xl text-sm leading-relaxed shadow-md ${msg.role === 'user' ? 'bg-[#E15A15] text-white rounded-tr-none' : 'bg-[#1a1a1a]/80 backdrop-blur-md text-gray-200 border border-[#333]/80 rounded-tl-none'}`}>
-                      <p className="whitespace-pre-wrap">{msg.content}</p>        
+                      <p className="whitespace-pre-wrap">{msg.content}</p>
+                      {msg.attachmentUrl && (
+                        <div className="mt-3 inline-flex border border-[#333] rounded-lg p-2 bg-[#222]/50 hover:bg-[#333]/50 transition-colors">
+                          <a href={msg.attachmentUrl} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#E15A15] flex items-center gap-2 text-xs">
+                            <Paperclip size={14} /> View File
+                          </a>
+                        </div>
+                      )}        
                     </div>
                     {msg.role === 'assistant' && (
                       <button 
@@ -251,18 +337,42 @@ export default function ChatAIStudioLayout() {
 
           {/* Input Area */}
         <div className="p-4 md:p-6 bg-gradient-to-t from-[#050101] to-transparent relative">
-          <div className="max-w-4xl mx-auto flex items-end space-x-2 bg-[#1a1a1a]/90 backdrop-blur-xl border border-[#333] rounded-3xl pt-2 pb-2 px-3 focus-within:ring-1 ring-[#E15A15]/50 focus-within:border-[#E15A15]/50 transition-all shadow-2xl">
-            <div className="flex items-center space-x-1 mb-0.5">
-              <select
-                value={speechLang}
-                onChange={(e) => setSpeechLang(e.target.value)}
-                className="bg-transparent text-gray-500 hover:text-gray-300 text-xs outline-none cursor-pointer p-1 appearance-none text-center font-medium font-mono"
+          <div className="max-w-4xl mx-auto w-full">
+            {attachment && (
+              <div className="mb-2 inline-flex items-center gap-2 bg-[#222] border border-[#333] px-3 py-1.5 rounded-xl text-sm text-gray-300 ml-2">
+                <Paperclip size={14} className="text-[#E15A15]"/>
+                <span className="truncate max-w-[200px]">{attachment.name}</span>
+                <button onClick={() => setAttachment(null)} className="text-gray-500 hover:text-white"><X size={14}/></button>
+              </div>
+            )}
+            <div className="flex items-end space-x-2 bg-[#1a1a1a]/90 backdrop-blur-xl border border-[#333] rounded-3xl pt-3 pb-3 px-4 focus-within:ring-1 ring-[#E15A15]/50 focus-within:border-[#E15A15]/50 transition-all shadow-2xl">
+            <button onClick={() => fileInputRef.current?.click()} className="p-2 mb-0.5 text-gray-400 hover:text-[#E15A15] transition-colors rounded-full hover:bg-[#2a2a2a]"><Paperclip size={18} /></button><input type="file" ref={fileInputRef} className="hidden" accept="image/*,.pdf" onChange={(e) => setAttachment(e.target.files?.[0] || null)} /><div className="relative flex items-center space-x-1 mb-0.5">
+              <button
+                onClick={() => setShowLangDropdown(!showLangDropdown)}
+                className="flex items-center justify-center p-2 text-xs font-bold font-mono text-gray-400 hover:text-[#E15A15] hover:bg-[#2a2a2a] transition-colors rounded-full relative group"
                 title="Select Voice Language"
               >
-                <option value="en-IN">EN</option>
-                <option value="hi-IN">HI</option>
-                <option value="bn-IN">BN</option>
-              </select>
+                <div className="absolute inset-0 bg-[#E15A15]/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="relative z-10">{SUPPORTED_LANGUAGES.find(l => l.value === speechLang)?.label || "EN"}</span>
+              </button>
+              
+              {showLangDropdown && (
+                <>
+                  <div className="fixed inset-0 z-40" onClick={() => setShowLangDropdown(false)} />
+                  <div className="absolute bottom-full left-0 mb-3 w-40 max-h-64 overflow-y-auto bg-[#1a1a1a] border border-[#333] rounded-2xl shadow-2xl p-1.5 z-50 transform origin-bottom-left custom-scrollbar">
+                    {SUPPORTED_LANGUAGES.map((lang) => (
+                      <button
+                        key={lang.value}
+                        onClick={() => { setSpeechLang(lang.value); setShowLangDropdown(false); }}
+                        className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-xl transition-all ${speechLang === lang.value ? 'bg-[#E15A15]/10 text-[#E15A15] font-semibold' : 'text-gray-400 hover:bg-[#252525] hover:text-gray-200'}`}
+                      >
+                        <span>{lang.label}</span>
+                        <span className="text-[10px] opacity-40">{lang.value.split('-')[0].toUpperCase()}</span>
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
               <button 
                 onClick={isListening ? stopListening : () => startListening(speechLang)}
                 className={`p-2 transition-colors rounded-full ${isListening ? 'bg-red-500/20 text-red-500 animate-pulse' : 'text-gray-400 hover:text-[#E15A15] hover:bg-[#2a2a2a]'}`} 
@@ -272,7 +382,7 @@ export default function ChatAIStudioLayout() {
               </button>
             </div>
             <textarea
-              className="flex-1 max-h-48 min-h-[44px] bg-transparent text-sm resize-none focus:outline-none p-2.5 text-gray-200 placeholder-gray-500"
+                className="flex-1 max-h-48 min-h-[52px] bg-transparent text-sm resize-none focus:outline-none p-2.5 text-gray-200 placeholder-gray-500"
               placeholder="Ask anything or use voice dictation..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -292,7 +402,7 @@ export default function ChatAIStudioLayout() {
               {loading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} className="ml-0.5" />}
             </button>
           </div>
-          <p className="text-center text-[11px] text-gray-500 mt-4 font-medium drop-shadow-sm">
+          </div>`n          <p className="text-center text-[11px] text-gray-500 mt-4 font-medium drop-shadow-sm">
             Sahayak Intelligence can analyze your situation. Global Voice dictate enabled. Responses are generated by AI.
           </p>
         </div>
@@ -300,3 +410,26 @@ export default function ChatAIStudioLayout() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

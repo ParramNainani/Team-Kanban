@@ -51,4 +51,5 @@ export interface MatchResult {
   thresholdUsed: number;
 }
 export interface SchemeSummary extends ScoredScheme {}
-export interface Message { role: 'user' | 'assistant' | 'system'; content: string; schemes?: SchemeSummary[]; profile?: Partial<UserProfile>; isComplete?: boolean; }
+export interface Message { role: 'user' | 'assistant' | 'system'; content: string; schemes?: SchemeSummary[]; profile?: Partial<UserProfile>; isComplete?: boolean; attachmentUrl?: string; }
+
