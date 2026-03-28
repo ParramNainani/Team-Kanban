@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Bot, User, Send, MessageSquare, Plus, Menu, Mic, MicOff, Loader2, Volume2, LogIn, LogOut, Paperclip, X } from "lucide-react";
 import type { Message } from "@/types";
 import ChatBackground from "@/components/ChatBackground";
+import GapGraph from "@/components/GapGraph";
 import { useWebSpeech } from "@/hooks/useWebSpeech";
 import { db } from "@/lib/firebase";
 import { collection, doc, setDoc, onSnapshot, query, orderBy, serverTimestamp, getDoc } from "firebase/firestore";
@@ -255,6 +257,10 @@ export default function ChatAIStudioLayout() {
                 Speaking...
               </span>
             )}
+            <span className="bg-[#222]/50 px-2 py-1 rounded text-[#E15A15] font-mono text-[10px] tracking-wide border border-[#E15A15]/20 backdrop-blur-sm">Gemini Flash Voice</span>
+            <Link href="/gap-report" className="rounded-full border border-[#E15A15]/30 bg-[#111]/70 px-3 py-1 text-[10px] uppercase tracking-[0.35em] text-amber-200 transition hover:bg-[#E15A15]/10 hover:border-[#E15A15]/60">
+              Gap report
+            </Link>
             <span className="bg-[#222]/50 px-2 py-1 rounded text-[#E15A15] font-mono text-[10px] tracking-wide border border-[#E15A15]/20 backdrop-blur-sm hidden sm:inline-block">Gemini Flash Voice</span>
             {user ? (
               <button onClick={signOut} className="flex items-center gap-1 bg-[#222]/50 px-3 py-1.5 rounded text-gray-300 hover:text-white transition-colors border border-[#333]">
@@ -303,7 +309,7 @@ export default function ChatAIStudioLayout() {
                     <div className="mt-2 space-y-3">
                       <p className="text-[11px] text-[#A78F62] font-medium uppercase tracking-wider pl-1">Targeted Programs</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">   
-                        {msg.schemes.map((s: { name: string, benefits: string, tags?: string[], score?: number }, idx: number) => (
+                        {msg.schemes.map((s, idx) => (
                           <div key={idx} className="flex flex-col bg-[#151515]/90 backdrop-blur shadow-sm p-4 rounded-xl border border-[#333]/50 hover:border-[#E15A15]/40 transition-colors">
                             <div className="flex justify-between items-start mb-2 gap-2">
                               <strong className="text-sm text-[#A78F62] leading-tight">{s.name}</strong>
@@ -326,6 +332,19 @@ export default function ChatAIStudioLayout() {
                           </div>
                         ))}
                       </div>
+                      {/* GapGraph integration below scheme cards */}
+                      {(() => {
+                        // Compute totalEligible and totalReceived
+                        const fallbackValue = 1000;
+                        const totalEligible = msg.schemes.reduce((sum, s) => sum + (typeof s.estimatedBenefit === 'number' ? s.estimatedBenefit : fallbackValue), 0);
+                        // Placeholder: totalReceived = 0 (can be replaced with real data)
+                        const totalReceived = 0;
+                        return (
+                          <div className="mt-6">
+                            <GapGraph totalEligible={totalEligible} totalReceived={totalReceived} />
+                          </div>
+                        );
+                      })()}
                     </div>
                   )}
                 </div>
@@ -334,6 +353,8 @@ export default function ChatAIStudioLayout() {
           ))}
           <div ref={bottomRef} className="h-4" />
         </div>
+
+        {/* GapGraph section removed: now rendered contextually in assistant messages with schemes */}
 
           {/* Input Area */}
         <div className="p-4 md:p-6 bg-gradient-to-t from-[#050101] to-transparent relative">
