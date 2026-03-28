@@ -1,1 +1,87 @@
-// TODO: Local dataset of schemes`n// Contains 20-30 schemes`n// Each scheme includes: id, name, tags, benefits, documents, estimatedBenefit`n[]
+[
+  {
+    "id": "pm-kisan",
+    "name": "PM-KISAN",
+    "eligibility": {
+      "ageRange": { "min": 18, "max": 120 },
+      "gender": "any",
+      "occupation": ["farmer", "agricultural worker"],
+      "incomeLimit": 600000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": true
+    },
+    "benefits": "₹6,000 per year in three equal installments for farmers with landholding up to 2 hectares",
+    "documents": ["Aadhaar Card", "Bank Account Details", "Land Records"],
+    "estimatedBenefit": 6000
+  },
+  {
+    "id": "widow-pension",
+    "name": "National Widow Pension Scheme",
+    "eligibility": {
+      "ageRange": { "min": 18, "max": 120 },
+      "gender": "female",
+      "occupation": ["any"],
+      "incomeLimit": 200000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "widow",
+      "landOwnership": null
+    },
+    "benefits": "₹2,000 per month financial assistance",
+    "documents": ["Widow Certificate", "Income Certificate", "Aadhaar Card"],
+    "estimatedBenefit": 24000
+  },
+  {
+    "id": "ayushman-bharat",
+    "name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana",
+    "eligibility": {
+      "ageRange": { "min": 0, "max": 120 },
+      "gender": "any",
+      "occupation": ["any"],
+      "incomeLimit": 500000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": null
+    },
+    "benefits": "Cashless treatment up to ₹5 lakh per family per year for secondary and tertiary care hospitalization",
+    "documents": ["Ayushman Bharat Card", "Income Certificate"],
+    "estimatedBenefit": 500000
+  },
+  {
+    "id": "student-scholarship",
+    "name": "National Scholarship Portal - Post Matric Scholarship",
+    "eligibility": {
+      "ageRange": { "min": 17, "max": 30 },
+      "gender": "any",
+      "occupation": ["student"],
+      "incomeLimit": 600000,
+      "category": ["SC", "ST", "OBC", "Minority"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": null
+    },
+    "benefits": "Tuition fee reimbursement and maintenance allowance up to ₹20,000 per year",
+    "documents": ["Caste Certificate", "Income Certificate", "Admission Letter", "Mark Sheets"],
+    "estimatedBenefit": 20000
+  },
+  {
+    "id": "mnrega",
+    "name": "Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA)",
+    "eligibility": {
+      "ageRange": { "min": 18, "max": 120 },
+      "gender": "any",
+      "occupation": ["unskilled worker", "farmer", "laborer"],
+      "incomeLimit": 1000000,
+      "category": ["All"],
+      "state": ["All"],
+      "maritalStatus": "any",
+      "landOwnership": false
+    },
+    "benefits": "100 days of guaranteed wage employment per year at minimum wage rates",
+    "documents": ["Job Card", "Aadhaar Card", "Bank Account"],
+    "estimatedBenefit": 60000
+  }
+]

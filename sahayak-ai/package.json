@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:match": "npx --yes tsx test/matchTest.ts"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^2.0.0",
