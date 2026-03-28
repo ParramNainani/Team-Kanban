@@ -1,1 +1,5 @@
-// TODO: Returns matched schemes based on profile/keywords
+import { NextResponse } from "next/server";
+
+export async function POST() {
+  return NextResponse.json({ schemes: [] });
+}
