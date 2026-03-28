@@ -86,8 +86,10 @@ function EngineCore() {
 
 export default function ChatBackground() {
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none opacity-60">
+    <div className="absolute inset-0 z-0 pointer-events-none opacity-90">
       <Canvas
+        className="absolute inset-0 h-full w-full"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
         camera={{ position: [0, 0, 5], fov: 60 }}
         gl={{ alpha: true, antialias: true }}
       >
