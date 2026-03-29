@@ -31,6 +31,7 @@ export function useWebSpeech(onText: (text: string) => void) {
   const onTextRef = useRef(onText);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioQueueRef = useRef<string[]>([]);
+  const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => { onTextRef.current = onText; }, [onText]);
 
@@ -42,21 +43,38 @@ export function useWebSpeech(onText: (text: string) => void) {
     if (!SpeechRecognition) return;
 
     const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
+    recognition.continuous = true;
+    recognition.interimResults = true;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recognition.onresult = (event: any) => {
-      onTextRef.current(event.results[0][0].transcript);
-      setIsListening(false);
+      let currentTranscript = "";
+      for (let i = 0; i < event.results.length; i++) {
+        currentTranscript += event.results[i][0].transcript;
+      }
+      onTextRef.current(currentTranscript);
+      
+      // Reset silence timeout
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = setTimeout(() => {
+        try { recognition.stop(); } catch { /* */ }
+        setIsListening(false);
+      }, 3000);
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recognition.onerror = (event: any) => {
       console.error("Speech recognition error:", event.error);
       setIsListening(false);
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
     };
-    recognition.onend = () => setIsListening(false);
+    recognition.onend = () => {
+      setIsListening(false);
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+    };
     recognitionRef.current = recognition;
-    return () => { try { recognition.stop(); } catch { /* */ } };
+    return () => { 
+      try { recognition.stop(); } catch { /* */ } 
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+    };
   }, []);
 
   const startListening = useCallback((lang: string = "en-IN") => {
@@ -65,6 +83,13 @@ export function useWebSpeech(onText: (text: string) => void) {
         recognitionRef.current.lang = lang;
         recognitionRef.current.start();
         setIsListening(true);
+        
+        // Start initial silence timeout
+        if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+        silenceTimerRef.current = setTimeout(() => {
+          try { recognitionRef.current.stop(); } catch { /* */ }
+          setIsListening(false);
+        }, 3000);
       } catch (e) {
         console.error("Failed to start recognition:", e);
         setIsListening(false);
@@ -78,6 +103,7 @@ export function useWebSpeech(onText: (text: string) => void) {
     if (recognitionRef.current) {
       try { recognitionRef.current.stop(); } catch { /* */ }
       setIsListening(false);
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
     }
   }, []);
 
