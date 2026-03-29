@@ -192,11 +192,12 @@ export async function POST(request: Request) {
 
     console.log(`[WhatsApp] Message from ${from}: ${body.substring(0, 100)}`);
 
-    // Handle reset command
-    if (body.trim().toLowerCase() === "reset" || body.trim().toLowerCase() === "restart") {
+    // Handle reset command or Twilio Sandbox join message
+    const normalizedBody = body.trim().toLowerCase();
+    if (normalizedBody === "reset" || normalizedBody === "restart" || normalizedBody.startsWith("join ")) {
       sessions.delete(from);
       await sendWhatsAppReply(from,
-        "🔄 Session reset!\n\n🙏 Namaste! I'm *Sahayak AI*.\n\nI help you find government welfare schemes you're eligible for.\n\nTell me about yourself — your *age*, *occupation*, *income*, and *state* — and I'll find the best schemes for you!\n\nYou can message me in Hindi, Bengali, Tamil, Telugu, or any Indian language. 🇮🇳"
+        "🙏 Namaste! I'm *Sahayak AI*.\n\nI help you find government welfare schemes you're eligible for.\n\nTell me about yourself — your *age*, *occupation*, *income*, and *state* — and I'll find the best schemes for you!\n\nYou can message me in Hindi, Bengali, Tamil, Telugu, or any Indian language. 🇮🇳"
       );
       return new NextResponse(
         '<?xml version="1.0" encoding="UTF-8"?><Response></Response>',
