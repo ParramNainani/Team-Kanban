@@ -19,7 +19,7 @@ const WhatsAppIcon = ({ className }: { className?: string }) => (
 
 export default function FloatingWhatsApp() {
   // Using the Twilio Sandbox number +14155238886
-  const whatsappUrl = "https://wa.me/14155238886?text=join%20fair-fort";
+  const whatsappUrl = "https://wa.me/14155238886?text=join%20coal-explanation";
 
   return (
     <a

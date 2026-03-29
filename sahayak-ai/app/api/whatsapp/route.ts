@@ -34,14 +34,19 @@ interface Session {
 const sessions = new Map<string, Session>();
 const SESSION_TTL = 30 * 60 * 1000; // 30 minutes
 
+const WELCOME_MSG = "Namaste! 🙏 I'm Sahayak AI, your personal guide to government welfare schemes in India.\n\nTell me a little about yourself — your age, occupation, and state — and I'll find the best schemes for you.";
+
 function getSession(phoneNumber: string): Session {
   const existing = sessions.get(phoneNumber);
   if (existing && Date.now() - existing.lastActive < SESSION_TTL) {
     existing.lastActive = Date.now();
     return existing;
   }
-  // New session or expired
-  const session: Session = { messages: [], lastActive: Date.now() };
+  // New session or expired - pre-seed with welcome message like the web
+  const session: Session = { 
+    messages: [{ role: "assistant", content: WELCOME_MSG }], 
+    lastActive: Date.now() 
+  };
   sessions.set(phoneNumber, session);
   return session;
 }
@@ -76,6 +81,20 @@ function detectLanguage(text: string): { language: string; languageCode: string 
   if (/[\u0600-\u06FF]/.test(text)) return { language: "Urdu", languageCode: "ur-IN" };
   if (/[\u0D80-\u0DFF]/.test(text)) return { language: "Sinhala", languageCode: "si-LK" };
   return { language: "English", languageCode: "en-IN" };
+}
+
+function formatMarkdownForWhatsApp(text: string): string {
+  if (!text) return text;
+  return text
+    // Remove markdown headers
+    .replace(/^###?\s+/gm, '')
+    // Replace **bold** with *bold* (WhatsApp uses single asterisk)
+    .replace(/\*\*(.*?)\*\*/g, '*$1*')
+    // Replace markdown links [text](url) with text - url
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '$1 - $2')
+    // Convert generic bullet points to uniform dot
+    .replace(/^\* /gm, '• ')
+    .replace(/^- /gm, '• ');
 }
 
 // ─── Format scheme results for WhatsApp (plain text, no markdown) ───
@@ -210,7 +229,8 @@ export async function POST(request: Request) {
     // Add AI reply to session
     session.messages.push({ role: "assistant", content: reply });
 
-    let fullReply = reply;
+    // Format Markdown into WhatsApp Markup
+    let fullReply = formatMarkdownForWhatsApp(reply);
 
     // If profile is complete, add scheme recommendations
     if (isComplete && profile) {
